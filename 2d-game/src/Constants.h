@@ -2,7 +2,7 @@
 
 const static int targetFPS = 60;
 
-const static int voxelSize = 4;
+const static int voxelSize = 2;
 const static int widthVoxels = 320;
 const static int heightVoxels = 240;
 

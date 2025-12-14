@@ -23,7 +23,7 @@ int main()
         game.Render();
 
         // Optional: Draw other raylib elements (text, shapes)
-        DrawFPS(10, 10);
+        // DrawFPS(10, 10);
 
         EndDrawing(); // Swaps the buffers and displays the new frame
     }

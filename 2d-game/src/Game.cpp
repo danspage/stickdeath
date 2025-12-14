@@ -5,14 +5,10 @@
 
 void Game::Render()
 {
-    // graphics.FillRandom();
+    scenes[currentScene]->DoKeyboardInput();
+    scenes[currentScene]->Update();
 
-    for (int i=0; i<10; i++)
-    {
-        graphics.setVoxel(i, i, WHITE);
-    }
-
-    graphics.DrawString("default", YELLOW, 20, 20, "Hello!");
+    scenes[currentScene]->Render(graphics);
 
     // 1. If texture doesn't exist yet (ID is 0), create it
     if (texture.id == 0)

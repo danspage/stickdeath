@@ -9,8 +9,9 @@ class Graphics
 public:
     void Initialize();
     bool isOnScreen(int voxelX, int voxelY);
-    void setPixel(int x, int y, Color color);
-    void setVoxel(int voxelX, int voxelY, Color color);
+    void FillPixel(int x, int y, Color color);
+    void FillVoxel(int voxelX, int voxelY, Color color);
+    void FillBG(Color color);
     void FillRandom();
     void DrawString(std::string font, Color color, int x, int y, std::string str);
     unsigned char *pixels;

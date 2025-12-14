@@ -15,7 +15,7 @@ bool Graphics::isOnScreen(int voxelX, int voxelY)
     return (voxelX >= 0 && voxelY >= 0 && voxelX < widthVoxels && voxelY < heightVoxels);
 }
 
-void Graphics::setPixel(int x, int y, Color color)
+void Graphics::FillPixel(int x, int y, Color color)
 {
     int index = ((y * voxelSize * widthVoxels) + x) * 4;
     pixels[index] = color.r;
@@ -24,7 +24,7 @@ void Graphics::setPixel(int x, int y, Color color)
     pixels[index + 3] = 255;
 }
 
-void Graphics::setVoxel(int voxelX, int voxelY, Color color)
+void Graphics::FillVoxel(int voxelX, int voxelY, Color color)
 {
     if (isOnScreen(voxelX, voxelY))
     {
@@ -32,8 +32,19 @@ void Graphics::setVoxel(int voxelX, int voxelY, Color color)
         {
             for (int y = voxelY * voxelSize; y < voxelY * voxelSize + voxelSize; y++)
             {
-                setPixel(x, y, color);
+                FillPixel(x, y, color);
             }
+        }
+    }
+}
+
+void Graphics::FillBG(Color color)
+{
+    for (int x = 0; x < widthVoxels * voxelSize; x++)
+    {
+        for (int y = 0; y < heightVoxels * voxelSize; y++)
+        {
+            FillPixel(x, y, color);
         }
     }
 }
@@ -45,7 +56,7 @@ void Graphics::FillRandom()
     {
         for (int y = 0; y < heightVoxels; y++)
         {
-            setVoxel(x, y, GetRandomRaylibColor());
+            FillVoxel(x, y, GetRandomRaylibColor());
         }
     }
 }
@@ -65,7 +76,7 @@ void Graphics::DrawString(std::string font, Color color, int x, int y, std::stri
                 int charDataIndex = (y2 * _char.width) + x2;
                 if (_char.pixels[charDataIndex] == 1)
                 {
-                    setVoxel(x + x2 + charX, y + y2, color);
+                    FillVoxel(x + x2 + charX, y + y2, color);
                 }
             }
         }
