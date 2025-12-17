@@ -1,6 +1,7 @@
 #include "Scene.h"
+#include <raylib.h>
 
-void Scene::Render(Graphics graphics) {}
+void Scene::Render(Graphics* graphics) {}
 
 void Scene::Update() {}
 

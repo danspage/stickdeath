@@ -1,4 +1,6 @@
 #include "BouncingBallScene.h"
+#include "../Graphics.h"
+#include "../Constants.h"
 #include <iostream>
 
 bool BouncingBallScene::DoUpdate()
@@ -42,17 +44,18 @@ void BouncingBallScene::Update()
     }
 }
 
-void BouncingBallScene::Render(Graphics graphics)
+void BouncingBallScene::Render(Graphics* graphics)
 {
-    graphics.FillBG(BLACK);
+    graphics->FillBG(WHITE);
+
+    graphics->DrawImage("large_dialogue", widthVoxels/2, heightVoxels/2, true, true);
 
     std::string printText = "Bouncing ball! B) ";
 
-    graphics.DrawString("default", YELLOW, 5, 5, printText);
+    graphics->DrawString("default", colors[colorIndex], 5, 5, printText);
 
-    graphics.FillVoxel(x, y, colors[colorIndex]);
-
-    std::cout << "X: " << x << " Y: " << y << std::endl;
+    // graphics->FillRect(x-1, y-1, 3, 3, colors[colorIndex]);
+    graphics->DrawImage("player", x, y, true, true);
 }
 
 void BouncingBallScene::onEnterPressed()

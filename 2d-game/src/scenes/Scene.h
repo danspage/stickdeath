@@ -1,12 +1,13 @@
 #pragma once
 #include <string>   
 #include <functional>
-#include "Graphics.h"
+#include "../Graphics.h"
 
 class Scene
 {
 public:
-    virtual void Render(Graphics graphics);
+    virtual ~Scene() {};
+    virtual void Render(Graphics* graphics);
     virtual void Update();
     virtual void onLeftArrowPressed() {};
     virtual void whileLeftArrowPressed(bool pressed) {};

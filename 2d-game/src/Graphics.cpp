@@ -6,8 +6,27 @@
 
 void Graphics::Initialize()
 {
+    initializing = true;
+
     pixels = (unsigned char *)calloc(widthVoxels * voxelSize * heightVoxels * voxelSize * 4, 1);
     fonts.LoadFonts();
+
+    LoadImage("assets/sprites/gui/large_dialogue.png", "large_dialogue");
+    LoadImage("assets/sprites/entity/smiley.png", "player");
+
+    initializing = false;
+}
+
+void Graphics::LoadImage(std::string filename, std::string imagename)
+{
+    if (initializing)
+    {
+        images[imagename] = std::make_unique<GameImage>(filename);
+    }
+    else
+    {
+        std::cerr << "An image can only be loaded while the game is initializing (image: " << imagename << ", filename: " << filename << ")" << std::endl;
+    }
 }
 
 bool Graphics::isOnScreen(int voxelX, int voxelY)
@@ -26,16 +45,19 @@ void Graphics::FillPixel(int x, int y, Color color)
 
 void Graphics::FillVoxel(int voxelX, int voxelY, Color color)
 {
-    if (isOnScreen(voxelX, voxelY))
+    for (int x = voxelX * voxelSize; x < voxelX * voxelSize + voxelSize; x++)
     {
-        for (int x = voxelX * voxelSize; x < voxelX * voxelSize + voxelSize; x++)
+        for (int y = voxelY * voxelSize; y < voxelY * voxelSize + voxelSize; y++)
         {
-            for (int y = voxelY * voxelSize; y < voxelY * voxelSize + voxelSize; y++)
-            {
-                FillPixel(x, y, color);
-            }
+            FillPixel(x, y, color);
         }
     }
+}
+
+Color Graphics::GetVoxel(int voxelX, int voxelY)
+{
+    int index = (((voxelY * voxelSize) * voxelSize * widthVoxels) + (voxelX * voxelSize)) * 4;
+    return Color({pixels[index], pixels[index + 1], pixels[index + 2], pixels[index + 3]});
 }
 
 void Graphics::FillBG(Color color)
@@ -76,11 +98,57 @@ void Graphics::DrawString(std::string font, Color color, int x, int y, std::stri
                 int charDataIndex = (y2 * _char.width) + x2;
                 if (_char.pixels[charDataIndex] == 1)
                 {
-                    FillVoxel(x + x2 + charX, y + y2, color);
+                    if (isOnScreen(x + x2 + charX, y + y2))
+                        FillVoxel(x + x2 + charX, y + y2, color);
                 }
             }
         }
 
         charX += _char.width + 1;
+    }
+}
+
+void Graphics::DrawImage(std::string image, int x, int y, bool centeredX = false, bool centeredY = false)
+{
+    for (int x2 = 0; x2 < images[image].get()->width; x2++)
+    {
+        for (int y2 = 0; y2 < images[image].get()->height; y2++)
+        {
+            int xOffset = centeredX ? images[image].get()->width / -2 : 0;
+            int yOffset = centeredY ? images[image].get()->height / -2 : 0;
+
+            if (isOnScreen(x + x2 + xOffset, y + (images[image].get()->height - y2) + yOffset))
+            {
+                int imgIndex = ((images[image].get()->height - y2) * images[image].get()->width + x2);
+
+                Color bgColor = GetVoxel(x + x2 + xOffset, y + (images[image].get()->height - y2) + yOffset);
+                Color imgColor = images[image].get()->pixels[imgIndex];
+                Color newColor;
+
+                if (imgColor.a == 0)
+                {
+                    continue;
+                }
+
+                newColor.r = (imgColor.r * imgColor.a + bgColor.r * (255 - imgColor.a)) / 255;
+                newColor.g = (imgColor.g * imgColor.a + bgColor.g * (255 - imgColor.a)) / 255;
+                newColor.b = (imgColor.b * imgColor.a + bgColor.b * (255 - imgColor.a)) / 255;
+                newColor.a = 255;
+
+                FillVoxel(x + x2 + xOffset, y + (images[image].get()->height - y2) + yOffset, newColor);
+            }
+        }
+    }
+}
+
+void Graphics::FillRect(int x, int y, int width, int height, Color color)
+{
+    for (int x2 = x; x2 < x + width; x2++)
+    {
+        for (int y2 = y; y2 < y + height; y2++)
+        {
+            if (isOnScreen(x2, y2))
+                FillVoxel(x2, y2, color);
+        }
     }
 }

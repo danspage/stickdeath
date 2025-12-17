@@ -14,7 +14,7 @@ void Game::Render()
     if (texture.id == 0)
     {
         Image image = {
-            .data = graphics.pixels,
+            .data = graphics->pixels,
             .width = widthVoxels * voxelSize,
             .height = heightVoxels * voxelSize,
             .mipmaps = 1,
@@ -24,7 +24,7 @@ void Game::Render()
     // 2. If it exists, just update the pixel data (Much faster!)
     else
     {
-        UpdateTexture(texture, graphics.pixels);
+        UpdateTexture(texture, graphics->pixels);
     }
 
     DrawTexture(texture, 0, 0, WHITE);

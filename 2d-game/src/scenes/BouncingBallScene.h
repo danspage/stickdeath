@@ -1,11 +1,12 @@
 #pragma once
 #include "Scene.h"
+#include <raylib.h>
 
 class BouncingBallScene : public Scene
 {
 public:
     BouncingBallScene() : Scene() {}
-    void Render(Graphics graphics) override;
+    void Render(Graphics* graphics) override;
     void Update() override;
     void onEnterPressed() override;
     void onUpArrowPressed() override { yVel = std::min(yVel, -10); };
