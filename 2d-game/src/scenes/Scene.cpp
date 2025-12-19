@@ -1,12 +1,16 @@
 #include "Scene.h"
 #include <raylib.h>
+#include <iostream>
 
-void Scene::Render(Graphics* graphics) {}
-
-void Scene::Update() {}
-
+double _lastKBUpdate = std::chrono::system_clock::now().time_since_epoch().count();
 void Scene::DoKeyboardInput()
 {
+    auto _now = std::chrono::system_clock::now();
+    std::chrono::duration<double> seconds = _now.time_since_epoch();
+    double time_since_epoch = seconds.count();
+
+    std::cout << std::setprecision (15) << time_since_epoch << std::endl;    
+
     if (IsKeyPressed(KEY_LEFT))
         onLeftArrowPressed();
     if (IsKeyPressed(KEY_RIGHT))
@@ -19,10 +23,13 @@ void Scene::DoKeyboardInput()
         onSpacePressed();
     if (IsKeyPressed(KEY_ENTER))
         onEnterPressed();
-    whileLeftArrowPressed(IsKeyDown(KEY_LEFT));
-    whileRightArrowPressed(IsKeyDown(KEY_RIGHT));
-    whileUpArrowPressed(IsKeyDown(KEY_UP));
-    whileDownArrowPressed(IsKeyDown(KEY_DOWN));
-    whileSpacePressed(IsKeyDown(KEY_SPACE));
-    whileEnterPressed(IsKeyDown(KEY_ENTER));
+
+    whileLeftArrowPressed(IsKeyDown(KEY_LEFT), time_since_epoch - _lastKBUpdate);
+    whileRightArrowPressed(IsKeyDown(KEY_RIGHT), time_since_epoch - _lastKBUpdate);
+    whileUpArrowPressed(IsKeyDown(KEY_UP), time_since_epoch - _lastKBUpdate);
+    whileDownArrowPressed(IsKeyDown(KEY_DOWN), time_since_epoch - _lastKBUpdate);
+    whileSpacePressed(IsKeyDown(KEY_SPACE), time_since_epoch - _lastKBUpdate);
+    whileEnterPressed(IsKeyDown(KEY_ENTER), time_since_epoch - _lastKBUpdate);
+
+    _lastKBUpdate = time_since_epoch;
 }

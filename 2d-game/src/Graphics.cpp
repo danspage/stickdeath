@@ -12,7 +12,9 @@ void Graphics::Initialize()
     fonts.LoadFonts();
 
     LoadImage("assets/sprites/gui/large_dialogue.png", "large_dialogue");
-    LoadImage("assets/sprites/entity/smiley.png", "player");
+    LoadImage("assets/sprites/entity/smiley.png", "smiley");
+    LoadImage("assets/sprites/entity/player_left.png", "player_left");
+    LoadImage("assets/sprites/entity/player_right.png", "player_right");
 
     initializing = false;
 }
@@ -110,18 +112,26 @@ void Graphics::DrawString(std::string font, Color color, int x, int y, std::stri
 
 void Graphics::DrawImage(std::string image, int x, int y, bool centeredX = false, bool centeredY = false)
 {
-    for (int x2 = 0; x2 < images[image].get()->width; x2++)
+    int xOffset = centeredX ? -images[image].get()->width / 2 : 0;
+    int yOffset = centeredY ? -images[image].get()->height / 2 : 0;
+
+    for (int imgX = 0; imgX < images[image].get()->width; imgX++)
     {
-        for (int y2 = 0; y2 < images[image].get()->height; y2++)
+        for (int imgY = 0; imgY < images[image].get()->height; imgY++)
         {
-            int xOffset = centeredX ? images[image].get()->width / -2 : 0;
-            int yOffset = centeredY ? images[image].get()->height / -2 : 0;
+            int posXonScreen = x + xOffset + imgX;
+            int posYonScreen = y + yOffset + (images[image].get()->height - (imgY+1));
 
-            if (isOnScreen(x + x2 + xOffset, y + (images[image].get()->height - y2) + yOffset))
+            if (!isOnScreen(posXonScreen, posYonScreen))
             {
-                int imgIndex = ((images[image].get()->height - y2) * images[image].get()->width + x2);
+                continue;
+            }
+            else
+            {
+                Color bgColor = GetVoxel(posXonScreen, posYonScreen);
 
-                Color bgColor = GetVoxel(x + x2 + xOffset, y + (images[image].get()->height - y2) + yOffset);
+                int imgIndex = ((images[image].get()->height - (imgY+1)) * images[image].get()->width + imgX);
+
                 Color imgColor = images[image].get()->pixels[imgIndex];
                 Color newColor;
 
@@ -135,7 +145,7 @@ void Graphics::DrawImage(std::string image, int x, int y, bool centeredX = false
                 newColor.b = (imgColor.b * imgColor.a + bgColor.b * (255 - imgColor.a)) / 255;
                 newColor.a = 255;
 
-                FillVoxel(x + x2 + xOffset, y + (images[image].get()->height - y2) + yOffset, newColor);
+                FillVoxel(posXonScreen, posYonScreen, newColor);
             }
         }
     }
