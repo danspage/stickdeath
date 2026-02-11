@@ -85,9 +85,20 @@ void Graphics::FillRandom()
     }
 }
 
-void Graphics::DrawString(std::string font, Color color, int x, int y, std::string str)
+void Graphics::DrawString(std::string font, Color color, int x, int y, std::string str, bool centered)
 {
     std::vector<FontChar> chars = fonts.getStringChars(font, str);
+
+    int strWidth = 0;
+    if (centered)
+    {
+        for (FontChar c : chars)
+        {
+            if (strWidth != 0)
+                strWidth += 1;
+            strWidth += c.width;
+        }
+    }
 
     int charX = 0;
 
@@ -101,7 +112,12 @@ void Graphics::DrawString(std::string font, Color color, int x, int y, std::stri
                 if (_char.pixels[charDataIndex] == 1)
                 {
                     if (isOnScreen(x + x2 + charX, y + y2))
-                        FillVoxel(x + x2 + charX, y + y2, color);
+                    {
+                        if (centered)
+                            FillVoxel(x + x2 + charX - strWidth/2, y + y2, color);
+                        else
+                            FillVoxel(x + x2 + charX, y + y2, color);
+                    }
                 }
             }
         }
@@ -120,7 +136,7 @@ void Graphics::DrawImage(std::string image, int x, int y, bool centeredX = false
         for (int imgY = 0; imgY < images[image].get()->height; imgY++)
         {
             int posXonScreen = x + xOffset + imgX;
-            int posYonScreen = y + yOffset + (images[image].get()->height - (imgY+1));
+            int posYonScreen = y + yOffset + (images[image].get()->height - (imgY + 1));
 
             if (!isOnScreen(posXonScreen, posYonScreen))
             {
@@ -130,7 +146,7 @@ void Graphics::DrawImage(std::string image, int x, int y, bool centeredX = false
             {
                 Color bgColor = GetVoxel(posXonScreen, posYonScreen);
 
-                int imgIndex = ((images[image].get()->height - (imgY+1)) * images[image].get()->width + imgX);
+                int imgIndex = ((images[image].get()->height - (imgY + 1)) * images[image].get()->width + imgX);
 
                 Color imgColor = images[image].get()->pixels[imgIndex];
                 Color newColor;

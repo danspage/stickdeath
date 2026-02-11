@@ -3,12 +3,30 @@
 #include "Constants.h"
 #include <iostream>
 
+#include "scenes/title/TitleScene.h"
+#include "scenes/bouncing_ball/BouncingBallScene.h"
+
+void Game::init()
+{   
+    sm->registerScene("title", std::make_unique<TitleScene>());
+    sm->registerScene("bouncing_ball", std::make_unique<BouncingBallScene>());
+
+    sm->markAsInitialized();
+
+    sm->setScene("title");
+}
+
 void Game::Render()
 {
-    scenes[currentScene]->DoKeyboardInput();
-    scenes[currentScene]->Update();
+    if (sm->getCurrentSceneName() == "NULL_SCENE")
+    {
+        std::cerr << "The game tried to loop but there was no scene set!" << std::endl;
+        return;
+    }
 
-    scenes[currentScene]->Render(graphics);
+    sm->update();
+    
+    sm->render(graphics);
 
     // 1. If texture doesn't exist yet (ID is 0), create it
     if (texture.id == 0)

@@ -9,6 +9,9 @@ int main()
     Game game = Game();
     Graphics graphics;
     game.graphics = &graphics;
+    SceneManager sceneManager;
+    game.sm = &sceneManager;
+    game.init();
     graphics.Initialize();
 
     InitWindow(widthVoxels * voxelSize, heightVoxels * voxelSize, "2D Game");

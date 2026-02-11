@@ -1,5 +1,5 @@
 #pragma once
-#include "Scene.h"
+#include "../Scene.h"
 #include <raylib.h>
 #include "Player.h"
 
@@ -7,12 +7,14 @@ class BouncingBallScene : public Scene
 {
 public:
     BouncingBallScene() : Scene() {}
-    void Render(Graphics* graphics) override;
-    void Update() override;
+    void Render(Graphics* graphics, SceneManager* sm) override;
+    void Update(SceneManager* sm) override;
     void onEnterPressed() override;
-    void onUpArrowPressed() override { yVel = std::min(yVel, -10); };
     void whileLeftArrowPressed(bool pressed, double dt) override;
     void whileRightArrowPressed(bool pressed, double dt) override;
+    void whileUpArrowPressed(bool pressed, double dt) override;
+    void whileDownArrowPressed(bool pressed, double dt) override;
+    void onEnter() override;
 private:
     // bool DoUpdate();
     long lastUpdateTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();

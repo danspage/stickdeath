@@ -1,7 +1,10 @@
 #pragma once
+
 #include <string>   
 #include <functional>
 #include "../Graphics.h"
+
+class SceneManager;
 
 class Scene
 {
@@ -9,8 +12,8 @@ public:
     virtual ~Scene() {};
     virtual void onEnter() {};
     virtual void onExit() {};
-    virtual void Render(Graphics* graphics) {};
-    virtual void Update() {};
+    virtual void Render(Graphics* graphics, SceneManager* sm) {};
+    virtual void Update(SceneManager* sm) {};
     virtual void onLeftArrowPressed() {};
     virtual void whileLeftArrowPressed(bool pressed, double dt) {};
     virtual void onRightArrowPressed() {};

@@ -1,6 +1,10 @@
 #include "Scene.h"
 #include <raylib.h>
 #include <iostream>
+#include "SceneManager.h"
+#include <chrono>
+#include <iomanip>
+
 
 double _lastKBUpdate = std::chrono::system_clock::now().time_since_epoch().count();
 void Scene::DoKeyboardInput()
@@ -8,8 +12,6 @@ void Scene::DoKeyboardInput()
     auto _now = std::chrono::system_clock::now();
     std::chrono::duration<double> seconds = _now.time_since_epoch();
     double time_since_epoch = seconds.count();
-
-    std::cout << std::setprecision (15) << time_since_epoch << std::endl;    
 
     if (IsKeyPressed(KEY_LEFT))
         onLeftArrowPressed();
