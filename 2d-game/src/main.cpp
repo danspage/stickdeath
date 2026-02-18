@@ -1,29 +1,40 @@
 #include <raylib.h>
-#include <vector>
-#include "Game.h"
-#include "Constants.h"
-#include "Graphics.h"
+
+#include "framework/GameEngine.h"
+#include "framework/graphics/Graphics.h"
+#include "framework/state/TestState.h"
 
 int main()
 {
-    Game game = Game();
-    Graphics graphics;
-    game.graphics = &graphics;
-    SceneManager sceneManager;
-    game.sm = &sceneManager;
-    game.init();
-    graphics.Initialize();
+    InitWindow(GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE, GameEngine::HEIGHT_VOXELS * GameEngine::VOXEL_SIZE, GameEngine::WINDOW_TITLE);
 
-    InitWindow(widthVoxels * voxelSize, heightVoxels * voxelSize, "2D Game");
-    SetTargetFPS(targetFPS);
+    GameEngine::Initialize(
+        "test",
+        {
+            {"test", new TestState()},
+        }
+    );
+
+    SetTargetFPS(GameEngine::TARGET_FPS);
     InitAudioDevice();
 
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!WindowShouldClose() && !GameEngine::_shuttingDown)
     {
         BeginDrawing();
 
-        game.Render();
+        GameEngine::ProcessKeyEvents();
+
+        GameEngine::UpdateCurrentState(GetFrameTime());
+
+        GameEngine::RenderCurrentState();
 
         EndDrawing();
     }
+
+    GameEngine::Cleanup();
+
+    CloseAudioDevice();
+    CloseWindow();
+
+    return 0;
 }
