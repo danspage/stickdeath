@@ -15,4 +15,6 @@ public:
 
     int squareX = 10;
     int squareY = 10;
+
+    bool flipImg = false;
 };

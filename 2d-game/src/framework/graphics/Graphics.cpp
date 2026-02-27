@@ -1,13 +1,13 @@
 #include "Graphics.h"
 #include "../GameEngine.h"
 
-namespace GameEngine::Graphics
+namespace GameEngine
 {
-    void Initialize()
+    void InitializeGraphics()
     {
         int fullWidth = GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE;
         int fullHeight = GameEngine::HEIGHT_VOXELS * GameEngine::VOXEL_SIZE;
-        GameEngine::_pixels = (unsigned char *)calloc(fullWidth * fullHeight * 4, 1);
+        GameEngine::_voxels = (unsigned char *)calloc(fullWidth * fullHeight * 4, 1);
     }
 
     bool IsOnScreen(int voxelX, int voxelY)
@@ -20,10 +20,21 @@ namespace GameEngine::Graphics
         int pitch = (GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE);
         int index = (pixelY * pitch + pixelX) * 4;
 
-        GameEngine::_pixels[index] = color.r;
-        GameEngine::_pixels[index + 1] = color.g;
-        GameEngine::_pixels[index + 2] = color.b;
-        GameEngine::_pixels[index + 3] = color.a;
+        GameEngine::_voxels[index] = color.r;
+        GameEngine::_voxels[index + 1] = color.g;
+        GameEngine::_voxels[index + 2] = color.b;
+        GameEngine::_voxels[index + 3] = color.a;
+    }
+
+    void FillPixel(int pixelX, int pixelY, unsigned char r, unsigned char g, unsigned char b)
+    {
+        int pitch = (GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE);
+        int index = (pixelY * pitch + pixelX) * 4;
+
+        GameEngine::_voxels[index] = r;
+        GameEngine::_voxels[index + 1] = g;
+        GameEngine::_voxels[index + 2] = b;
+        GameEngine::_voxels[index + 3] = 255;
     }
 
     void FillVoxel(int voxelX, int voxelY, Color color)
@@ -40,10 +51,26 @@ namespace GameEngine::Graphics
         }
     }
 
+    void FillVoxel(int voxelX, int voxelY, unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+    {
+        // TODO: Add a way to interpolate background pixels for partial alpha
+
+        int startX = voxelX * GameEngine::VOXEL_SIZE;
+        int startY = voxelY * GameEngine::VOXEL_SIZE;
+
+        for (int y = 0; y < GameEngine::VOXEL_SIZE; y++)
+        {
+            for (int x = 0; x < GameEngine::VOXEL_SIZE; x++)
+            {
+                FillPixel(startX + x, startY + y, r, g, b);
+            }
+        }
+    }
+
     Color GetVoxel(int voxelX, int voxelY)
     {
         int index = (((voxelY * GameEngine::VOXEL_SIZE) * GameEngine::VOXEL_SIZE * GameEngine::WIDTH_VOXELS) + (voxelX * GameEngine::VOXEL_SIZE)) * 4;
-        return Color({GameEngine::_pixels[index], GameEngine::_pixels[index + 1], GameEngine::_pixels[index + 2], GameEngine::_pixels[index + 3]});
+        return Color({GameEngine::_voxels[index], GameEngine::_voxels[index + 1], GameEngine::_voxels[index + 2], GameEngine::_voxels[index + 3]});
     }
 
     void FillBG(Color color)

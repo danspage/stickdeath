@@ -1,18 +1,19 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <iostream>
 
 #include "GameEngine.h"
 #include "graphics/Graphics.h"
 #include "state/GameState.h"
 #include "state/TestState.h"
-#include <iostream>
+#include "graphics/GameImage.h"
 
 namespace GameEngine
 {
-    void Initialize(std::string initialRoute, std::map<std::string, GameState *> routes)
+    void InitializeRoutes(std::string initialRoute, std::map<std::string, GameState *> routes)
     {
-        GameEngine::Graphics::Initialize();
+        GameEngine::InitializeGraphics();
 
         _currentState = initialRoute;
 
@@ -36,10 +37,10 @@ namespace GameEngine
         }
 
         // 2. Free the CPU pixel buffer
-        if (_pixels != nullptr)
+        if (_voxels != nullptr)
         {
-            free(_pixels);
-            _pixels = nullptr;
+            free(_voxels);
+            _voxels = nullptr;
         }
     }
 
@@ -66,7 +67,7 @@ namespace GameEngine
         if (_texture.id == 0)
         {
             Image image = {
-                .data = _pixels,
+                .data = _voxels,
                 .width = WIDTH_VOXELS * VOXEL_SIZE,
                 .height = HEIGHT_VOXELS * VOXEL_SIZE,
                 .mipmaps = 1,
@@ -75,7 +76,7 @@ namespace GameEngine
         }
         else
         {
-            UpdateTexture(_texture, _pixels);
+            UpdateTexture(_texture, _voxels);
         }
 
         DrawTexture(_texture, 0, 0, WHITE);
