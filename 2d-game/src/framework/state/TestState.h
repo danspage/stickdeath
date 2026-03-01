@@ -2,7 +2,7 @@
 
 #include "GameState.h"
 
-class TestState : public GameState
+class TestState : public GameEngine::GameState
 {
 public:
     TestState() : GameState() {};

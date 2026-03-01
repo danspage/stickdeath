@@ -7,13 +7,19 @@
 
 #include "framework/util/StringUtil.h"
 #include "framework/graphics/Images.h"
+#include "framework/graphics/Fonts.h"
 
 namespace fs = std::filesystem;
 
 void _LoadAssetFile(std::string path, std::string cleanedPath, std::string fileExtension)
 {
-    if (fileExtension == ".png") {
+    if (fileExtension == ".png")
+    {
         GameEngine::_LoadImage(cleanedPath, path);
+    }
+    else if (fileExtension == ".2df")
+    {
+        GameEngine::_LoadFont(path);
     }
 }
 

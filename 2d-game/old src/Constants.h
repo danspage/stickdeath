@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 const static int targetFPS = 60;
 
 const static int voxelSize = 2;

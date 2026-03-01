@@ -7,7 +7,7 @@
 
 namespace GameEngine
 {
-    struct GameImageOptions
+    struct GameImageRenderOptions
     {
         int scaleX = 1;
         int scaleY = 1;
@@ -24,7 +24,7 @@ namespace GameEngine
      * @param referencePath The path that the image will be referenced by for the
      * `GameEngine::GetImage` function. The format is as follows:
      * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat`.
-     * @param filePath the path of the file, starting with `assets/...`
+     * @param filePath The path of the file, starting with `assets/...`
      */
     inline void _LoadImage(std::string referencePath, std::string filePath)
     {
@@ -50,20 +50,22 @@ namespace GameEngine
      * @param y The y coordinate of the top left of the image.
      * @param options Additional options to influence the image's rendering.
      */
-    inline void DrawImage(std::string imageName, int x, int y, GameImageOptions options = {})
+    inline void DrawImage(std::string imageName, int x, int y, GameImageRenderOptions options = {})
     {
+        // TODO: Implement image scaling (nearest neighbor)
+
         GameImage *img = GetImage(imageName);
         unsigned char *imgPx = img->getPixels();
 
         int xOffset = 0, yOffset = 0, xMult = 1, yMult = 1;
         if (options.flipHorizontal)
         {
-            xOffset += img->getWidth()-1;
+            xOffset += img->getWidth() - 1;
             xMult = -1;
         }
         if (options.flipVertical)
         {
-            yOffset += img->getHeight()-1;
+            yOffset += img->getHeight() - 1;
             yMult = -1;
         }
 
