@@ -17,5 +17,7 @@ namespace GameEngine
     public:
         GameFont(int _charWidth, int _charHeight, std::vector<bool> _fontChars);
         std::vector<bool> GetCharData(char c);
+        int GetCharWidth() { return charWidth; }
+        int GetCharHeight() { return charHeight; }
     };
 }

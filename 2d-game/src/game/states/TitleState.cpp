@@ -1,0 +1,45 @@
+#include "TitleState.h"
+
+#include <iostream>
+
+void TitleState::Render()
+{
+    GameEngine::FillBG(SKYBLUE);
+
+    GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 35, GameEngine::WIDTH_VOXELS - 100, 20, LIGHTGRAY);
+    GameEngine::DrawString(GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 28, "default", "Play", optionsIndex == 0 ? RED : YELLOW);
+
+    GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 10, GameEngine::WIDTH_VOXELS - 100, 20, LIGHTGRAY);
+    GameEngine::DrawString(GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 3, "default", "Options", optionsIndex == 1 ? RED : YELLOW);
+
+    GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 + 15, GameEngine::WIDTH_VOXELS - 100, 20, LIGHTGRAY);
+    GameEngine::DrawString(GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 + 22, "default", "Exit Game", optionsIndex == 2 ? RED : YELLOW);
+}
+
+void TitleState::Update(float dt)
+{
+}
+
+void TitleState::OnKeyPressed(int key)
+{
+    switch (key)
+    {
+    case KEY_UP:
+        optionsIndex -= 1;
+        if (optionsIndex < 0)
+            optionsIndex = 2;
+        break;
+    case KEY_DOWN:
+        optionsIndex += 1;
+        if (optionsIndex > 2)
+            optionsIndex = 0;
+        break;
+    case KEY_ENTER:
+        if (optionsIndex == 0)
+        {
+        }
+        break;
+    default:
+        break;
+    }
+}

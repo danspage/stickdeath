@@ -3,6 +3,7 @@
 #include "framework/GameEngine.h"
 #include "framework/graphics/Graphics.h"
 #include "framework/state/TestState.h"
+#include "game/states/TitleState.h"
 #include "framework/file_io/AssetLoader.h"
 
 int main()
@@ -10,9 +11,10 @@ int main()
     InitWindow(GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE, GameEngine::HEIGHT_VOXELS * GameEngine::VOXEL_SIZE, GameEngine::WINDOW_TITLE);
 
     GameEngine::InitializeRoutes(
-        "test",
+        "title",
         {
             {"test", new TestState()},
+            {"title", new TitleState()},
         }
     );
 
