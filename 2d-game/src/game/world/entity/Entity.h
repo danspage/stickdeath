@@ -1,6 +1,10 @@
+#pragma once
+
 class Entity
 {
 public:
+    virtual ~Entity() {};
+
     float getXPos() { return xPos; }
     float getYPos() { return yPos; }
     float getXVel() { return xVel; }

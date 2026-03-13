@@ -2,7 +2,7 @@
 
 #include "framework/GameEngine.h"
 #include "framework/graphics/Graphics.h"
-#include "framework/state/TestState.h"
+#include "game/states/TestState.h"
 #include "game/states/TitleState.h"
 #include "framework/file_io/AssetLoader.h"
 

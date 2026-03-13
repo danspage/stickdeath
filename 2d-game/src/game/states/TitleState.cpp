@@ -1,19 +1,17 @@
 #include "TitleState.h"
 
-#include <iostream>
-
 void TitleState::Render()
 {
     GameEngine::FillBG(SKYBLUE);
 
     GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 35, GameEngine::WIDTH_VOXELS - 100, 20, LIGHTGRAY);
-    GameEngine::DrawString(GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 28, "default", "Play", optionsIndex == 0 ? RED : YELLOW);
+    GameEngine::DrawString("Play", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 28, "default", optionsIndex == 0 ? RED : YELLOW);
 
     GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 10, GameEngine::WIDTH_VOXELS - 100, 20, LIGHTGRAY);
-    GameEngine::DrawString(GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 3, "default", "Options", optionsIndex == 1 ? RED : YELLOW);
+    GameEngine::DrawString("Options", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 3, "default", optionsIndex == 1 ? RED : YELLOW);
 
     GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 + 15, GameEngine::WIDTH_VOXELS - 100, 20, LIGHTGRAY);
-    GameEngine::DrawString(GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 + 22, "default", "Exit Game", optionsIndex == 2 ? RED : YELLOW);
+    GameEngine::DrawString("Exit Game", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 + 22, "default", optionsIndex == 2 ? RED : YELLOW);
 }
 
 void TitleState::Update(float dt)

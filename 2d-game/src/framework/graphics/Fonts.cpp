@@ -61,7 +61,7 @@ namespace GameEngine
         _fonts[referenceName] = new GameFont(_charWidth, _charHeight, tempCharData);
     }
 
-    void DrawString(std::string str, std::string font, int x, int y, Color color, GameFontRenderOptions options)
+    void DrawString(std::string str, int x, int y, std::string font, Color color, GameFontRenderOptions options)
     {
         // TODO: implement font render options
 
@@ -80,6 +80,8 @@ namespace GameEngine
         {
             charX -= strWidthPx;
         }
+
+
 
         for (char &c : str)
         {

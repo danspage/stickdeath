@@ -35,5 +35,14 @@ namespace GameEngine
      */
     void _LoadFont(std::string _fileName);
 
-    void DrawString(int x, int y, std::string font, std::string str, Color color, GameFontRenderOptions options = {});
+    /**
+     * @brief Draws a string onto the screen.
+     * @param font The name of the font, as written in the first line of a font's asset file.
+     * @param str The string to be drawn.
+     * @param x The x coordinate to draw the string at.
+     * @param y The y coordinate to draw the string at.
+     * @param color The color of the text.
+     * @param options Additional options to modify the rendering of the font.
+     */
+    void DrawString(std::string str, int x, int y, std::string font, Color color, GameFontRenderOptions options = {});
 }
