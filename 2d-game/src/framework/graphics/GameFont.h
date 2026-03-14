@@ -7,17 +7,34 @@
 
 namespace GameEngine
 {
-    inline const char* CHAR_MAP = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    inline const char *CHAR_MAP = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+    class GameFontChar
+    {
+    private:
+        std::vector<bool> pixels;
+        int charWidth;
+
+    public:
+        GameFontChar(std::vector<bool> _pixels, int _charWidth)
+        {
+            pixels = _pixels;
+            charWidth = _charWidth;
+        };
+        const std::vector<bool> &getPixels() const { return pixels; };
+        int getCharWidth() { return charWidth; };
+    };
 
     class GameFont
     {
     private:
-        std::vector<bool> fontChars;
-        int charWidth, charHeight;
+        std::vector<GameFontChar *> fontChars;
+        int charHeight;
+
     public:
-        GameFont(int _charWidth, int _charHeight, std::vector<bool> _fontChars);
-        std::vector<bool> GetCharData(char c);
-        int GetCharWidth() { return charWidth; }
+        GameFont(int _charHeight, std::vector<GameFontChar *> _fontChars);
+        GameFontChar *GetCharData(char c);
+        int GetStrWidthVoxels();
         int GetCharHeight() { return charHeight; }
     };
 }

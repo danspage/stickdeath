@@ -1,6 +1,8 @@
 #pragma once
 
-#include "GameState.h"
+#include "../../framework/state/GameState.h"
+#include "../../framework/graphics/Graphics.h"
+#include "../../framework/graphics/Images.h"
 
 class TestState : public GameEngine::GameState
 {

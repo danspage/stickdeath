@@ -26,10 +26,7 @@ namespace GameEngine
      * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat`.
      * @param filePath The path of the file, starting with `assets/...`
      */
-    inline void _LoadImage(std::string referencePath, std::string filePath)
-    {
-        _images[referencePath] = new GameImage(filePath);
-    };
+    void _LoadImage(std::string referencePath, std::string filePath);
 
     /**
      * @brief Returns a game image from memory.
@@ -37,10 +34,7 @@ namespace GameEngine
      * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat` for the parameter.
      * @return The GameImage retrieved from memory.
      */
-    GameImage *GetImage(std::string imageName)
-    {
-        return _images[imageName];
-    }
+    GameImage *GetImage(std::string imageName);
 
     /**
      * @brief Draws an image from memory to the screen.

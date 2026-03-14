@@ -2,7 +2,17 @@
 
 namespace GameEngine
 {
-    void DrawImage(std::string imageName, int x, int y, GameImageRenderOptions options = {})
+    void _LoadImage(std::string referencePath, std::string filePath)
+    {
+        _images[referencePath] = new GameImage(filePath);
+    };
+
+    GameImage *GetImage(std::string imageName)
+    {
+        return _images[imageName];
+    }
+
+    void DrawImage(std::string imageName, int x, int y, GameImageRenderOptions options)
     {
         // TODO: Implement image scaling (nearest neighbor)
 

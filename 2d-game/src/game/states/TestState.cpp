@@ -1,8 +1,5 @@
 #include "TestState.h"
 
-#include "../graphics/Graphics.h"
-#include "../graphics/Images.h"
-
 void TestState::Update(float dt)
 {
 }

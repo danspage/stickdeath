@@ -2,10 +2,15 @@
 
 #include <string>
 #include <map>
+#include <memory>
+#include <iostream>
 
 #include <raylib.h>
 
 #include "state/GameState.h"
+#include "graphics/Graphics.h"
+#include "state/GameState.h"
+#include "graphics/GameImage.h"
 
 namespace GameEngine
 {
