@@ -1,5 +1,4 @@
 #include "Graphics.h"
-#include "../GameEngine.h"
 
 namespace GameEngine
 {
@@ -7,7 +6,7 @@ namespace GameEngine
     {
         int fullWidth = GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE;
         int fullHeight = GameEngine::HEIGHT_VOXELS * GameEngine::VOXEL_SIZE;
-        GameEngine::_voxels = (unsigned char *)calloc(fullWidth * fullHeight * 4, 1);
+        GameEngine::_pixels = (uint32_t *)calloc(fullWidth * fullHeight, sizeof(uint32_t));
     }
 
     bool IsOnScreen(int voxelX, int voxelY)
@@ -17,36 +16,36 @@ namespace GameEngine
 
     void FillPixel(int pixelX, int pixelY, Color color)
     {
-        int pitch = (GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE);
-        int index = (pixelY * pitch + pixelX) * 4;
+        uint32_t merged = color.r | (color.g << 8) | (color.b << 16) | (255 << 24);
 
-        GameEngine::_voxels[index] = color.r;
-        GameEngine::_voxels[index + 1] = color.g;
-        GameEngine::_voxels[index + 2] = color.b;
-        GameEngine::_voxels[index + 3] = color.a;
+        GameEngine::_pixels[pixelY * GameEngine::WIDTH_PIXELS + pixelX] = merged;
     }
 
-    void FillPixel(int pixelX, int pixelY, unsigned char r, unsigned char g, unsigned char b)
+    void FillPixel(int pixelX, int pixelY, uint32_t r, uint32_t g, uint32_t b)
     {
-        int pitch = (GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE);
-        int index = (pixelY * pitch + pixelX) * 4;
+        int index = pixelY * GameEngine::WIDTH_PIXELS + pixelX;
 
-        GameEngine::_voxels[index] = r;
-        GameEngine::_voxels[index + 1] = g;
-        GameEngine::_voxels[index + 2] = b;
-        GameEngine::_voxels[index + 3] = 255;
+        uint32_t merged = r | (g << 8) | (b << 16) | (255 << 24);
+
+        GameEngine::_pixels[index] = merged;
+    }
+
+    void FillPixel(int pixelX, int pixelY, uint32_t color)
+    {
+        GameEngine::_pixels[pixelY * GameEngine::WIDTH_PIXELS + pixelX] = color;
     }
 
     void FillVoxel(int voxelX, int voxelY, Color color)
     {
-        int startX = voxelX * GameEngine::VOXEL_SIZE;
-        int startY = voxelY * GameEngine::VOXEL_SIZE;
+        const int startX = voxelX * GameEngine::VOXEL_SIZE;
+        const int startY = voxelY * GameEngine::VOXEL_SIZE;
+        const uint32_t merged = color.r | (color.g << 8) | (color.b << 16) | (255 << 24);
 
         for (int y = 0; y < GameEngine::VOXEL_SIZE; y++)
         {
             for (int x = 0; x < GameEngine::VOXEL_SIZE; x++)
             {
-                FillPixel(startX + x, startY + y, color);
+                FillPixel(startX + x, startY + y, merged);
             }
         }
     }
@@ -69,19 +68,21 @@ namespace GameEngine
 
     Color GetVoxel(int voxelX, int voxelY)
     {
-        int index = (((voxelY * GameEngine::VOXEL_SIZE) * GameEngine::VOXEL_SIZE * GameEngine::WIDTH_VOXELS) + (voxelX * GameEngine::VOXEL_SIZE)) * 4;
-        return Color({GameEngine::_voxels[index], GameEngine::_voxels[index + 1], GameEngine::_voxels[index + 2], GameEngine::_voxels[index + 3]});
+        uint32_t packed = _pixels[((voxelY * VOXEL_SIZE) * WIDTH_PIXELS) + (voxelX * VOXEL_SIZE)];
+
+        uint8_t r = static_cast<uint8_t>(packed & 0xFF);
+        uint8_t g = static_cast<uint8_t>((packed >> 8) & 0xFF);
+        uint8_t b = static_cast<uint8_t>((packed >> 16) & 0xFF);
+        uint8_t a = static_cast<uint8_t>((packed >> 24) & 0xFF);
+
+        return Color({r, g, b, a});
     }
 
     void FillBG(Color color)
     {
-        for (int x = 0; x < GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE; x++)
-        {
-            for (int y = 0; y < GameEngine::HEIGHT_VOXELS * GameEngine::VOXEL_SIZE; y++)
-            {
-                FillPixel(x, y, color);
-            }
-        }
+        uint32_t merged = color.r | (color.g << 8) | (color.b << 16) | (255 << 24);
+
+        std::fill(_pixels, _pixels + TOTAL_NUM_PIXELS, merged);
     }
 
     void FillRect(int x, int y, int width, int height, Color color)

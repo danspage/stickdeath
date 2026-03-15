@@ -1,5 +1,7 @@
 #include "GameEngine.h"
 
+int _frameCount = 0;
+
 namespace GameEngine
 {
     void InitializeRoutes(std::string initialRoute, std::map<std::string, GameState *> routes)
@@ -28,10 +30,10 @@ namespace GameEngine
         }
 
         // 2. Free the CPU pixel buffer
-        if (_voxels != nullptr)
+        if (_pixels != nullptr)
         {
-            free(_voxels);
-            _voxels = nullptr;
+            free(_pixels);
+            _pixels = nullptr;
         }
     }
 
@@ -53,23 +55,33 @@ namespace GameEngine
 
     void RenderCurrentState()
     {
+        const double renderTime = GetTime() * 1000;
         _states[_currentState]->Render();
+        if (_frameCount % 120 == 0)
+            std::cout << "Render time: " << (GetTime() * 1000) - renderTime << std::endl;
 
+        const double textureUploadTime = GetTime() * 1000;
         if (_texture.id == 0)
         {
             Image image = {
-                .data = _voxels,
+                .data = _pixels,
                 .width = WIDTH_VOXELS * VOXEL_SIZE,
                 .height = HEIGHT_VOXELS * VOXEL_SIZE,
                 .mipmaps = 1,
                 .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
             _texture = LoadTextureFromImage(image);
+            if (_frameCount % 120 == 0)
+                std::cout << "Texture upload time: " << (GetTime() * 1000) - textureUploadTime << std::endl;
         }
         else
         {
-            UpdateTexture(_texture, _voxels);
+            UpdateTexture(_texture, _pixels);
+            if (_frameCount % 120 == 0)
+                std::cout << "Texture upload time: " << (GetTime() * 1000) - textureUploadTime << std::endl;
         }
 
         DrawTexture(_texture, 0, 0, WHITE);
+
+        _frameCount++;
     }
 }

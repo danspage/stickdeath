@@ -1,7 +1,11 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
+
 #include <raylib.h>
+
+#include "../GameEngine.h"
 
 namespace GameEngine
 {
@@ -25,7 +29,13 @@ namespace GameEngine
     /// @param r Pixel color's red channel value
     /// @param g Pixel color's blue channel value
     /// @param b Pixel color's green channel value
-    void FillPixel(int pixelX, int pixelY, unsigned char r, unsigned char g, unsigned char b);
+    void FillPixel(int pixelX, int pixelY, uint32_t r, uint32_t g, uint32_t b);
+
+    /// @brief Fills a pixel (NOT voxel) on the screen with a given color. This should rarely be used in place of `FillVoxel`.
+    /// @param pixelX Pixel's X coordinate
+    /// @param pixelY Pixel's Y coordinate
+    /// @param color The color in uint32_t form to fill the pixel with.
+    void FillPixel(int pixelX, int pixelY, uint32_t color);
 
     /// @brief Fills a voxel on the screen with a given color.
     /// @param voxelX Voxel's X coordinate

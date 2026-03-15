@@ -26,9 +26,17 @@ namespace GameEngine
     /// @brief How many voxels tall the game's screen is.
     inline const int HEIGHT_VOXELS = 240;
 
+    /// @brief How many pixels (NOT voxels) wide the game's screen is.
+    inline const int WIDTH_PIXELS = WIDTH_VOXELS * VOXEL_SIZE;
+
+    /// @brief How many pixels (NOT voxels) tall the game's screen is.
+    inline const int HEIGHT_PIXELS = HEIGHT_VOXELS * VOXEL_SIZE;
+
     /// @brief The total number of voxels present in the screen.
     inline const int TOTAL_NUM_VOXELS = WIDTH_VOXELS * HEIGHT_VOXELS;
 
+    /// @brief The total number of pixels (NOT voxels) present on the screen.
+    inline const int TOTAL_NUM_PIXELS = TOTAL_NUM_VOXELS * VOXEL_SIZE * VOXEL_SIZE;
     /// @brief The title of the game's window.
     inline const char *WINDOW_TITLE = "2D Game";
 
@@ -60,7 +68,7 @@ namespace GameEngine
     void RenderCurrentState();
 
     /// @brief A list of voxels that gets drawn to the screen. Each voxel takes up 4 chars, representing the R, G, B, and A channels, from 0-255.
-    inline unsigned char *_voxels;
+    inline uint32_t *_pixels;
 
     /// @brief The raylib texture object that the voxels are drawn to. We draw to the `_voxels` array first, then apply it to this texture, and finally render this to the screen so that we can double buffer.
     inline Texture2D _texture = {0};
