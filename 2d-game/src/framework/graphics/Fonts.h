@@ -28,8 +28,11 @@ namespace GameEngine
     inline std::map<std::string, GameFont *> _fonts;
 
     /**
-     * @brief Used internally within the `GameEngine::LoadAllAssets` function to load a
+     * @brief Used internally within the `GameEngine::LoadAllAssets` function, to load a
      * font into memory.
+     * @param referenceName The name that the font will be referenced as when retrieved
+     * by various functions.
+     * @param filePath The path of the file, starting with `assets/...`
      */
     void _LoadFont(std::string _fileName);
 

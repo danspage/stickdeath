@@ -2,13 +2,6 @@
 
 namespace GameEngine
 {
-    /**
-     * @brief Used internally within the `GameEngine::LoadAllAssets` function, to load a
-     * font into memory.
-     * @param referenceName The name that the font will be referenced as when retrieved
-     * by various functions.
-     * @param filePath The path of the file, starting with `assets/...`
-     */
     void _LoadFont(std::string _fileName)
     {
         std::ifstream file(_fileName);
@@ -31,7 +24,7 @@ namespace GameEngine
             }
             else
             {
-                std::vector<bool> lineData;
+                std::vector<PixelOffset> lineData;
 
                 size_t pos = str.find(' ');
 
@@ -40,23 +33,23 @@ namespace GameEngine
                     std::string first = str.substr(0, pos);
                     std::string second = str.substr(pos + 1);
 
-                    for (char c : second)
+                    int charWidth = stoi(first);
+
+                    for (int i = 0; i < second.length(); i++)
                     {
-                        if (c == '0')
+                        if (second[i] == '1')
                         {
-                            lineData.push_back(false);
+                            const uint16_t offsetX = static_cast<int>(i) % charWidth;
+                            const uint16_t offsetY = static_cast<int>(i) / charWidth;
+                            lineData.push_back(PixelOffset({offsetX, offsetY}));
                         }
-                        else if (c == '1')
-                        {
-                            lineData.push_back(true);
-                        }
-                        else
+                        else if (second[i] != '0')
                         {
                             std::cerr << "Invalid characters were present in line " << line << " while loading the font file '" << _fileName << "'!";
                         }
                     }
 
-                    tempCharData.push_back(new GameFontChar(lineData, stoi(first)));
+                    tempCharData.push_back(new GameFontChar(lineData, charWidth));
                 }
                 else
                 {
@@ -121,34 +114,20 @@ namespace GameEngine
 
         for (GameFontChar *gfc : strChars)
         {
-            const std::vector<bool> &charPx = gfc->getPixels();
+            const std::vector<PixelOffset> &charPx = gfc->getPixels();
             int _charW = gfc->getCharWidth();
-            int _charH = charPx.size() / _charW;
 
-            for (int row = 0; row < _charH; row++)
+            for (const PixelOffset &po : charPx)
             {
-                int pxY = y + row;
-                if (pxY < 0 || pxY >= GameEngine::HEIGHT_VOXELS)
+                const int drawX = charX + po.x;
+                const int drawY = y + po.y;
+
+                if (!IsOnScreen(drawX, drawY))
                 {
                     continue;
                 }
 
-                int rowStart = row * _charW;
-                for (int col = 0; col < _charW; col++)
-                {
-                    if (!charPx[rowStart + col])
-                    {
-                        continue;
-                    }
-
-                    int pxX = charX + col;
-                    if (pxX < 0 || pxX >= GameEngine::WIDTH_VOXELS)
-                    {
-                        continue;
-                    }
-
-                    FillVoxel(pxX, pxY, color);
-                }
+                FillVoxel(drawX, drawY, color);
             }
 
             charX += _charW + 1;
