@@ -37,33 +37,25 @@ namespace GameEngine
 
     void FillVoxel(int voxelX, int voxelY, Color color)
     {
-        const int startX = voxelX * GameEngine::VOXEL_SIZE;
-        const int startY = voxelY * GameEngine::VOXEL_SIZE;
         const uint32_t merged = color.r | (color.g << 8) | (color.b << 16) | (255 << 24);
 
-        for (int y = 0; y < GameEngine::VOXEL_SIZE; y++)
-        {
-            for (int x = 0; x < GameEngine::VOXEL_SIZE; x++)
-            {
-                FillPixel(startX + x, startY + y, merged);
-            }
-        }
+        const int topLeftIndex = (voxelY * VOXEL_SIZE) * WIDTH_PIXELS + (voxelX * VOXEL_SIZE);
+        _pixels[topLeftIndex] = merged;
+        _pixels[topLeftIndex + 1] = merged;
+        _pixels[topLeftIndex + WIDTH_PIXELS] = merged;
+        _pixels[topLeftIndex + WIDTH_PIXELS + 1] = merged;
     }
 
-    void FillVoxel(int voxelX, int voxelY, unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+    void FillVoxel(int voxelX, int voxelY, uint32_t r, uint32_t g, uint32_t b, uint32_t a)
     {
         // TODO: Add a way to interpolate background pixels for partial alpha
+        uint32_t merged = r | (g << 8) | (b << 16) | (255 << 24);
 
-        int startX = voxelX * GameEngine::VOXEL_SIZE;
-        int startY = voxelY * GameEngine::VOXEL_SIZE;
-
-        for (int y = 0; y < GameEngine::VOXEL_SIZE; y++)
-        {
-            for (int x = 0; x < GameEngine::VOXEL_SIZE; x++)
-            {
-                FillPixel(startX + x, startY + y, r, g, b);
-            }
-        }
+        const int topLeftIndex = (voxelY * VOXEL_SIZE) * WIDTH_PIXELS + (voxelX * VOXEL_SIZE);
+        _pixels[topLeftIndex] = merged;
+        _pixels[topLeftIndex + 1] = merged;
+        _pixels[topLeftIndex + WIDTH_PIXELS] = merged;
+        _pixels[topLeftIndex + WIDTH_PIXELS + 1] = merged;
     }
 
     Color GetVoxel(int voxelX, int voxelY)

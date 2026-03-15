@@ -49,7 +49,7 @@ namespace GameEngine
     /// @param r Voxel color's red channel value
     /// @param g Voxel color's blue channel value
     /// @param b Voxel color's green channel value
-    void FillVoxel(int voxelX, int voxelY, unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+    void FillVoxel(int voxelX, int voxelY, uint32_t r, uint32_t g, uint32_t b, uint32_t a);
 
     /// @brief Returns the color of the voxel at a given coordinate.
     /// @param voxelX Voxel's X coordinate
