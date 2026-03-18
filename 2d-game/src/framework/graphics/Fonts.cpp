@@ -1,5 +1,7 @@
 #include "Fonts.h"
 
+#include <cstring>
+
 namespace GameEngine
 {
     void _LoadFont(std::string _fileName)
@@ -60,12 +62,24 @@ namespace GameEngine
             line++;
         }
 
+        const size_t expectedChars = std::strlen(CHAR_MAP);
+        if (tempCharData.size() != expectedChars)
+        {
+            std::cerr << "Warning: Font '" << referenceName << "' loaded " << tempCharData.size() << " glyphs, expected " << expectedChars << ". Missing characters will render as spaces." << std::endl;
+        }
+
         _fonts[referenceName] = new GameFont(_charHeight, tempCharData);
     }
 
     int _GetStringWidth(std::string str, std::string font, GameFontRenderOptions options)
     {
-        GameFont *_font = _fonts[font];
+        auto fontIt = _fonts.find(font);
+        if (fontIt == _fonts.end() || fontIt->second == nullptr)
+        {
+            return 0;
+        }
+
+        GameFont *_font = fontIt->second;
         int numChars = str.size();
 
         std::vector<GameFontChar *> strChars;
@@ -90,7 +104,13 @@ namespace GameEngine
 
         int charX = x;
 
-        GameFont *_font = _fonts[font];
+        auto fontIt = _fonts.find(font);
+        if (fontIt == _fonts.end() || fontIt->second == nullptr)
+        {
+            return;
+        }
+
+        GameFont *_font = fontIt->second;
         std::vector<GameFontChar *> strChars;
         strChars.reserve(str.size());
 

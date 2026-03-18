@@ -1,5 +1,7 @@
 #include "GameFont.h"
 
+#include <cstring>
+
 namespace GameEngine
 {
     GameFont::GameFont(int _charHeight, std::vector<GameFontChar*> _fontChars)
@@ -10,7 +12,25 @@ namespace GameEngine
 
     GameFontChar* GameFont::GetCharData(char c)
     {
-        int indexOfChar = (int)(strchr(CHAR_MAP, c) - CHAR_MAP);
+        static GameFontChar emptyChar({}, 0);
+
+        if (fontChars.empty())
+        {
+            return &emptyChar;
+        }
+
+        const char *mappedChar = std::strchr(CHAR_MAP, c);
+        if (mappedChar == nullptr)
+        {
+            return fontChars[0];
+        }
+
+        const size_t indexOfChar = static_cast<size_t>(mappedChar - CHAR_MAP);
+        if (indexOfChar >= fontChars.size())
+        {
+            return fontChars[0];
+        }
+
         return fontChars[indexOfChar];
     }
 }

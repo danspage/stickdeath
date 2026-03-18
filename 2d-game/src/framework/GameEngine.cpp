@@ -57,8 +57,6 @@ namespace GameEngine
     {
         const double renderTime = GetTime() * 1000;
         _states[_currentState]->Render();
-        if (_frameCount % 120 == 0)
-            std::cout << "Render time: " << (GetTime() * 1000) - renderTime << std::endl;
 
         const double textureUploadTime = GetTime() * 1000;
         if (_texture.id == 0)
@@ -70,18 +68,21 @@ namespace GameEngine
                 .mipmaps = 1,
                 .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
             _texture = LoadTextureFromImage(image);
-            if (_frameCount % 120 == 0)
-                std::cout << "Texture upload time: " << (GetTime() * 1000) - textureUploadTime << std::endl;
         }
         else
         {
             UpdateTexture(_texture, _pixels);
-            if (_frameCount % 120 == 0)
-                std::cout << "Texture upload time: " << (GetTime() * 1000) - textureUploadTime << std::endl;
         }
 
         DrawTexture(_texture, 0, 0, WHITE);
 
         _frameCount++;
+    }
+
+    void SetState(std::string route)
+    {
+        _states[_currentState]->onExit();
+        _currentState = route;
+        _states[_currentState]->OnLoad();
     }
 }

@@ -77,6 +77,13 @@ namespace GameEngine
         std::fill(_pixels, _pixels + TOTAL_NUM_PIXELS, merged);
     }
 
+    void FillBG(uint32_t r, uint32_t g, uint32_t b)
+    {
+        uint32_t merged = r | (g << 8) | (b << 16) | (255 << 24);
+
+        std::fill(_pixels, _pixels + TOTAL_NUM_PIXELS, merged);
+    }
+
     void FillRect(int x, int y, int width, int height, Color color)
     {
         for (int x2 = x; x2 < x + width; x2++)

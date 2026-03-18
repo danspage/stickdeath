@@ -60,6 +60,12 @@ namespace GameEngine
     /// @param color
     void FillBG(Color color);
 
+    /// @brief Fills the entire screen with a given RGB color.
+    /// @param r Red value
+    /// @param g Green value
+    /// @param b Blue value
+    void FillBG(uint32_t r, uint32_t g, uint32_t b);
+
     /// @brief Fills a rectangular area with a given color.
     /// @param x Top left X coordinate of the rectangle
     /// @param y Top left Y coordinate of the rectangle

@@ -1,18 +1,45 @@
 #pragma once
 
+#include <cstdint>
+
+struct EntitySize
+{
+    uint16_t width;
+    uint16_t height;
+};
+
 class Entity
 {
 public:
-    virtual ~Entity() {};
+    Entity(EntitySize _size)
+    {
+        size = _size;
+    };
 
-    float getXPos() { return xPos; }
-    float getYPos() { return yPos; }
-    float getXVel() { return xVel; }
+    float GetXPos() { return xPos; }
+    float GetYPos() { return yPos; }
+    float GetXVel() { return xVel; }
     float getYVel() { return yVel; }
-    void setXPos(float _xPos) { xPos = _xPos; }
-    void setYPos(float _yPos) { yPos = _yPos; }
-    void setXVel(float _xVel) { xVel = _xVel; }
-    void setYVel(float _yVel) { yVel = _yVel; }
+    void SetXPos(float _xPos) { xPos = _xPos; }
+    void SetYPos(float _yPos) { yPos = _yPos; }
+    void SetPos(float _xPos, float _yPos)
+    {
+        xPos = _xPos;
+        yPos = _yPos;
+    }
+    void SetXVel(float _xVel) { xVel = _xVel; }
+    void SetYVel(float _yVel) { yVel = _yVel; }
+    void SetVel(float _xVel, float _yVel)
+    {
+        xVel = _xVel;
+        yVel = _yVel;
+    }
+    int GetWidth() { return size.width; }
+    int GetHeight() { return size.height; }
+
+    virtual void Render() {};
+    virtual void Update(float dt) {};
+
 private:
     float xPos = 0.0;
     float yPos = 0.0;
@@ -20,5 +47,5 @@ private:
     float lastYPos = 0.0;
     float xVel = 0.0;
     float yVel = 0.0;
-    int width, height;
+    EntitySize size;
 };

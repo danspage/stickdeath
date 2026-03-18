@@ -9,6 +9,7 @@
 int main()
 {
     InitWindow(GameEngine::WIDTH_VOXELS * GameEngine::VOXEL_SIZE, GameEngine::HEIGHT_VOXELS * GameEngine::VOXEL_SIZE, GameEngine::WINDOW_TITLE);
+    SetExitKey(KEY_NULL);
 
     GameEngine::InitializeRoutes(
         "title",

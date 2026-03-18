@@ -67,6 +67,9 @@ namespace GameEngine
     /// @brief Handles all rendering to the screen for the current state. Attemps to run at a constant interval defined by the `TARGET_FPS` variable in the `GameEngine` class.
     void RenderCurrentState();
 
+    /// @brief Exits the current state and loads the specified state.
+    void SetState(std::string route);
+
     /// @brief A list of voxels that gets drawn to the screen. Each voxel takes up 4 chars, representing the R, G, B, and A channels, from 0-255.
     inline uint32_t *_pixels;
 
