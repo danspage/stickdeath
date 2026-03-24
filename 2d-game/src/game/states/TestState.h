@@ -4,23 +4,29 @@
 #include "../../framework/graphics/Graphics.h"
 #include "../../framework/graphics/Images.h"
 #include "../world/entity/Player.h"
+#include "../world/map/block/Block.h"
 
-class TestState : public GameEngine::GameState
+namespace StickDeath
 {
-public:
-    TestState() : GameState() {};
+    class TestState : public GameEngine::GameState
+    {
+    public:
+        TestState() : GameState() {};
 
-    void OnLoad() override;
-    // void onExit() override;
-    void Update(float dt) override;
-    void Render() override;
-    void OnKeyPressed(int key) override;
+        void OnLoad() override;
+        // void onExit() override;
+        void Update(float dt) override;
+        void Render() override;
+        void OnKeyPressed(int key) override;
 
-private:
-    int squareX = 10;
-    int squareY = 10;
+    private:
+        int squareX = 10;
+        int squareY = 10;
 
-    bool flipImg = false;
+        bool flipImg = false;
 
-    Player player;
-};
+        Player player;
+
+        Block testBlock = Block(3, 3, "floor");
+    };
+}

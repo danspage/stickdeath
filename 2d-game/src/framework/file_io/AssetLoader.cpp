@@ -15,10 +15,20 @@ void _LoadAssetFile(std::string path, std::string cleanedPath, std::string fileE
 {
     if (fileExtension == ".png")
     {
+        size_t pos = cleanedPath.find("images/");
+        if (pos != std::string::npos)
+        {
+            cleanedPath.erase(pos, std::string("images/").length());
+        }
+
+        std::cout << "LOADING IMAGE: " << cleanedPath << std::endl;
+
         GameEngine::_LoadImage(cleanedPath, path);
     }
     else if (fileExtension == ".2df")
     {
+        std::cout << "LOADING FONT: " << cleanedPath << std::endl;
+
         GameEngine::_LoadFont(path);
     }
 }
@@ -61,7 +71,7 @@ namespace GameEngine
             fs::path p(file);
             std::string cleanedPath = fs::relative(p, "assets").replace_extension("").string();
 
-            std::cout << "Found: " << cleanedPath << std::endl;
+            // std::cout << "Found: " << cleanedPath << std::endl;
 
             _LoadAssetFile(file, cleanedPath, p.extension().string());
 

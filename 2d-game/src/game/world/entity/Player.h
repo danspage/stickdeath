@@ -8,23 +8,26 @@
 #include "../../../framework/graphics/Images.h"
 #include "../../../framework/graphics/TextureAnimation.h"
 
-class Player : public Entity
+namespace StickDeath
 {
-public:
-    Player() : Entity({12, 32}) {};
+    class Player : public Entity
+    {
+    public:
+        Player() : Entity({12, 32}) {};
 
-    void Update(float dt) override;
-    void Render() override;
+        void Update(float dt) override;
+        void Render() override;
 
-private:
-    bool facingLeft = false;
+    private:
+        bool facingLeft = false;
 
-    const float speed = 50;
+        const float speed = 50;
 
-    GameEngine::TextureAnimation playerAnim = GameEngine::TextureAnimation(0.1, {
-                                                                                    "images/sprites/entity/player/walking_1",
-                                                                                    "images/sprites/entity/player/walking_2",
-                                                                                    "images/sprites/entity/player/walking_3",
-                                                                                    "images/sprites/entity/player/walking_4",
-                                                                                });
-};
+        GameEngine::TextureAnimation playerAnim = GameEngine::TextureAnimation(0.1, {
+                                                                                        "sprites/entity/player/walking_1",
+                                                                                        "sprites/entity/player/walking_2",
+                                                                                        "sprites/entity/player/walking_3",
+                                                                                        "sprites/entity/player/walking_4",
+                                                                                    });
+    };
+}

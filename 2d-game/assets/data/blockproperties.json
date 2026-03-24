@@ -1,0 +1,8 @@
+{
+    "null": {
+        "texture": "blocks/null"
+    },
+    "floor": {
+        "texture": "blocks/floor"
+    }
+}
