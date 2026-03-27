@@ -8,7 +8,7 @@ namespace GameEngine
         virtual ~GameState() {};
 
         /// @brief Runs when the state is loaded by the game.
-        virtual void OnLoad() {};
+        virtual void OnEnter() {};
 
         /// @brief Runs before the game switches from this state to a new one.
         virtual void onExit() {};

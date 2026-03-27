@@ -21,7 +21,7 @@ namespace StickDeath
     private:
         bool facingLeft = false;
 
-        const float speed = 50;
+        const float speed = 5;
 
         GameEngine::TextureAnimation playerAnim = GameEngine::TextureAnimation(0.1, {
                                                                                         "sprites/entity/player/walking_1",

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "../map/Map.h"
 
 namespace StickDeath
 {
@@ -26,6 +27,16 @@ namespace StickDeath
 
     void Player::Render()
     {
-        GameEngine::DrawImage(playerAnim.GetCurrentFrame(), std::floor(GetXPos()) - (GetWidth() / 2), std::floor(GetYPos() - GetHeight()), {.flipHorizontal = facingLeft});
+        float worldX = GetXPos() * StickDeath::Map::TILE_SIZE;
+        float worldY = GetYPos() * StickDeath::Map::TILE_SIZE;
+
+        int drawX = static_cast<int>(std::floor(worldX)) - GetWidth() / 2;
+        int drawY = GameEngine::HEIGHT_VOXELS - static_cast<int>(std::floor(worldY)) - GetHeight();
+
+        GameEngine::DrawImage(
+            playerAnim.GetCurrentFrame(),
+            drawX,
+            drawY,
+            {.flipHorizontal = facingLeft});
     }
 }

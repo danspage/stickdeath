@@ -2,9 +2,17 @@
 
 namespace StickDeath
 {
-    void TestState::OnLoad()
+    TestState::TestState() : GameState()
     {
-        player.SetPos(50, 50);
+        player.SetPos(1, 1);
+
+        for (int x = 0; x < 10; x++)
+        {
+            for (int y = 0; y < 10; y++)
+            {
+                StickDeath::Map::SetBlock(x * 2, y, "floor");
+            }
+        }
     }
 
     void TestState::Update(float dt)
@@ -16,9 +24,9 @@ namespace StickDeath
     {
         GameEngine::FillBG(SKYBLUE);
 
-        player.Render();
+        StickDeath::Map::Render();
 
-        testBlock.Render();
+        player.Render();
     }
 
     void TestState::OnKeyPressed(int key)

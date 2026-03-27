@@ -1,9 +1,11 @@
 #include "Block.h"
 
 #include "Blocks.h"
+#include "../Map.h"
 #include "../../../../framework/graphics/Images.h"
 
-namespace StickDeath {
+namespace StickDeath
+{
     Block::Block(int xPos, int yPos, std::string blockName)
     {
         x = xPos;
@@ -13,13 +15,17 @@ namespace StickDeath {
         texturePath = _defaultBlockProperties.at(blockName).at("texture");
     }
 
+    void Block::HardOverwriteCoordinates(int xPos, int yPos)
+    {
+        x = xPos;
+        y = yPos;
+    }
+
     void Block::Render()
     {
-        std::cout << "Rendering block path: " << texturePath << std::endl;
+        int drawX = x * StickDeath::Map::TILE_SIZE;
+        int drawY = GameEngine::HEIGHT_VOXELS - (y + 1) * StickDeath::Map::TILE_SIZE;
 
-        int renderX = x*16 + 20;
-        int renderY = y*16 + 20;
-
-        GameEngine::DrawImage(texturePath, renderX, renderY);
+        GameEngine::DrawImage(texturePath, drawX, drawY);
     }
 }

@@ -5,15 +5,16 @@
 #include "../../framework/graphics/Images.h"
 #include "../world/entity/Player.h"
 #include "../world/map/block/Block.h"
+#include "../world/map/Map.h"
 
 namespace StickDeath
 {
     class TestState : public GameEngine::GameState
     {
     public:
-        TestState() : GameState() {};
+        TestState();
 
-        void OnLoad() override;
+        // void OnEnter() override;
         // void onExit() override;
         void Update(float dt) override;
         void Render() override;
@@ -26,7 +27,5 @@ namespace StickDeath
         bool flipImg = false;
 
         Player player;
-
-        Block testBlock = Block(3, 3, "floor");
     };
 }

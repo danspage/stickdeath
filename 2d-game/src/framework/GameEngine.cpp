@@ -83,6 +83,6 @@ namespace GameEngine
     {
         _states[_currentState]->onExit();
         _currentState = route;
-        _states[_currentState]->OnLoad();
+        _states[_currentState]->OnEnter();
     }
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cmath>
 
 namespace StickDeath
 {
@@ -38,6 +39,10 @@ namespace StickDeath
         }
         int GetWidth() { return size.width; }
         int GetHeight() { return size.height; }
+        int GetTileToLeftOfEntity();
+        int GetTileToRightOfEntity();
+        int GetTileAboveEntity();
+        int GetTileBelowEntity();
 
         virtual void Render() {};
         virtual void Update(float dt) {};
