@@ -3,12 +3,15 @@
 #include <cstdint>
 #include <cmath>
 
+#include "../map/Map.h"
+#include "../physics/AABB.h"
+
 namespace StickDeath
 {
     struct EntitySize
     {
-        uint16_t width;
-        uint16_t height;
+        uint16_t widthPx;
+        uint16_t heightPx;
     };
 
     class Entity
@@ -17,12 +20,13 @@ namespace StickDeath
         Entity(EntitySize _size)
         {
             size = _size;
+            
         };
 
-        float GetXPos() { return xPos; }
-        float GetYPos() { return yPos; }
-        float GetXVel() { return xVel; }
-        float getYVel() { return yVel; }
+        float GetXPos() const { return xPos; }
+        float GetYPos() const { return yPos; }
+        float GetXVel() const { return xVel; }
+        float GetYVel() const { return yVel; }
         void SetXPos(float _xPos) { xPos = _xPos; }
         void SetYPos(float _yPos) { yPos = _yPos; }
         void SetPos(float _xPos, float _yPos)
@@ -37,13 +41,16 @@ namespace StickDeath
             xVel = _xVel;
             yVel = _yVel;
         }
-        int GetWidth() { return size.width; }
-        int GetHeight() { return size.height; }
-        int GetTileToLeftOfEntity();
-        int GetTileToRightOfEntity();
-        int GetTileAboveEntity();
-        int GetTileBelowEntity();
+        float GetWidthBlocks() const { return (float)size.widthPx / (float)StickDeath::Map::TILE_SIZE; }
+        float GetHeightBlocks() const { return (float)size.heightPx / (float)StickDeath::Map::TILE_SIZE; }
+        int GetWidthPixels() const { return size.widthPx; }
+        int GetHeightPixels() const { return size.heightPx; }
 
+        Physics::AABB GetBounds() const;
+        Physics::AABB GetBoundsAt(float x, float y) const;
+        Physics::TileRange GetOverlappedTiles() const;
+
+        void DoCollision(float dt);
         virtual void Render() {};
         virtual void Update(float dt) {};
 

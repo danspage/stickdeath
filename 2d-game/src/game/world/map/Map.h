@@ -8,7 +8,9 @@
 
 namespace StickDeath::Map
 {
-    const int TILE_SIZE = 16;
+    const inline int TILE_SIZE = 16;
+
+    const inline float EPSILON = 0.0001;
 
     class BlockOutOfBoundsException : public std::exception
     {
@@ -39,6 +41,12 @@ namespace StickDeath::Map
     Block *TryGetBlock(int x, int y);
     Block *TryGetBlockAtWorldPos(float worldX, float worldY);
     bool IsInBounds(int x, int y);
+
+    std::vector<std::pair<int, int>> GetSolidBlocksInRow(int y, int startX, int endX);
+    std::vector<std::pair<int, int>> GetSolidBlocksInColumn(int x, int startY, int endY);
+
+    bool CheckSolidBlocksExistInRow(int y, int startX, int endX);
+    bool CheckSolidBlocksExistInColumn(int x, int startY, int endY);
 
     void Render();
 }

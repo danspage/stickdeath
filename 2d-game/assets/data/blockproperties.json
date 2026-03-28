@@ -1,8 +1,10 @@
 {
     "null": {
-        "texture": "blocks/null"
+        "texture": "blocks/null",
+        "isSolid": true
     },
     "floor": {
-        "texture": "blocks/floor"
+        "texture": "blocks/floor",
+        "isSolid": true
     }
 }

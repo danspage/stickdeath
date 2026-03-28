@@ -2,8 +2,15 @@
 
 #include <string>
 
+#include "../../physics/AABB.h"
+
 namespace StickDeath
 {
+    struct BlockProperties
+    {
+        bool isSolid;
+    };
+
     class Block
     {
     public:
@@ -11,10 +18,15 @@ namespace StickDeath
 
         void HardOverwriteCoordinates(int xPos, int yPos);
 
+        Physics::AABB GetBounds() const;
+
+        BlockProperties GetProperties() const;
+        
         void Render();
         void Update(float dt);
     private:
         std::string texturePath;
         int x, y;
+        BlockProperties properties;
     };
 }

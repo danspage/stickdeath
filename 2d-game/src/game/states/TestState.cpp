@@ -4,13 +4,13 @@ namespace StickDeath
 {
     TestState::TestState() : GameState()
     {
-        player.SetPos(1, 1);
+        player.SetPos(3, 1);
 
         for (int x = 0; x < 10; x++)
         {
             for (int y = 0; y < 10; y++)
             {
-                StickDeath::Map::SetBlock(x * 2, y, "floor");
+                StickDeath::Map::SetBlock(x * 5, y, "floor");
             }
         }
     }

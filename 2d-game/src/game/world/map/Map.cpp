@@ -65,6 +65,65 @@ namespace StickDeath::Map
         return (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT);
     }
 
+    std::vector<std::pair<int, int>> GetSolidBlocksInRow(int y, int startX, int endX)
+    {
+        std::vector<std::pair<int, int>> matches;
+
+        for (int x = startX; x <= endX; x++)
+        {
+            Block *search = TryGetBlock(x, y);
+            if (search != nullptr && search->GetProperties().isSolid)
+            {
+                matches.push_back({x, y});
+            }
+        }
+
+        return matches;
+    };
+
+    std::vector<std::pair<int, int>> GetSolidBlocksInColumn(int x, int startY, int endY)
+    {
+        std::vector<std::pair<int, int>> matches;
+
+        for (int y = startY; y <= endY; y++)
+        {
+            Block *search = TryGetBlock(x, y);
+            if (search != nullptr && search->GetProperties().isSolid)
+            {
+                matches.push_back({x, y});
+            }
+        }
+
+        return matches;
+    };
+
+    bool CheckSolidBlocksExistInRow(int y, int startX, int endX)
+    {
+        for (int x = startX; x <= endX; x++)
+        {
+            Block *search = TryGetBlock(x, y);
+            if (search != nullptr && search->GetProperties().isSolid)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    bool CheckSolidBlocksExistInColumn(int x, int startY, int endY)
+    {
+        for (int y = startY; y <= endY; y++)
+        {
+            Block *search = TryGetBlock(x, y);
+            if (search != nullptr && search->GetProperties().isSolid)
+            {
+                return true;
+            }
+        }
+        return false;
+    };
+
     void Render()
     {
         for (Block &b : blocks)

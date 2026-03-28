@@ -3,10 +3,12 @@
 #include "Entity.h"
 
 #include <vector>
+#include <cmath>
 
 #include "../../../framework/graphics/Graphics.h"
 #include "../../../framework/graphics/Images.h"
 #include "../../../framework/graphics/TextureAnimation.h"
+#include "../map/Map.h"
 
 namespace StickDeath
 {
@@ -14,7 +16,7 @@ namespace StickDeath
     {
     public:
         Player() : Entity({12, 32}) {};
-
+        
         void Update(float dt) override;
         void Render() override;
 
