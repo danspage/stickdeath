@@ -2,6 +2,14 @@
 
 namespace StickDeath
 {
+    void Player::HandleKeyPress(int key)
+    {
+        if (key == KEY_UP && IsOnGround())
+        {
+            SetYVel(12);
+        }
+    }
+
     void Player::Update(float dt)
     {
         playerAnim.UpdateAnimation(dt);
@@ -22,19 +30,6 @@ namespace StickDeath
         {
             playerAnim.SetAnimationActive(false);
             SetXVel(0);
-        }
-
-        if (IsKeyDown(KEY_DOWN))
-        {
-            SetYVel(-speed);
-        }
-        else if (IsKeyDown(KEY_UP))
-        {
-            SetYVel(speed);
-        }
-        else
-        {
-            SetYVel(0);
         }
 
         DoCollision(dt);

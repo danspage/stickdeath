@@ -36,10 +36,20 @@ namespace StickDeath
 
     void Entity::DoCollision(float dt)
     {
-        float dx = xVel * dt;
-        float dy = yVel * dt;
         float halfWidth = GetWidthBlocks() / 2.0f;
         float height = GetHeightBlocks();
+
+        // Reset grounded state each frame
+        onGround = false;
+
+        // Gravity
+        if (doGravity)
+        {
+            yVel += GRAVITY * dt;
+        }
+
+        float dx = xVel * dt;
+        float dy = yVel * dt;
 
         // Horizontal check
         Physics::AABB futureX = GetBoundsAt(xPos + dx, yPos);
@@ -96,6 +106,8 @@ namespace StickDeath
                 int tileY = static_cast<int>(std::floor(futureY.bottomBound));
                 yPos = tileY + 1.0f;
                 yVel = 0.0f;
+                
+                onGround = true;
             }
             else
             {

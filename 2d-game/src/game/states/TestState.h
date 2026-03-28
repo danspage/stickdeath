@@ -2,6 +2,7 @@
 
 #include "../../framework/state/GameState.h"
 #include "../../framework/graphics/Graphics.h"
+#include "../../framework/graphics/Fonts.h"
 #include "../../framework/graphics/Images.h"
 #include "../world/entity/Player.h"
 #include "../world/map/block/Block.h"

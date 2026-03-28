@@ -6,12 +6,14 @@ namespace StickDeath
     {
         player.SetPos(3, 1);
 
+        for (int x = 0; x < 50; x++)
+        {
+            StickDeath::Map::SetBlock(x, 0, "floor");
+        }
+
         for (int x = 0; x < 10; x++)
         {
-            for (int y = 0; y < 10; y++)
-            {
-                StickDeath::Map::SetBlock(x * 5, y, "floor");
-            }
+            StickDeath::Map::SetBlock(x * 5, x + 4, "floor");
         }
     }
 
@@ -27,6 +29,10 @@ namespace StickDeath
         StickDeath::Map::Render();
 
         player.Render();
+
+        GameEngine::DrawString(std::format("IsOnGround: {}", (player.IsOnGround() ? "true" : "false")), 2, 2, "default", YELLOW);
+        GameEngine::DrawString(std::format("X: {}", player.GetXPos()), 2, 10, "default", YELLOW);
+        GameEngine::DrawString(std::format("Y: {}", player.GetYPos()), 2, 18, "default", YELLOW);
     }
 
     void TestState::OnKeyPressed(int key)
@@ -35,5 +41,7 @@ namespace StickDeath
         {
             GameEngine::SetState("title");
         }
+
+        player.HandleKeyPress(key);
     }
 }

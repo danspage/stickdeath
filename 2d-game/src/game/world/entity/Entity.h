@@ -8,6 +8,8 @@
 
 namespace StickDeath
 {
+    static constexpr float GRAVITY = -15;
+
     struct EntitySize
     {
         uint16_t widthPx;
@@ -50,6 +52,8 @@ namespace StickDeath
         Physics::AABB GetBoundsAt(float x, float y) const;
         Physics::TileRange GetOverlappedTiles() const;
 
+        bool IsOnGround() const { return onGround; };
+
         void DoCollision(float dt);
         virtual void Render() {};
         virtual void Update(float dt) {};
@@ -62,5 +66,8 @@ namespace StickDeath
         float xVel = 0.0;
         float yVel = 0.0;
         EntitySize size;
+
+        bool onGround = false;
+        bool doGravity = true;
     };
 }

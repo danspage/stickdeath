@@ -5,6 +5,8 @@
 #include <vector>
 #include <cmath>
 
+#include <raylib.h>
+
 #include "../../../framework/graphics/Graphics.h"
 #include "../../../framework/graphics/Images.h"
 #include "../../../framework/graphics/TextureAnimation.h"
@@ -16,6 +18,8 @@ namespace StickDeath
     {
     public:
         Player() : Entity({12, 32}) {};
+
+        void HandleKeyPress(int key);
         
         void Update(float dt) override;
         void Render() override;
