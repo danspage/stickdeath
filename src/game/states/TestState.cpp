@@ -32,9 +32,11 @@ namespace StickDeath
 
         player.Render();
 
-        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 2, "default", YELLOW);
-        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 10, "default", YELLOW);
-        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 18, "default", YELLOW);
+        GameEngine::DrawString(std::format("FPS: {}", GetFPS()), 2, 2, "default", YELLOW);
+
+        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 32, "default", YELLOW);
+        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 40, "default", YELLOW);
+        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 48, "default", YELLOW);
 
         healthBar->Render();
     }

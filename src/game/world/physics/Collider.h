@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cmath>
+#include <algorithm>
+
 #include "AABB.h"
 #include "../map/Map.h"
 
