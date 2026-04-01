@@ -4,9 +4,10 @@ namespace StickDeath
 {
     void Player::HandleKeyPress(int key)
     {
-        if (key == KEY_UP && IsOnGround())
+        if (key == KEY_UP && GetCollider()->IsOnGround())
         {
-            SetYVel(12);
+            // Jump
+            GetCollider()->SetYVel(15);
         }
     }
 
@@ -18,30 +19,30 @@ namespace StickDeath
         {
             playerAnim.SetAnimationActive(true);
             facingLeft = true;
-            SetXVel(-speed);
+            GetCollider()->SetXVel(-speed);
         }
         else if (IsKeyDown(KEY_RIGHT))
         {
             playerAnim.SetAnimationActive(true);
             facingLeft = false;
-            SetXVel(speed);
+            GetCollider()->SetXVel(speed);
         }
         else
         {
             playerAnim.SetAnimationActive(false);
-            SetXVel(0);
+            GetCollider()->SetXVel(0);
         }
 
-        DoCollision(dt);
+        GetCollider()->DoCollision(dt);
     }
 
     void Player::Render()
     {
-        float worldX = GetXPos() * StickDeath::Map::TILE_SIZE;
-        float worldY = GetYPos() * StickDeath::Map::TILE_SIZE;
+        float worldX = GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE;
+        float worldY = GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE;
 
-        int drawX = static_cast<int>(std::floor(worldX)) - GetWidthPixels() / 2;
-        int drawY = GameEngine::HEIGHT_VOXELS - static_cast<int>(std::floor(worldY)) - GetHeightPixels();
+        int drawX = static_cast<int>(std::floor(worldX - WIDTH_PX / 2.0f));
+        int drawY = static_cast<int>(std::floor(GameEngine::HEIGHT_VOXELS - worldY - HEIGHT_PX));
 
         GameEngine::DrawImage(
             playerAnim.GetCurrentFrame(),

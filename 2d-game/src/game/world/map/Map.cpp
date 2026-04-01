@@ -124,7 +124,15 @@ namespace StickDeath::Map
         return false;
     };
 
-    void Render()
+    void UpdateMap(float dt)
+    {
+        for (Block &b : blocks)
+        {
+            b.Update(dt);
+        }
+    }
+
+    void RenderMap()
     {
         for (Block &b : blocks)
         {

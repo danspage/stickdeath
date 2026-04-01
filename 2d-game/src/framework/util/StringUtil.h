@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace GameUtil
+namespace GameEngine::Util
 {
     inline bool begins_with(std::string const &value, std::string const &beginning)
     {

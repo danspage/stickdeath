@@ -30,6 +30,8 @@ namespace StickDeath::Map
 
     inline const int MAP_WIDTH = 10000, MAP_HEIGHT = 300;
 
+    inline const float GRAVITY = -25;
+
     inline std::vector<int> tileToBlockIndex((MAP_WIDTH * MAP_HEIGHT), -1);
     inline std::deque<Block> blocks;
 
@@ -48,5 +50,6 @@ namespace StickDeath::Map
     bool CheckSolidBlocksExistInRow(int y, int startX, int endX);
     bool CheckSolidBlocksExistInColumn(int x, int startY, int endY);
 
-    void Render();
+    void UpdateMap(float dt);
+    void RenderMap();
 }

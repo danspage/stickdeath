@@ -4,8 +4,6 @@ namespace StickDeath
 {
     TestState::TestState() : GameState()
     {
-        player.SetPos(3, 1);
-
         for (int x = 0; x < 50; x++)
         {
             StickDeath::Map::SetBlock(x, 0, "floor");
@@ -15,10 +13,14 @@ namespace StickDeath
         {
             StickDeath::Map::SetBlock(x * 5, x + 4, "floor");
         }
+
+        StickDeath::Map::SetBlock(1, 1, SpikeBlock(1, 1));
     }
 
     void TestState::Update(float dt)
     {
+        Map::UpdateMap(dt);
+
         player.Update(dt);
     }
 
@@ -26,13 +28,15 @@ namespace StickDeath
     {
         GameEngine::FillBG(SKYBLUE);
 
-        StickDeath::Map::Render();
+        StickDeath::Map::RenderMap();
 
         player.Render();
 
-        GameEngine::DrawString(std::format("IsOnGround: {}", (player.IsOnGround() ? "true" : "false")), 2, 2, "default", YELLOW);
-        GameEngine::DrawString(std::format("X: {}", player.GetXPos()), 2, 10, "default", YELLOW);
-        GameEngine::DrawString(std::format("Y: {}", player.GetYPos()), 2, 18, "default", YELLOW);
+        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 2, "default", YELLOW);
+        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 10, "default", YELLOW);
+        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 18, "default", YELLOW);
+
+        healthBar->Render();
     }
 
     void TestState::OnKeyPressed(int key)

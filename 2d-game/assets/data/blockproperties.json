@@ -6,5 +6,9 @@
     "floor": {
         "texture": "blocks/floor",
         "isSolid": true
+    },
+    "spike": {
+        "texture": "blocks/spike",
+        "isSolid": false
     }
 }

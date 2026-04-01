@@ -6,7 +6,9 @@
 #include "../../framework/graphics/Images.h"
 #include "../world/entity/Player.h"
 #include "../world/map/block/Block.h"
+#include "../world/map/block/SpikeBlock.h"
 #include "../world/map/Map.h"
+#include "../ui/components/player/HealthBar.h"
 
 namespace StickDeath
 {
@@ -27,6 +29,8 @@ namespace StickDeath
 
         bool flipImg = false;
 
-        Player player;
+        Player player = Player(3, 1);
+
+        UI::HealthBar *healthBar = new UI::HealthBar(RED, 10, 10, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
     };
 }

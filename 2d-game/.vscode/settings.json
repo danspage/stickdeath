@@ -3,5 +3,21 @@
         "iostream": "cpp",
         "map": "cpp",
         "vector": "cpp"
-    }
+    },
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local Instance",
+            "username": "root",
+            "database": "sql_store"
+        }
+    ]
 }

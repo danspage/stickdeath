@@ -23,7 +23,7 @@ namespace StickDeath
         BlockProperties GetProperties() const;
         
         void Render();
-        void Update(float dt);
+        virtual void Update(float dt) {}
     private:
         std::string texturePath;
         int x, y;

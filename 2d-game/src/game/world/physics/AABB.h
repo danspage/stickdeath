@@ -6,7 +6,7 @@ namespace StickDeath::Physics
     {
         float leftBound, rightBound, topBound, bottomBound;
 
-        bool CheckCollision(AABB &other)
+        bool CheckCollision(AABB &other) const
         {
             return (leftBound < other.rightBound &&
                     rightBound > other.leftBound &&

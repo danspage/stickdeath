@@ -17,7 +17,14 @@ namespace StickDeath
     class Player : public Entity
     {
     public:
-        Player() : Entity({12, 32}) {};
+        static constexpr float WIDTH_PX = 12.0f;
+        static constexpr float HEIGHT_PX = 32.0f;
+
+        Player(float x, float y)
+            : Entity(x, y, WIDTH_PX / Map::TILE_SIZE, HEIGHT_PX / Map::TILE_SIZE, true)
+        {
+            GetCollider()->EnableGravity();
+        };
 
         void HandleKeyPress(int key);
         
