@@ -26,8 +26,13 @@ namespace StickDeath
             GetCollider()->EnableGravity();
         };
 
+        int GetHealth() const { return health; }
+        void SetHealth(int _health) { health = _health; }
+        void AddHealth(int amount) { health = std::min(maxHealth, health + amount); }
+        void RemoveHealth(int amount) { health = std::max(0, health - amount); }
+
         void HandleKeyPress(int key);
-        
+
         void Update(float dt) override;
         void Render() override;
 
@@ -35,6 +40,8 @@ namespace StickDeath
         bool facingLeft = false;
 
         const float speed = 5;
+        const int maxHealth = 20;
+        int health = maxHealth;
 
         GameEngine::TextureAnimation playerAnim = GameEngine::TextureAnimation(0.1, {
                                                                                         "sprites/entity/player/walking_1",

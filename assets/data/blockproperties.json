@@ -1,14 +1,26 @@
 {
+    "parent_models": {
+        "solid_square": [
+            [0, 0, 16, 16]
+        ]
+    },
     "null": {
+        "parent": "solid_square",
         "texture": "blocks/null",
-        "isSolid": true
+        "isSolid": false
     },
     "floor": {
+        "parent": "solid_square",
         "texture": "blocks/floor",
         "isSolid": true
     },
     "spike": {
         "texture": "blocks/spike",
-        "isSolid": false
+        "isSolid": false,
+        "model": [
+            [0, 0, 16, 6],
+            [3, 6, 13, 12],
+            [6, 12, 10, 16]
+        ]
     }
 }

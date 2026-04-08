@@ -19,31 +19,30 @@ namespace StickDeath::Map
 
         if (tileToBlockIndex[y * MAP_WIDTH + x] == -1)
         {
-            blocks.emplace_back(Block(x, y, blockName));
+            blocks.emplace_back(std::make_unique<Block>(x, y, blockName));
             tileToBlockIndex[y * MAP_WIDTH + x] = blocks.size() - 1;
         }
         else
         {
-            blocks[tileToBlockIndex[y * MAP_WIDTH + x]] = Block(x, y, blockName);
+            blocks[tileToBlockIndex[y * MAP_WIDTH + x]] = std::make_unique<Block>(x, y, blockName);
         }
     }
 
-    void SetBlock(int x, int y, const Block &block)
+    void SetBlock(int x, int y, std::unique_ptr<Block> block)
     {
         if (!IsInBounds(x, y))
             throw BlockOutOfBoundsException(x, y);
 
-        Block adjustedBlock = block;
-        adjustedBlock.HardOverwriteCoordinates(x, y);
+        block->HardOverwriteCoordinates(x, y);
 
         if (tileToBlockIndex[y * MAP_WIDTH + x] == -1)
         {
-            blocks.emplace_back(adjustedBlock);
+            blocks.emplace_back(std::move(block));
             tileToBlockIndex[y * MAP_WIDTH + x] = blocks.size() - 1;
         }
         else
         {
-            blocks[tileToBlockIndex[y * MAP_WIDTH + x]] = adjustedBlock;
+            blocks[tileToBlockIndex[y * MAP_WIDTH + x]] = std::move(block);
         }
     };
 
@@ -52,7 +51,7 @@ namespace StickDeath::Map
         if (!IsInBounds(x, y) || tileToBlockIndex[y * MAP_WIDTH + x] == -1)
             return nullptr;
 
-        return &blocks[tileToBlockIndex[y * MAP_WIDTH + x]];
+        return blocks[tileToBlockIndex[y * MAP_WIDTH + x]].get();
     };
 
     Block *TryGetBlockAtWorldPos(float worldX, float worldY)
@@ -126,17 +125,17 @@ namespace StickDeath::Map
 
     void UpdateMap(float dt)
     {
-        for (Block &b : blocks)
+        for (auto &b : blocks)
         {
-            b.Update(dt);
+            b->Update(dt);
         }
     }
 
     void RenderMap()
     {
-        for (Block &b : blocks)
+        for (auto &b : blocks)
         {
-            b.Render();
+            b->Render();
         }
     }
 }

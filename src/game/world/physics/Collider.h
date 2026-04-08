@@ -8,6 +8,12 @@
 
 namespace StickDeath::Physics
 {
+    struct BlockEntityCollisionHit
+    {
+        Block* block;
+        bool isInside;
+    };
+
     class Collider
     {
     private:
@@ -57,6 +63,6 @@ namespace StickDeath::Physics
         void EnableGravity() { doGravity = true; }
         void DisableGravity() { doGravity = false; }
 
-        void DoCollision(float dt);
+        std::vector<BlockEntityCollisionHit> DoCollision(float dt);
     };
 }

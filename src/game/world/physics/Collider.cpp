@@ -1,5 +1,7 @@
 #include "Collider.h"
 
+#include "../map/block/Block.h"
+
 namespace StickDeath::Physics
 {
     AABB Collider::GetBoundsAt(float x, float y) const
@@ -35,7 +37,7 @@ namespace StickDeath::Physics
         };
     }
 
-    void Collider::DoCollision(float dt)
+    std::vector<BlockEntityCollisionHit> Collider::DoCollision(float dt)
     {
         // Resolve against tile faces using the collider's own local bounds offsets,
         // so this works for both center-anchored and left-anchored colliders.
@@ -145,5 +147,49 @@ namespace StickDeath::Physics
                 }
             }
         }
+
+        std::vector<BlockEntityCollisionHit> hits;
+
+        const AABB finalBounds = GetBounds();
+
+        const int minX = static_cast<int>(std::floor(finalBounds.leftBound));
+        const int maxX = static_cast<int>(std::floor(finalBounds.rightBound - Map::EPSILON));
+        const int minY = static_cast<int>(std::floor(finalBounds.bottomBound));
+        const int maxY = static_cast<int>(std::floor(finalBounds.topBound - Map::EPSILON));
+
+        for (int y = minY; y <= maxY; y++)
+        {
+            for (int x = minX; x <= maxX; x++)
+            {
+                Block *block = Map::TryGetBlock(x, y);
+                if (block == nullptr)
+                    continue;
+
+                for (const AABB &localBound : block->GetProperties().bounds)
+                {
+                    // Convert local block bound to world space
+                    const AABB worldBound = {
+                        .leftBound = localBound.leftBound + x,
+                        .rightBound = localBound.rightBound + x,
+                        .bottomBound = localBound.bottomBound + y,
+                        .topBound = localBound.topBound + y,
+                    };
+
+                    // if (!finalBounds.CheckCollision(worldBound))
+                    //     continue;
+
+                    // Compute minimum overlap across both axes to determine inside vs touching
+                    const float overlapX = std::min(finalBounds.rightBound - worldBound.leftBound,
+                                                    worldBound.rightBound - finalBounds.leftBound);
+                    const float overlapY = std::min(finalBounds.topBound - worldBound.bottomBound,
+                                                    worldBound.topBound - finalBounds.bottomBound);
+                    const bool isInside = overlapX > Map::EPSILON && overlapY > Map::EPSILON;
+
+                    hits.push_back({block, isInside});
+                }
+            }
+        }
+
+        return hits;
     }
 }

@@ -22,7 +22,7 @@ namespace StickDeath::UI
 
         return static_cast<int>(std::round((float)maxBarWidth * barPercent));
     }
-    
+
     void HealthBar::SetValue(int newVal)
     {
         value = newVal;
@@ -32,6 +32,6 @@ namespace StickDeath::UI
     void HealthBar::Render()
     {
         GameEngine::FillRect(xScreenPos, yScreenPos, width, height, LIGHTGRAY);
-        GameEngine::FillRect(xScreenPos + 1, yScreenPos + 1, width-2, height-2, barColor);
+        GameEngine::FillRect(xScreenPos + 1, yScreenPos + 1, barWidth, height - 2, barColor);
     }
 }

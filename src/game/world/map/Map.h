@@ -33,13 +33,13 @@ namespace StickDeath::Map
     inline const float GRAVITY = -25;
 
     inline std::vector<int> tileToBlockIndex((MAP_WIDTH * MAP_HEIGHT), -1);
-    inline std::deque<Block> blocks;
+    inline std::deque<std::unique_ptr<Block>> blocks;
 
     int GetTileX(float worldX);
     int GetTileY(float worldY);
 
     void SetBlock(int x, int y, const std::string &blockName);
-    void SetBlock(int x, int y, const Block &block);
+    void SetBlock(int x, int y, const std::unique_ptr<Block> block);
     Block *TryGetBlock(int x, int y);
     Block *TryGetBlockAtWorldPos(float worldX, float worldY);
     bool IsInBounds(int x, int y);

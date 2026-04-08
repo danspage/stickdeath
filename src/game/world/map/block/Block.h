@@ -1,14 +1,18 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "../../physics/AABB.h"
 
 namespace StickDeath
 {
+    class Entity;
+    
     struct BlockProperties
     {
         bool isSolid;
+        std::vector<Physics::AABB> bounds;
     };
 
     class Block
@@ -18,15 +22,14 @@ namespace StickDeath
 
         void HardOverwriteCoordinates(int xPos, int yPos);
 
-        Physics::AABB GetBounds() const;
-
         BlockProperties GetProperties() const;
         
         void Render();
         virtual void Update(float dt) {}
-    private:
+        virtual void OnCollision(Entity* entity, bool isInside) {};
+    protected:
         std::string texturePath;
-        int x, y;
+        int x = 0, y = 0;
         BlockProperties properties;
     };
 }

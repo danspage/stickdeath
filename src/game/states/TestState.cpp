@@ -14,7 +14,7 @@ namespace StickDeath
             StickDeath::Map::SetBlock(x * 5, x + 4, "floor");
         }
 
-        StickDeath::Map::SetBlock(1, 1, SpikeBlock(1, 1));
+        StickDeath::Map::SetBlock(1, 1, std::make_unique<SpikeBlock>(1, 1));
     }
 
     void TestState::Update(float dt)
@@ -22,6 +22,8 @@ namespace StickDeath
         Map::UpdateMap(dt);
 
         player.Update(dt);
+
+        healthBar.SetValue(player.GetHealth());
     }
 
     void TestState::Render()
@@ -38,7 +40,7 @@ namespace StickDeath
         GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 40, "default", YELLOW);
         GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 48, "default", YELLOW);
 
-        healthBar->Render();
+        healthBar.Render();
     }
 
     void TestState::OnKeyPressed(int key)

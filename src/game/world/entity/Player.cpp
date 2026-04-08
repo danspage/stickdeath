@@ -33,7 +33,15 @@ namespace StickDeath
             GetCollider()->SetXVel(0);
         }
 
-        GetCollider()->DoCollision(dt);
+        const auto hits = GetCollider()->DoCollision(dt);
+
+        for (const auto& hit : hits)
+        {
+            if (hit.block != nullptr)
+            {
+                hit.block->OnCollision(this, hit.isInside);
+            }
+        }
     }
 
     void Player::Render()
