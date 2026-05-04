@@ -21,7 +21,11 @@ namespace GameEngine
         virtual void Render() {};
 
         /// @brief Handles the logic for when a key is pressed.
-        /// @param key The ID of the key, as defined by Raylib.
-        virtual void OnKeyPressed(int key) {};
+        /// @param key Which key was pressed.
+        virtual void OnKeyPressed(GameEngine::Key key) {};
+
+        /// @brief Handles the logic for when a key is held.
+        /// @param key Which key is being held.
+        virtual void OnKeyHeld(GameEngine::Key key) {};
     };
 }

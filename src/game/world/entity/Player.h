@@ -5,8 +5,6 @@
 #include <vector>
 #include <cmath>
 
-#include <raylib.h>
-
 #include "../../../framework/graphics/Graphics.h"
 #include "../../../framework/graphics/Images.h"
 #include "../../../framework/graphics/TextureAnimation.h"
@@ -32,7 +30,8 @@ namespace StickDeath
         void AddHealth(int amount) { health = std::min(maxHealth, health + amount); }
         void RemoveHealth(int amount) { health = std::max(0, health - amount); }
 
-        void HandleKeyPress(int key);
+        void OnKeyPressed(GameEngine::Key key);
+        void OnKeyHeld(GameEngine::Key key);
 
         void Update(float dt) override;
         void Render() override;

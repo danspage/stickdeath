@@ -3,8 +3,6 @@
 #include <limits>
 #include <map>
 
-#include <raylib.h>
-
 #include "GameFont.h"
 #include "Graphics.h"
 #include "../GameEngine.h"

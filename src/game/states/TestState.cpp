@@ -1,5 +1,7 @@
 #include "TestState.h"
 
+#include <format>
+
 namespace StickDeath
 {
     TestState::TestState() : GameState()
@@ -28,28 +30,28 @@ namespace StickDeath
 
     void TestState::Render()
     {
-        GameEngine::FillBG(SKYBLUE);
+        GameEngine::FillBG(GameEngine::Colors::SKYBLUE);
 
         StickDeath::Map::RenderMap();
 
         player.Render();
 
-        GameEngine::DrawString(std::format("FPS: {}", GetFPS()), 2, 2, "default", YELLOW);
+        GameEngine::DrawString(std::format("FPS: {}", GetFPS()), 2, 2, "default", GameEngine::Colors::YELLOW);
 
-        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 32, "default", YELLOW);
-        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 40, "default", YELLOW);
-        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 48, "default", YELLOW);
+        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 32, "default", GameEngine::Colors::YELLOW);
+        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 40, "default", GameEngine::Colors::YELLOW);
+        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 48, "default", GameEngine::Colors::YELLOW);
 
         healthBar.Render();
     }
 
-    void TestState::OnKeyPressed(int key)
+    void TestState::OnKeyPressed(GameEngine::Key key)
     {
-        if (key == KEY_ESCAPE)
+        if (key == GameEngine::Key::ESCAPE)
         {
             GameEngine::SetState("title");
         }
 
-        player.HandleKeyPress(key);
+        player.OnKeyPressed(key);
     }
 }

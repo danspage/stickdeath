@@ -2,26 +2,24 @@
 
 namespace StickDeath
 {
-    void Player::HandleKeyPress(int key)
+    void Player::OnKeyPressed(GameEngine::Key key)
     {
-        if (key == KEY_UP && GetCollider()->IsOnGround())
+        if (key == GameEngine::Key::UP && GetCollider()->IsOnGround())
         {
             // Jump
             GetCollider()->SetYVel(15);
         }
     }
 
-    void Player::Update(float dt)
+    void Player::OnKeyHeld(GameEngine::Key key)
     {
-        playerAnim.UpdateAnimation(dt);
-
-        if (IsKeyDown(KEY_LEFT))
+        if (key == GameEngine::Key::LEFT)
         {
             playerAnim.SetAnimationActive(true);
             facingLeft = true;
             GetCollider()->SetXVel(-speed);
         }
-        else if (IsKeyDown(KEY_RIGHT))
+        else if (key == GameEngine::Key::RIGHT)
         {
             playerAnim.SetAnimationActive(true);
             facingLeft = false;
@@ -32,6 +30,11 @@ namespace StickDeath
             playerAnim.SetAnimationActive(false);
             GetCollider()->SetXVel(0);
         }
+    }
+
+    void Player::Update(float dt)
+    {
+        playerAnim.UpdateAnimation(dt);
 
         const auto hits = GetCollider()->DoCollision(dt);
 
