@@ -1,5 +1,7 @@
 #include "SpikeBlock.h"
 
+#include <cmath>
+
 #include "../../entity/Player.h"
 
 namespace StickDeath
@@ -17,8 +19,17 @@ namespace StickDeath
         if (player == nullptr)
             return; // Not a Player
 
-        player->RemoveHealth(1);
-        std::cout << "Spike hurt player. Health: " << player->GetHealth() << std::endl;
+        int additionalDamage = std::max(0, static_cast<int>(std::round(player->GetYVel() / -5.0f)));
+
+        player->RemoveHealth(1 + additionalDamage);
+
+        if (player->GetHealth() == 0)
+        {
+            player->SetPos(3, 1);
+            player->SetHealth(player->GetMaxHealth());
+            GameEngine::SetState("title");
+        }
+        // std::cout << "Spike hurt player. Health: " << player->GetHealth() << std::endl;
     }
 
     void SpikeBlock::Update(float dt)

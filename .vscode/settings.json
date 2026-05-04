@@ -19,5 +19,6 @@
             "username": "root",
             "database": "sql_store"
         }
-    ]
+    ],
+    "C_Cpp.default.compilerPath": "/opt/homebrew/bin/g++-15"
 }

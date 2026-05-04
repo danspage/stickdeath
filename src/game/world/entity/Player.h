@@ -27,6 +27,7 @@ namespace StickDeath
         };
 
         int GetHealth() const { return health; }
+        int GetMaxHealth() const { return maxHealth; }
         void SetHealth(int _health) { health = _health; }
         void AddHealth(int amount) { health = std::min(maxHealth, health + amount); }
         void RemoveHealth(int amount) { health = std::max(0, health - amount); }
