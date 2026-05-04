@@ -43,8 +43,8 @@ namespace StickDeath
                     def.properties.bounds.push_back({
                         .leftBound = leftPx / 16.0f,
                         .rightBound = rightPx / 16.0f,
-                        .bottomBound = bottomPx / 16.0f,
                         .topBound = topPx / 16.0f,
+                        .bottomBound = bottomPx / 16.0f,
                     });
                 }
             }
@@ -63,8 +63,8 @@ namespace StickDeath
                     def.properties.bounds.push_back({
                         .leftBound = leftPx / 16.0f,
                         .rightBound = rightPx / 16.0f,
-                        .bottomBound = bottomPx / 16.0f,
                         .topBound = topPx / 16.0f,
+                        .bottomBound = bottomPx / 16.0f,
                     });
                 }
             }

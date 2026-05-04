@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <vector>
 
-#include "../GameEngine.h"
-
 namespace GameEngine
 {
   struct Color
@@ -18,7 +16,9 @@ namespace GameEngine
     inline constexpr Color YELLOW = {253, 249, 0, 255};
     inline constexpr Color SKYBLUE = {102, 191, 255, 255};
     inline constexpr Color LIGHTGRAY = {200, 200, 200, 255};
-  } // namespace Colors
+    inline constexpr Color WHITE = {255, 255, 255, 255};
+    inline constexpr Color BLACK = {0, 0, 0, 255};
+  }
 
   /// @brief Initializes the graphics engine.
   void InitializeGraphics();

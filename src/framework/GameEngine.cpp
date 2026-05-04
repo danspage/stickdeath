@@ -1,7 +1,5 @@
 #include "GameEngine.h"
 
-#include <raylib.h>
-
 int _frameCount = 0;
 
 namespace GameEngine

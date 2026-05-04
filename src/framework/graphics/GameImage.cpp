@@ -1,6 +1,5 @@
 #include "GameImage.h"
 
-#include <raylib.h>
 #include <string>
 
 namespace GameEngine

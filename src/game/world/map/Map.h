@@ -3,6 +3,8 @@
 #include <vector>
 #include <deque>
 #include <format>
+#include <memory>
+#include <cmath>
 
 #include "block/Block.h"
 

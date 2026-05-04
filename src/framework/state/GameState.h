@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../GameEngine.h"
+
 namespace GameEngine
 {
     class GameState

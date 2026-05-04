@@ -32,6 +32,6 @@ namespace StickDeath
 
         Player player = Player(3, 1);
 
-        UI::HealthBar healthBar = UI::HealthBar(RED, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
+        UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
     };
 }

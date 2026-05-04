@@ -171,8 +171,8 @@ namespace StickDeath::Physics
                     const AABB worldBound = {
                         .leftBound = localBound.leftBound + x,
                         .rightBound = localBound.rightBound + x,
-                        .bottomBound = localBound.bottomBound + y,
                         .topBound = localBound.topBound + y,
+                        .bottomBound = localBound.bottomBound + y,
                     };
 
                     // if (!finalBounds.CheckCollision(worldBound))

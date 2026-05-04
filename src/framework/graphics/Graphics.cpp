@@ -1,5 +1,7 @@
 #include "Graphics.h"
 
+#include "../GameEngine.h"
+
 namespace GameEngine
 {
     void InitializeGraphics()

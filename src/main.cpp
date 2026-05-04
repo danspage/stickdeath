@@ -1,5 +1,3 @@
-#include <raylib.h>
-
 #include "framework/GameEngine.h"
 #include "framework/graphics/Graphics.h"
 #include "game/states/TestState.h"
