@@ -11,7 +11,7 @@ namespace GameEngine::Util
         float elapsedSeconds = 0;
         bool running = false;
         bool looping;
-    
+
     public:
         Timer(float _intervalSeconds, bool _looping);
 

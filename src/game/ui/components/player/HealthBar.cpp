@@ -4,7 +4,9 @@
 
 namespace StickDeath::UI
 {
-    HealthBar::HealthBar(GameEngine::Color _barColor, int defaultValue, int _maxValue, int _xScreenPos, int _yScreenPos, int _width, int _height)
+    HealthBar::HealthBar(GameEngine::Color _barColor, int defaultValue,
+                         int _maxValue, int _xScreenPos, int _yScreenPos,
+                         int _width, int _height)
     {
         barColor = _barColor;
         value = defaultValue;
@@ -33,7 +35,9 @@ namespace StickDeath::UI
 
     void HealthBar::Render()
     {
-        GameEngine::FillRect(xScreenPos, yScreenPos, width, height, GameEngine::Colors::LIGHTGRAY);
-        GameEngine::FillRect(xScreenPos + 1, yScreenPos + 1, barWidth, height - 2, barColor);
+        GameEngine::FillRect(xScreenPos, yScreenPos, width, height,
+                             GameEngine::Colors::LIGHTGRAY);
+        GameEngine::FillRect(xScreenPos + 1, yScreenPos + 1, barWidth, height - 2,
+                             barColor);
     }
-}
+} // namespace StickDeath::UI

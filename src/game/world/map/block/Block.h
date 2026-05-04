@@ -8,7 +8,7 @@
 namespace StickDeath
 {
     class Entity;
-    
+
     struct BlockProperties
     {
         bool isSolid;
@@ -23,10 +23,11 @@ namespace StickDeath
         void HardOverwriteCoordinates(int xPos, int yPos);
 
         BlockProperties GetProperties() const;
-        
+
         void Render();
         virtual void Update(float dt) {}
-        virtual void OnCollision(Entity* entity, bool isInside) {};
+        virtual void OnCollision(Entity *entity, bool isInside) {};
+
     protected:
         std::string texturePath;
         int x = 0, y = 0;

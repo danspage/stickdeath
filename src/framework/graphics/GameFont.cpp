@@ -4,13 +4,13 @@
 
 namespace GameEngine
 {
-    GameFont::GameFont(int _charHeight, std::vector<GameFontChar*> _fontChars)
+    GameFont::GameFont(int _charHeight, std::vector<GameFontChar *> _fontChars)
     {
         charHeight = _charHeight;
         fontChars = _fontChars;
     }
 
-    GameFontChar* GameFont::GetCharData(char c)
+    GameFontChar *GameFont::GetCharData(char c)
     {
         static GameFontChar emptyChar({}, 0);
 

@@ -10,7 +10,7 @@ namespace StickDeath::Physics
 {
     struct BlockEntityCollisionHit
     {
-        Block* block;
+        Block *block;
         bool isInside;
     };
 

@@ -38,7 +38,7 @@ namespace StickDeath
 
         const auto hits = GetCollider()->DoCollision(dt);
 
-        for (const auto& hit : hits)
+        for (const auto &hit : hits)
         {
             if (hit.block != nullptr)
             {

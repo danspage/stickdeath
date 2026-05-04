@@ -11,9 +11,10 @@ namespace StickDeath::UI
 
         void SetValue(int newVal);
         void Render();
+
     private:
         GameEngine::Color barColor;
-        
+
         int xScreenPos;
         int yScreenPos;
         int width;

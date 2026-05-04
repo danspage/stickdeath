@@ -20,8 +20,7 @@ int main()
         {
             {"test", new StickDeath::TestState()},
             {"title", new StickDeath::TitleState()},
-        }
-    );
+        });
 
     GameEngine::LoadAllAssets();
 
