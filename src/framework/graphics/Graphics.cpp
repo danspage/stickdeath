@@ -51,7 +51,7 @@ namespace GameEngine
     void FillVoxel(int voxelX, int voxelY, uint32_t r, uint32_t g, uint32_t b, uint32_t a)
     {
         // TODO: Add a way to interpolate background pixels for partial alpha
-        uint32_t merged = r | (g << 8) | (b << 16) | (255 << 24);
+        uint32_t merged = r | (g << 8) | (b << 16) | (a << 24);
 
         const int topLeftIndex = (voxelY * VOXEL_SIZE) * WIDTH_PIXELS + (voxelX * VOXEL_SIZE);
         _pixels[topLeftIndex] = merged;

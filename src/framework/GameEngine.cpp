@@ -50,6 +50,11 @@ namespace GameEngine
     }
   }
 
+  int GetFPS()
+  {
+    return _fps;
+  }
+
   void ProcessKeyEvents()
   {
     for (GameEngine::Key key : ALL_KEYS)
@@ -72,7 +77,7 @@ namespace GameEngine
       return;
 
     if (_texture == nullptr)
-      SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, WIDTH_PIXELS, HEIGHT_PIXELS);
+      _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIDTH_PIXELS, HEIGHT_PIXELS);
 
     SDL_UpdateTexture(_texture, nullptr, _pixels, WIDTH_PIXELS * sizeof(uint32_t));
 
@@ -90,14 +95,14 @@ namespace GameEngine
 
     const double elapsedSeconds = static_cast<double>(now - _lastFpsCounter) /
                                   static_cast<double>(SDL_GetPerformanceFrequency());
-    
+
     if (elapsedSeconds >= 1.0)
     {
       _fps = static_cast<int>(_frameCount / elapsedSeconds);
       _frameCount = 0;
       _lastFpsCounter = now;
     }
-                                }
+  }
 
   void SetState(std::string route)
   {
