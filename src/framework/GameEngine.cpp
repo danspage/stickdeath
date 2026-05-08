@@ -3,14 +3,22 @@
 #include "state/GameState.h"
 #include "io/Key.h"
 
+#include <SDL2/SDL.h>
+
 int _frameCount = 0;
 
 namespace GameEngine
 {
-  /// @brief The raylib texture object that the voxels are drawn to. We draw to
-  /// the `_voxels` array first, then apply it to this texture, and finally render
-  /// this to the screen so that we can double buffer.
-  inline Texture2D _texture = {0};
+  SDL_Texture *_texture = nullptr;
+  SDL_Renderer *_renderer = nullptr;
+  int _fps = 0;
+  Uint64 _lastFpsCounter = 0;
+
+  void SetRenderer(SDL_Renderer *renderer)
+  {
+    _renderer = renderer;
+    _lastFpsCounter = 0;
+  }
 
   void InitializeRoutes(std::string initialRoute,
                         std::map<std::string, GameState *> routes)
@@ -29,10 +37,9 @@ namespace GameEngine
 
   void Cleanup()
   {
-    // 1. Unload the texture from GPU memory
-    if (_texture.id != 0)
+    if (_texture != nullptr)
     {
-      UnloadTexture(_texture);
+      SDL_DestroyTexture(_texture);
     }
 
     // 2. Free the CPU pixel buffer
@@ -51,7 +58,7 @@ namespace GameEngine
       // {
       //   _states[_currentState]->OnKeyHeld(key);
       // }
-      
+
       // ~~~~~~ Process key hold and press events here
     }
   }
@@ -60,28 +67,37 @@ namespace GameEngine
 
   void RenderCurrentState()
   {
-    const double renderTime = GetTime() * 1000;
     _states[_currentState]->Render();
+    if (_renderer == nullptr)
+      return;
 
-    const double textureUploadTime = GetTime() * 1000;
-    if (_texture.id == 0)
-    {
-      Image image = {.data = _pixels,
-                     .width = WIDTH_VOXELS * VOXEL_SIZE,
-                     .height = HEIGHT_VOXELS * VOXEL_SIZE,
-                     .mipmaps = 1,
-                     .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8};
-      _texture = LoadTextureFromImage(image);
-    }
-    else
-    {
-      UpdateTexture(_texture, _pixels);
-    }
+    if (_texture == nullptr)
+      SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, WIDTH_PIXELS, HEIGHT_PIXELS);
 
-    DrawTexture(_texture, 0, 0, GameEngine::Colors::WHITE);
+    SDL_UpdateTexture(_texture, nullptr, _pixels, WIDTH_PIXELS * sizeof(uint32_t));
+
+    SDL_RenderClear(_renderer);
+    SDL_RenderCopy(_renderer, _texture, nullptr, nullptr);
 
     _frameCount++;
-  }
+
+    // Calculate FPS
+    const Uint64 now = SDL_GetPerformanceCounter();
+    if (_lastFpsCounter == 0)
+    {
+      _lastFpsCounter = now;
+    }
+
+    const double elapsedSeconds = static_cast<double>(now - _lastFpsCounter) /
+                                  static_cast<double>(SDL_GetPerformanceFrequency());
+    
+    if (elapsedSeconds >= 1.0)
+    {
+      _fps = static_cast<int>(_frameCount / elapsedSeconds);
+      _frameCount = 0;
+      _lastFpsCounter = now;
+    }
+                                }
 
   void SetState(std::string route)
   {
@@ -89,4 +105,4 @@ namespace GameEngine
     _currentState = route;
     _states[_currentState]->OnEnter();
   }
-} // namespace GameEngine
+}

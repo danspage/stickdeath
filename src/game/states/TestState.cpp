@@ -2,6 +2,8 @@
 
 #include <format>
 
+#include "../../framework/GameEngine.h"
+
 namespace StickDeath
 {
     TestState::TestState() : GameState()
@@ -36,7 +38,7 @@ namespace StickDeath
 
         player.Render();
 
-        GameEngine::DrawString(std::format("FPS: {}", GetFPS()), 2, 2, "default", GameEngine::Colors::YELLOW);
+        GameEngine::DrawString(std::format("FPS: {}", GameEngine::GetFPS()), 2, 2, "default", GameEngine::Colors::YELLOW);
 
         GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 32, "default", GameEngine::Colors::YELLOW);
         GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 40, "default", GameEngine::Colors::YELLOW);

@@ -9,6 +9,8 @@
 #include "graphics/Graphics.h"
 #include "io/Key.h"
 
+struct SDL_Renderer;
+
 namespace GameEngine
 {
     class GameState;
@@ -45,6 +47,9 @@ namespace GameEngine
 
     inline bool _shuttingDown = false;
 
+    /// @brief Sets the SDL_Renderer that the game engine will use to render to the screen. This should only be called once, in the app's main class, and should not be called anywhere else.
+    void SetRenderer(SDL_Renderer *renderer);
+
     /// @brief Initializes the game engine's states, mapping them to names that will
     /// be used for navigation within the code.
     /// @param initialRoute The name of the state that will be loaded upon launching
@@ -64,6 +69,9 @@ namespace GameEngine
     inline std::string _currentState;
 
     inline std::map<std::string, GameState *> _states;
+
+    /// @brief Gets the current FPS of the game.
+    int GetFPS();
 
     /// @brief Loops through all keys defined in `KEYS_USED`, and calls the current
     /// state's `OnKeyPressed` function accordingy for each key that has just been
@@ -87,4 +95,4 @@ namespace GameEngine
     /// @brief A list of voxels that gets drawn to the screen. Each voxel takes up 4
     /// chars, representing the R, G, B, and A channels, from 0-255.
     inline uint32_t *_pixels;
-} // namespace GameEngine
+}
