@@ -1,5 +1,8 @@
 #include "GameEngine.h"
 
+#include "state/GameState.h"
+#include "io/Key.h"
+
 int _frameCount = 0;
 
 namespace GameEngine
@@ -8,18 +11,6 @@ namespace GameEngine
   /// the `_voxels` array first, then apply it to this texture, and finally render
   /// this to the screen so that we can double buffer.
   inline Texture2D _texture = {0};
-
-  /// @brief A list of raylib key IDs that are watched for the `ProcessKeyEvents`
-  /// function.
-  inline const int KEYS_USED[] = {
-      KEY_UP,
-      KEY_DOWN,
-      KEY_LEFT,
-      KEY_RIGHT,
-      KEY_ENTER,
-      KEY_SPACE,
-      KEY_ESCAPE,
-  };
 
   void InitializeRoutes(std::string initialRoute,
                         std::map<std::string, GameState *> routes)
@@ -54,12 +45,14 @@ namespace GameEngine
 
   void ProcessKeyEvents()
   {
-    for (int key : KEYS_USED)
+    for (GameEngine::Key key : ALL_KEYS)
     {
-      if (IsKeyPressed(key))
-      {
-        _states[_currentState]->OnKeyPressed(key);
-      }
+      // if (IsKeyDown(key))
+      // {
+      //   _states[_currentState]->OnKeyHeld(key);
+      // }
+      
+      // ~~~~~~ Process key hold and press events here
     }
   }
 

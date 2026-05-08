@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "../../../framework/GameEngine.h"
 
 namespace StickDeath
 {

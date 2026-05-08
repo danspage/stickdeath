@@ -7,22 +7,11 @@
 
 #include "graphics/GameImage.h"
 #include "graphics/Graphics.h"
-#include "state/GameState.h"
+#include "io/Key.h"
 
 namespace GameEngine
 {
-    /// @brief A list of keys that are watched for the `ProcessKeyEvents`
-    /// function.
-    enum class Key
-    {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT,
-        ENTER,
-        SPACE,
-        ESCAPE
-    };
+    class GameState;
 
     /// @brief The FPS that the game attempts to run at. The key event, update, and
     /// render functions for the current game state are looped through this many

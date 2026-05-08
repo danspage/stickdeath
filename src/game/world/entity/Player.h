@@ -9,6 +9,7 @@
 #include "../../../framework/graphics/Images.h"
 #include "../../../framework/graphics/TextureAnimation.h"
 #include "../map/Map.h"
+#include "../../../framework/io/Key.h"
 
 namespace StickDeath
 {

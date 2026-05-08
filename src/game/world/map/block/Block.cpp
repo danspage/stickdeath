@@ -4,6 +4,7 @@
 #include "../Map.h"
 #include "../../../../framework/graphics/Images.h"
 #include "../../entity/Entity.h"
+#include "../../../../framework/GameEngine.h"
 
 namespace StickDeath
 {

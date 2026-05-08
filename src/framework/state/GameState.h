@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../GameEngine.h"
+#include "../io/Key.h"
 
 namespace GameEngine
 {

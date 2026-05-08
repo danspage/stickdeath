@@ -9,7 +9,7 @@
 #include "../world/map/block/SpikeBlock.h"
 #include "../world/map/Map.h"
 #include "../ui/components/player/HealthBar.h"
-#include "../../framework/GameEngine.h"
+#include "../../framework/io/Key.h"
 
 namespace StickDeath
 {
@@ -32,6 +32,6 @@ namespace StickDeath
 
         Player player = Player(3, 1);
 
-        UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
+        UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::RED, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
     };
 }

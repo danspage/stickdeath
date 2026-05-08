@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include "../../entity/Player.h"
+#include "../../../../framework/GameEngine.h"
 
 namespace StickDeath
 {

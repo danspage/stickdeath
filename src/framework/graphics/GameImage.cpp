@@ -1,28 +1,44 @@
 #include "GameImage.h"
 
 #include <string>
+#include <cstring>
+#include <iostream>
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 namespace GameEngine
 {
     GameImage::GameImage(std::string filename)
     {
-        Image tempImg = LoadImage(filename.c_str());
-        width = tempImg.width;
-        height = tempImg.height;
-
-        pixels = new unsigned char[width * height * 4];
-
-        Color *imgColors = LoadImageColors(tempImg);
-
-        for (int i = 0; i < width * height; i++)
+        SDL_Surface *loaded = IMG_Load(filename.c_str());
+        if (loaded == nullptr)
         {
-            pixels[i * 4] = imgColors[i].r;
-            pixels[i * 4 + 1] = imgColors[i].g;
-            pixels[i * 4 + 2] = imgColors[i].b;
-            pixels[i * 4 + 3] = imgColors[i].a;
+            std::cerr << "IMG_Load failed for '" << filename << "': " << IMG_GetError() << std::endl;
+            width = 1;
+            height = 1;
+            pixels = new unsigned char[4]{0, 0, 0, 0};
+            return;
         }
 
-        UnloadImageColors(imgColors);
-        UnloadImage(tempImg);
+        SDL_Surface *rgba = SDL_ConvertSurfaceFormat(loaded, SDL_PIXELFORMAT_RGBA32, 0);
+        SDL_FreeSurface(loaded);
+
+        if (rgba == nullptr)
+        {
+            std::cerr << "SDL_ConvertSurfaceFormat failed for '" << filename << "': " << SDL_GetError() << std::endl;
+            width = 1;
+            height = 1;
+            pixels = new unsigned char[4]{0, 0, 0, 0};
+            return;
+        }
+
+        width = rgba->w;
+        height = rgba->h;
+
+        pixels = new unsigned char[width * height * 4];
+        std::memcpy(pixels, rgba->pixels, static_cast<size_t>(width) * static_cast<size_t>(height) * 4);
+
+        SDL_FreeSurface(rgba);
     }
 }
