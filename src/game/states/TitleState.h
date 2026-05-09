@@ -19,7 +19,7 @@ namespace StickDeath
         // void onExit() override;
         void Update(float dt) override;
         void Render() override;
-        void OnKeyPressed(GameEngine::Key key) override;
+        void OnKeyPressed(SDL_Scancode key) override;
 
     private:
         std::vector<std::string> options = {"Play", "Settings", "Quit Game"};

@@ -3,30 +3,39 @@
 
 namespace StickDeath
 {
-    void Player::OnKeyPressed(GameEngine::Key key)
+    void Player::OnKeyPressed(SDL_Scancode key)
     {
-        if (key == GameEngine::Key::UP && GetCollider()->IsOnGround())
+        if (key == SDL_SCANCODE_UP && GetCollider()->IsOnGround())
         {
             // Jump
             GetCollider()->SetYVel(15);
         }
     }
 
-    void Player::OnKeyHeld(GameEngine::Key key)
+    void Player::OnKeyHeld(SDL_Scancode key)
     {
-        if (key == GameEngine::Key::LEFT)
+        if (key == SDL_SCANCODE_LEFT)
         {
             playerAnim.SetAnimationActive(true);
             facingLeft = true;
             GetCollider()->SetXVel(-speed);
         }
-        else if (key == GameEngine::Key::RIGHT)
+        else if (key == SDL_SCANCODE_RIGHT)
         {
             playerAnim.SetAnimationActive(true);
             facingLeft = false;
             GetCollider()->SetXVel(speed);
         }
         else
+        {
+            playerAnim.SetAnimationActive(false);
+            GetCollider()->SetXVel(0);
+        }
+    }
+
+    void Player::OnKeyReleased(SDL_Scancode key)
+    {
+        if (key == SDL_SCANCODE_LEFT || key == SDL_SCANCODE_RIGHT)
         {
             playerAnim.SetAnimationActive(false);
             GetCollider()->SetXVel(0);

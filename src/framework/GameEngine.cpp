@@ -1,7 +1,6 @@
 #include "GameEngine.h"
 
 #include "state/GameState.h"
-#include "io/Key.h"
 
 #include <SDL2/SDL.h>
 
@@ -42,7 +41,6 @@ namespace GameEngine
       SDL_DestroyTexture(_texture);
     }
 
-    // 2. Free the CPU pixel buffer
     if (_pixels != nullptr)
     {
       free(_pixels);
@@ -57,14 +55,22 @@ namespace GameEngine
 
   void ProcessKeyEvents()
   {
-    for (GameEngine::Key key : ALL_KEYS)
-    {
-      // if (IsKeyDown(key))
-      // {
-      //   _states[_currentState]->OnKeyHeld(key);
-      // }
+    static bool prevDown[SDL_NUM_SCANCODES] = {};
+    const Uint8 *keyboard = SDL_GetKeyboardState(nullptr);
 
-      // ~~~~~~ Process key hold and press events here
+    for (SDL_Scancode key : KEYS_USED)
+    {
+      bool down = keyboard[key] != 0;
+
+      if (down && !prevDown[key])
+        _states[_currentState]->OnKeyPressed(key);
+      else if (!down && prevDown[key])
+        _states[_currentState]->OnKeyReleased(key);
+      
+      if (down)
+        _states[_currentState]->OnKeyHeld(key);
+
+      prevDown[key] = down;
     }
   }
 

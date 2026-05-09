@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../io/Key.h"
+#include <SDL2/SDL.h>
 
 namespace GameEngine
 {
@@ -24,10 +24,14 @@ namespace GameEngine
 
         /// @brief Handles the logic for when a key is pressed.
         /// @param key Which key was pressed.
-        virtual void OnKeyPressed(GameEngine::Key key) {};
+        virtual void OnKeyPressed(SDL_Scancode key) {};
 
         /// @brief Handles the logic for when a key is held.
         /// @param key Which key is being held.
-        virtual void OnKeyHeld(GameEngine::Key key) {};
+        virtual void OnKeyHeld(SDL_Scancode key) {};
+
+        /// @brief Handles the logic for when a key is released.
+        /// @param key Which key was released.
+        virtual void OnKeyReleased(SDL_Scancode key) {};
     };
 }

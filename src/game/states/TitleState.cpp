@@ -22,21 +22,21 @@ namespace StickDeath
     {
     }
 
-    void TitleState::OnKeyPressed(GameEngine::Key key)
+    void TitleState::OnKeyPressed(SDL_Scancode key)
     {
         switch (key)
         {
-        case GameEngine::Key::UP:
+        case SDL_SCANCODE_UP:
             optionsIndex -= 1;
             if (optionsIndex < 0)
                 optionsIndex = 2;
             break;
-        case GameEngine::Key::DOWN:
+        case SDL_SCANCODE_DOWN:
             optionsIndex += 1;
             if (optionsIndex > 2)
                 optionsIndex = 0;
             break;
-        case GameEngine::Key::ENTER:
+        case SDL_SCANCODE_RETURN:
             if (optionsIndex == 0)
             {
                 GameEngine::SetState("test");

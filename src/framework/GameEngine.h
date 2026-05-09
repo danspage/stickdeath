@@ -5,9 +5,10 @@
 #include <memory>
 #include <string>
 
+#include <SDL2/SDL.h>
+
 #include "graphics/GameImage.h"
 #include "graphics/Graphics.h"
-#include "io/Key.h"
 
 struct SDL_Renderer;
 
@@ -46,6 +47,15 @@ namespace GameEngine
     inline const char *WINDOW_TITLE = "2D Game";
 
     inline bool _shuttingDown = false;
+
+    inline const SDL_Scancode KEYS_USED[] = {
+        SDL_SCANCODE_UP,
+        SDL_SCANCODE_DOWN,
+        SDL_SCANCODE_LEFT,
+        SDL_SCANCODE_RIGHT,
+        SDL_SCANCODE_ESCAPE,
+        SDL_SCANCODE_RETURN,
+    };
 
     /// @brief Sets the SDL_Renderer that the game engine will use to render to the screen. This should only be called once, in the app's main class, and should not be called anywhere else.
     void SetRenderer(SDL_Renderer *renderer);

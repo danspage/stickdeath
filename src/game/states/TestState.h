@@ -9,7 +9,6 @@
 #include "../world/map/block/SpikeBlock.h"
 #include "../world/map/Map.h"
 #include "../ui/components/player/HealthBar.h"
-#include "../../framework/io/Key.h"
 
 namespace StickDeath
 {
@@ -22,7 +21,9 @@ namespace StickDeath
         // void onExit() override;
         void Update(float dt) override;
         void Render() override;
-        void OnKeyPressed(GameEngine::Key key) override;
+        void OnKeyPressed(SDL_Scancode key) override;
+        void OnKeyHeld(SDL_Scancode key) override;
+        void OnKeyReleased(SDL_Scancode key) override;
 
     private:
         int squareX = 10;

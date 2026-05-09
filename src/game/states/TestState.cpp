@@ -47,13 +47,23 @@ namespace StickDeath
         healthBar.Render();
     }
 
-    void TestState::OnKeyPressed(GameEngine::Key key)
+    void TestState::OnKeyPressed(SDL_Scancode key)
     {
-        if (key == GameEngine::Key::ESCAPE)
+        if (key == SDL_SCANCODE_ESCAPE)
         {
             GameEngine::SetState("title");
         }
 
         player.OnKeyPressed(key);
+    }
+
+    void TestState::OnKeyHeld(SDL_Scancode key)
+    {
+        player.OnKeyHeld(key);
+    }
+
+    void TestState::OnKeyReleased(SDL_Scancode key)
+    {
+        player.OnKeyReleased(key);
     }
 }
