@@ -16,10 +16,10 @@ namespace GameEngine
 {
     class GameState;
 
-    /// @brief The FPS that the game attempts to run at. The key event, update, and
-    /// render functions for the current game state are looped through this many
-    /// times per second.
-    inline const int TARGET_FPS = 60;
+    /// @brief The target update rate of the game, in Hz. This is used to calculate
+    /// the fixed time step for the game loop, which is used to ensure that the game runs at a consistent speed regardless of the performance of the machine it's
+    /// running on.
+    inline const int TARGET_UPDATE_HZ = 60;
 
     /// @brief The game's graphics have a pixel art style to them, and this controls
     /// how big each pixel is (they are referred to as 'voxels'). The game's window

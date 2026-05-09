@@ -27,7 +27,7 @@ int main()
         return 1;
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == nullptr)
     {
         std::cerr << "SDL_CreateRenderer failed: " << SDL_GetError() << std::endl;
@@ -51,7 +51,12 @@ int main()
     bool running = true;
     SDL_Event event;
 
+    const Uint64 perfFrequency = SDL_GetPerformanceFrequency();
     Uint64 prevCounter = SDL_GetPerformanceCounter();
+    const double fixedDt = 1.0 / static_cast<double>(GameEngine::TARGET_UPDATE_HZ);
+    const double maxFrameTime = 0.25;
+    const int maxStepsPerFrame = 5;
+    double accumulator = 0.0;
 
     while (running && !GameEngine::_shuttingDown)
     {
@@ -63,14 +68,26 @@ int main()
             }
         }
 
-        GameEngine::ProcessKeyEvents();
-
         Uint64 currentCounter = SDL_GetPerformanceCounter();
-        double dt = static_cast<double>(currentCounter - prevCounter) /
-                    static_cast<double>(SDL_GetPerformanceFrequency());
+        double frameTime = static_cast<double>(currentCounter - prevCounter) /
+                           static_cast<double>(perfFrequency);
         prevCounter = currentCounter;
 
-        GameEngine::UpdateCurrentState(static_cast<float>(dt));
+        if (frameTime > maxFrameTime)
+        {
+            frameTime = maxFrameTime;
+        }
+
+        accumulator += frameTime;
+
+        int steps = 0;
+        while (accumulator >= fixedDt && steps < maxStepsPerFrame)
+        {
+            GameEngine::ProcessKeyEvents();
+            GameEngine::UpdateCurrentState(static_cast<float>(fixedDt));
+            accumulator -= fixedDt;
+            steps++;
+        }
 
         GameEngine::RenderCurrentState();
         SDL_RenderPresent(renderer);
