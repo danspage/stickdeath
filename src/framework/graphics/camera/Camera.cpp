@@ -1,0 +1,47 @@
+#include "Camera.h"
+
+#include "../../GameEngine.h"
+
+#include <cmath>
+
+namespace StickDeath
+{
+    float Camera::x = 0.0f;
+    float Camera::y = 0.0f;
+
+    void Camera::SetPosition(float worldX, float worldY)
+    {
+        x = worldX;
+        y = worldY;
+    }
+
+    void Camera::MoveBy(float dx, float dy)
+    {
+        x += dx;
+        y += dy;
+    }
+
+    PointI Camera::WorldToScreen(PointF worldPos)
+    {
+        const int screenX = static_cast<int>(std::floor(worldPos.x - x));
+        const int screenY = static_cast<int>(std::floor(GameEngine::HEIGHT_VOXELS - (worldPos.y - y)));
+        return {screenX, screenY};
+    }
+
+    PointF Camera::ScreenToWorld(PointI screenPos)
+    {
+        const float worldX = x + static_cast<float>(screenPos.x);
+        const float worldY = y + (GameEngine::HEIGHT_VOXELS - static_cast<float>(screenPos.y));
+        return {worldX, worldY};
+    }
+
+    BoundsF Camera::GetWorldBounds()
+    {
+        return {
+            x,
+            x + static_cast<float>(GameEngine::WIDTH_VOXELS),
+            y + static_cast<float>(GameEngine::HEIGHT_VOXELS),
+            y
+        };
+    }
+}

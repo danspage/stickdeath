@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../../../framework/GameEngine.h"
+#include "../../../framework/graphics/camera/Camera.h"
 
 namespace StickDeath
 {
@@ -62,13 +63,17 @@ namespace StickDeath
         float worldX = GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE;
         float worldY = GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE;
 
-        int drawX = static_cast<int>(std::floor(worldX - WIDTH_PX / 2.0f));
-        int drawY = static_cast<int>(std::floor(GameEngine::HEIGHT_VOXELS - worldY - HEIGHT_PX));
+        const PointF worldTopLeft = {
+            worldX - WIDTH_PX/2.0f,
+            worldY + HEIGHT_PX,
+        };
+
+        const PointI screen = StickDeath::Camera::WorldToScreen(worldTopLeft);
 
         GameEngine::DrawImage(
             playerAnim.GetCurrentFrame(),
-            drawX,
-            drawY,
+            screen.x,
+            screen.y,
             {.flipHorizontal = facingLeft});
     }
 }

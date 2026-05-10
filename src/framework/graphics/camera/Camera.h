@@ -18,6 +18,6 @@ namespace StickDeath
         static PointI WorldToScreen(PointF worldPos);
         static PointF ScreenToWorld(PointI screenPos);
         
-        static BoundsF GetViewBounds();
+        static BoundsF GetWorldBounds();
     };
 }

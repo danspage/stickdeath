@@ -1,8 +1,11 @@
 #include "TestState.h"
 
 #include <format>
+#include <algorithm>
 
 #include "../../framework/GameEngine.h"
+#include "../world/map/Map.h"
+#include "../../framework/graphics/camera/Camera.h"
 
 namespace StickDeath
 {
@@ -28,6 +31,20 @@ namespace StickDeath
         player.Update(dt);
 
         healthBar.SetValue(player.GetHealth());
+
+        const float playerWorldX = player.GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE;
+        const float playerWorldY = player.GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE;
+
+        float camX = playerWorldX - GameEngine::WIDTH_VOXELS * 0.5f;
+        float camY = playerWorldY - GameEngine::HEIGHT_VOXELS * 0.5f;
+
+        const float maxCamX = StickDeath::Map::MAP_WIDTH * StickDeath::Map::TILE_SIZE - GameEngine::WIDTH_VOXELS;
+        const float maxCamY = StickDeath::Map::MAP_HEIGHT * StickDeath::Map::TILE_SIZE - GameEngine::HEIGHT_VOXELS;
+
+        camX = std::clamp(camX, 0.0f, maxCamX);
+        camY = std::clamp(camY, 0.0f, maxCamY);
+
+        StickDeath::Camera::SetPosition(camX, camY);
     }
 
     void TestState::Render()

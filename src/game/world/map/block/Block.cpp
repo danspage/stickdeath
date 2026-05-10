@@ -5,6 +5,7 @@
 #include "../../../../framework/graphics/Images.h"
 #include "../../entity/Entity.h"
 #include "../../../../framework/GameEngine.h"
+#include "../../../../framework/graphics/camera/Camera.h"
 
 namespace StickDeath
 {
@@ -28,9 +29,10 @@ namespace StickDeath
 
     void Block::Render()
     {
-        int drawX = x * StickDeath::Map::TILE_SIZE;
-        int drawY = GameEngine::HEIGHT_VOXELS - (y + 1) * StickDeath::Map::TILE_SIZE;
+        const float worldLeft = static_cast<float>(x * StickDeath::Map::TILE_SIZE);
+        const float worldTop = static_cast<float>((y + 1) * StickDeath::Map::TILE_SIZE);
 
-        GameEngine::DrawImage(texturePath, drawX, drawY);
+        const PointI screen = StickDeath::Camera::WorldToScreen({worldLeft, worldTop});
+        GameEngine::DrawImage(texturePath, screen.x, screen.y);
     }
 }
