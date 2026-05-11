@@ -19,6 +19,7 @@ namespace StickDeath
 
         // void OnEnter() override;
         // void onExit() override;
+        void UpdateCameraPosition(float dt);
         void Update(float dt) override;
         void Render() override;
         void OnKeyPressed(SDL_Scancode key) override;
@@ -26,10 +27,9 @@ namespace StickDeath
         void OnKeyReleased(SDL_Scancode key) override;
 
     private:
-        int squareX = 10;
-        int squareY = 10;
-
-        bool flipImg = false;
+        float cameraTargetX = 0.0f;
+        float cameraTargetY = 0.0f;
+        const float cameraSmoothSpeed = 5.0f; // tune this for feel
 
         Player player = Player(3, 1);
 
