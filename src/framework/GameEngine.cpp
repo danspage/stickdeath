@@ -83,7 +83,9 @@ namespace GameEngine
       return;
 
     if (_texture == nullptr)
-      _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIDTH_PIXELS, HEIGHT_PIXELS);
+      _texture = SDL_CreateTexture(_renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STATIC, WIDTH_PIXELS, HEIGHT_PIXELS);
+
+    SDL_SetTextureScaleMode(_texture, SDL_ScaleModeNearest);
 
     SDL_UpdateTexture(_texture, nullptr, _pixels, WIDTH_PIXELS * sizeof(uint32_t));
 

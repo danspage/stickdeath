@@ -20,14 +20,23 @@ int main()
         return 1;
     }
 
-    SDL_Window *window = SDL_CreateWindow("Stickdeath", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GameEngine::WIDTH_PIXELS, GameEngine::HEIGHT_PIXELS, 0);
+    SDL_Window *window = SDL_CreateWindow(
+        "Stickdeath",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        GameEngine::WIDTH_PIXELS,
+        GameEngine::HEIGHT_PIXELS,
+        SDL_WINDOW_ALLOW_HIGHDPI);
     if (window == nullptr)
     {
         std::cerr << "SDL_CreateWindow failed: " << SDL_GetError() << std::endl;
         return 1;
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_Renderer *renderer = SDL_CreateRenderer(
+        window,
+        -1,
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == nullptr)
     {
         std::cerr << "SDL_CreateRenderer failed: " << SDL_GetError() << std::endl;
