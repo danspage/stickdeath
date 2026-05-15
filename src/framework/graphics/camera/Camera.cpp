@@ -23,8 +23,8 @@ namespace StickDeath
 
     PointI Camera::WorldToScreen(PointF worldPos)
     {
-        const int screenX = static_cast<int>(std::floor(worldPos.x - x));
-        const int screenY = static_cast<int>(std::floor(GameEngine::HEIGHT_VOXELS - (worldPos.y - y)));
+        const int screenX = static_cast<int>(std::lround(worldPos.x - x));
+        const int screenY = static_cast<int>(std::lround(GameEngine::HEIGHT_VOXELS - (worldPos.y - y)));
         return {screenX, screenY};
     }
 

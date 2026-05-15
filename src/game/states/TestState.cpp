@@ -24,6 +24,14 @@ namespace StickDeath
         StickDeath::Map::SetBlock(1, 1, std::make_unique<SpikeBlock>(1, 1));
     }
 
+    void TestState::Restart()
+    {
+        player.SetPos(3, 1);
+        player.SetHealth(player.GetMaxHealth());
+        healthBar.SetValue(player.GetMaxHealth());
+        GameEngine::SetState("title");
+    }
+
     void TestState::UpdateCameraPosition(float dt)
     {
         // Calculate target camera position (player near center)
@@ -57,6 +65,11 @@ namespace StickDeath
 
         player.Update(dt);
 
+        if (player.GetHealth() == 0 || player.GetY() < -200)
+        {
+            Restart();
+        }
+
         healthBar.SetValue(player.GetHealth());
 
         UpdateCameraPosition(dt);
@@ -64,7 +77,7 @@ namespace StickDeath
 
     void TestState::Render()
     {
-        GameEngine::FillBG(GameEngine::Colors::SKYBLUE);
+        GameEngine::FillBG(GameEngine::Colors::CRIMSON);
 
         StickDeath::Map::RenderMap();
 

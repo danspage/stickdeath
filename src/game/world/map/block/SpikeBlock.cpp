@@ -4,6 +4,7 @@
 
 #include "../../entity/Player.h"
 #include "../../../../framework/GameEngine.h"
+#include "../../../states/TestState.h"
 
 namespace StickDeath
 {
@@ -23,14 +24,6 @@ namespace StickDeath
         int additionalDamage = std::max(0, static_cast<int>(std::round(player->GetYVel() / -5.0f)));
 
         player->RemoveHealth(1 + additionalDamage);
-
-        if (player->GetHealth() == 0)
-        {
-            player->SetPos(3, 1);
-            player->SetHealth(player->GetMaxHealth());
-            GameEngine::SetState("title");
-        }
-        // std::cout << "Spike hurt player. Health: " << player->GetHealth() << std::endl;
     }
 
     void SpikeBlock::Update(float dt)

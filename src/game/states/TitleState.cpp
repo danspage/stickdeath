@@ -6,16 +6,16 @@ namespace StickDeath
     {
         GameEngine::FillBG(114, 47, 55);
 
-        GameEngine::DrawString("Stickdeath", GameEngine::WIDTH_VOXELS / 2, 30, "title", GameEngine::Color({40, 40, 40}), {.alignment = GameEngine::GameFontAlignment::CENTER});
+        GameEngine::DrawString("Stickdeath", GameEngine::WIDTH_VOXELS / 2, 30, "title", GameEngine::Colors::DARKGRAY, {.alignment = GameEngine::GameFontAlignment::CENTER});
 
-        GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 35, GameEngine::WIDTH_VOXELS - 100, 20, GameEngine::Color({40, 40, 40}));
-        GameEngine::DrawString("Play", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 28, "default", optionsIndex == 0 ? GameEngine::Colors::RED : GameEngine::Colors::YELLOW, {.alignment = GameEngine::GameFontAlignment::CENTER});
+        GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 35, GameEngine::WIDTH_VOXELS - 100, 20, GameEngine::Colors::GRAY);
+        GameEngine::DrawString("Play", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 28, "default", optionsIndex == 0 ? GameEngine::Colors::YELLOW : GameEngine::Colors::DARKGRAY, {.alignment = GameEngine::GameFontAlignment::CENTER});
 
-        GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 10, GameEngine::WIDTH_VOXELS - 100, 20, GameEngine::Color({40, 40, 40}));
-        GameEngine::DrawString("Options", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 3, "default", optionsIndex == 1 ? GameEngine::Colors::RED : GameEngine::Colors::YELLOW, {.alignment = GameEngine::GameFontAlignment::CENTER});
+        GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 - 10, GameEngine::WIDTH_VOXELS - 100, 20, GameEngine::Colors::GRAY);
+        GameEngine::DrawString("Options", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 - 3, "default", optionsIndex == 1 ? GameEngine::Colors::YELLOW : GameEngine::Colors::DARKGRAY, {.alignment = GameEngine::GameFontAlignment::CENTER});
 
-        GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 + 15, GameEngine::WIDTH_VOXELS - 100, 20, GameEngine::Color({40, 40, 40}));
-        GameEngine::DrawString("Exit Game", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 + 22, "default", optionsIndex == 2 ? GameEngine::Colors::RED : GameEngine::Colors::YELLOW, {.alignment = GameEngine::GameFontAlignment::CENTER});
+        GameEngine::FillRect(50, GameEngine::HEIGHT_VOXELS / 2 + 15, GameEngine::WIDTH_VOXELS - 100, 20, GameEngine::Colors::GRAY);
+        GameEngine::DrawString("Exit Game", GameEngine::WIDTH_VOXELS / 2, GameEngine::HEIGHT_VOXELS / 2 + 22, "default", optionsIndex == 2 ? GameEngine::Colors::YELLOW : GameEngine::Colors::DARKGRAY, {.alignment = GameEngine::GameFontAlignment::CENTER});
     }
 
     void TitleState::Update(float dt)
