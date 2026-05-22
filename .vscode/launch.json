@@ -1,4 +1,5 @@
 {
+    "version": "2.0.0",
     "configurations": [
         {
             "name": "(lldb) Launch",
@@ -6,11 +7,9 @@
             "request": "launch",
             "program": "${workspaceFolder}/bin/build_osx",
             "cwd": "${workspaceFolder}",
-            // This is to ensure VScode prints the program log in the debug console
-            "internalConsoleOptions": "openOnSessionStart", 
+            "internalConsoleOptions": "openOnSessionStart",
             "MIMode": "lldb",
             "preLaunchTask": "Build OSX"
-            }
-    ],
-    "version": "2.0.0"
+        }
+    ]
 }

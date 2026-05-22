@@ -1,0 +1,61 @@
+{
+    "name": "stickdeath-sdlvl-tools",
+    "displayName": "Stickdeath SDLVL Tools",
+    "description": "Syntax highlighting and diagnostics for Stickdeath .sdlvl files",
+    "version": "0.0.1",
+    "publisher": "stickdeath-local",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dan/stickdeath.git"
+    },
+    "engines": {
+        "vscode": "^1.90.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:stickdeath-level",
+        "onCommand:stickdeath-sdlvl-tools.createBoilerplate"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "stickdeath-level",
+                "aliases": [
+                    "Stickdeath Level",
+                    "stickdeath-level"
+                ],
+                "extensions": [
+                    ".sdlvl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "stickdeath-level",
+                "scopeName": "source.stickdeath-level",
+                "path": "./syntaxes/level.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "stickdeath-sdlvl-tools.createBoilerplate",
+                "title": "Generate SDLVL Boilerplate",
+                "category": "Stickdeath"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "stickdeath-sdlvl-tools.createBoilerplate",
+                    "when": "resourceExtname == .sdlvl",
+                    "group": "navigation"
+                }
+            ]
+        }
+    }
+}

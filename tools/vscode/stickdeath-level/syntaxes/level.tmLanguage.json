@@ -1,0 +1,123 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Stickdeath Level",
+    "scopeName": "source.stickdeath-level",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#headers"
+        },
+        {
+            "include": "#legendBlock"
+        },
+        {
+            "include": "#rowsBlock"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.semicolon.stickdeath-level",
+                    "match": "^\\s*;.*$"
+                }
+            ]
+        },
+        "headers": {
+            "patterns": [
+                {
+                    "name": "meta.header.version.stickdeath-level",
+                    "match": "^(version)(\\s+)(\\d+)\\s*$",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.section.stickdeath-level"
+                        },
+                        "3": {
+                            "name": "constant.numeric.integer.stickdeath-level"
+                        }
+                    }
+                },
+                {
+                    "name": "meta.header.size.stickdeath-level",
+                    "match": "^(size)(\\s+)(\\d+)(\\s+)(\\d+)\\s*$",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.section.stickdeath-level"
+                        },
+                        "3": {
+                            "name": "constant.numeric.integer.stickdeath-level"
+                        },
+                        "5": {
+                            "name": "constant.numeric.integer.stickdeath-level"
+                        }
+                    }
+                },
+                {
+                    "name": "meta.header.spawn.stickdeath-level",
+                    "match": "^(spawn)(\\s+)(-?\\d+)(\\s+)(-?\\d+)\\s*$",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.section.stickdeath-level"
+                        },
+                        "3": {
+                            "name": "constant.numeric.integer.stickdeath-level"
+                        },
+                        "5": {
+                            "name": "constant.numeric.integer.stickdeath-level"
+                        }
+                    }
+                }
+            ]
+        },
+        "legendBlock": {
+            "begin": "^(legend)\\s*$",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.section.stickdeath-level"
+                }
+            },
+            "end": "^(?=rows\\b)|\\z",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "name": "meta.legend.entry.stickdeath-level",
+                    "match": "^\\s*(\\S)(\\s+)([A-Za-z_][A-Za-z0-9_./-]*)\\s*$",
+                    "captures": {
+                        "1": {
+                            "name": "constant.character.legend-symbol.stickdeath-level"
+                        },
+                        "3": {
+                            "name": "entity.name.type.block.stickdeath-level"
+                        }
+                    }
+                }
+            ]
+        },
+        "rowsBlock": {
+            "begin": "^(rows)\\s*$",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.section.stickdeath-level"
+                }
+            },
+            "end": "\\z",
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "name": "constant.other.empty-tile.stickdeath-level",
+                    "match": "\\."
+                },
+                {
+                    "name": "constant.character.tile.stickdeath-level",
+                    "match": "[^\\s\\.;]"
+                }
+            ]
+        }
+    }
+}
