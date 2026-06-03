@@ -17,7 +17,7 @@ namespace StickDeath::Map
         if (!IsInBounds(x, y))
             throw BlockOutOfBoundsException(x, y);
 
-        if (tileToBlockIndex[y * MAP_WIDTH + x] == -1)
+        if (tileToBlockIndex[y * MAP_WIDTH + x] == NULL_BLOCK_INDEX)
         {
             blocks.emplace_back(std::make_unique<Block>(x, y, blockName));
             tileToBlockIndex[y * MAP_WIDTH + x] = blocks.size() - 1;
@@ -35,7 +35,7 @@ namespace StickDeath::Map
 
         block->HardOverwriteCoordinates(x, y);
 
-        if (tileToBlockIndex[y * MAP_WIDTH + x] == -1)
+        if (tileToBlockIndex[y * MAP_WIDTH + x] == NULL_BLOCK_INDEX)
         {
             blocks.emplace_back(std::move(block));
             tileToBlockIndex[y * MAP_WIDTH + x] = blocks.size() - 1;
@@ -48,7 +48,7 @@ namespace StickDeath::Map
 
     Block *TryGetBlock(int x, int y)
     {
-        if (!IsInBounds(x, y) || tileToBlockIndex[y * MAP_WIDTH + x] == -1)
+        if (!IsInBounds(x, y) || tileToBlockIndex[y * MAP_WIDTH + x] == NULL_BLOCK_INDEX)
             return nullptr;
 
         return blocks[tileToBlockIndex[y * MAP_WIDTH + x]].get();
@@ -62,6 +62,12 @@ namespace StickDeath::Map
     bool IsInBounds(int x, int y)
     {
         return (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT);
+    }
+
+    void ClearMap()
+    {
+        blocks.clear();
+        std::fill(tileToBlockIndex.begin(), tileToBlockIndex.end(), NULL_BLOCK_INDEX);
     }
 
     std::vector<std::pair<int, int>> GetSolidBlocksInRow(int y, int startX, int endX)
