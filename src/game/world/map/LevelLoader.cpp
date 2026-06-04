@@ -1,6 +1,8 @@
 #include "LevelLoader.h"
 
 #include "../../../framework/util/StringUtil.h"
+#include "Map.h"
+#include "tile/TileFactory.h"
 
 #include <fstream>
 
@@ -197,5 +199,23 @@ namespace StickDeath
 
     void LevelLoader::ApplyLevel(const ParsedLevel &level)
     {
+        Map::ClearMap();
+
+        for (size_t row = 0; row < level.rows.size(); row++)
+        {
+            for (size_t x = 0; x < level.rows[row].length(); x++)
+            {
+                if (level.rows[row][x] == '.')
+                    continue;
+
+                std::string tileName = level.legend.at(level.rows[row][x]);
+
+                int y = level.height - 1 - row;
+
+                std::unique_ptr<Tile> tile = TileFactory::CreateTile(tileName, x, y);
+
+                Map::SetTile(x, y, std::move(tile));
+            }
+        }
     }
 }
