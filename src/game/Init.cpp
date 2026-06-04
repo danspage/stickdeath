@@ -4,6 +4,6 @@ namespace StickDeath
 {
     void InitGame()
     {
-        InitBlockProperties();
+        InitTileProperties();
     }
 }

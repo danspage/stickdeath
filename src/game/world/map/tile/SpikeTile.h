@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include "Block.h"
+#include "Tile.h"
 #include "../../../../framework/util/Timer.h"
 
 namespace StickDeath
 {
-    class SpikeBlock : public Block
+    class SpikeTile : public Tile
     {
     private:
         bool touchingPlayer = false;
@@ -17,7 +17,7 @@ namespace StickDeath
         void HurtPlayer();
 
     public:
-        SpikeBlock(int x, int y);
+        SpikeTile(int x, int y);
 
         void Update(float dt) override;
         void OnCollision(Entity *entity, bool isInside) override;

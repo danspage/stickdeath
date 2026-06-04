@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Block.h"
+#include "Tile.h"
 
 #include <vector>
 #include <fstream>
@@ -16,13 +16,13 @@ using json = nlohmann::json;
 
 namespace StickDeath
 {
-    struct BlockDefinition
+    struct TileDefinition
     {
         std::string texturePath;
-        BlockProperties properties;
+        TileProperties properties;
     };
 
-    inline std::map<std::string, BlockDefinition> _defaultBlockProperties;
+    inline std::map<std::string, TileDefinition> _defaultTileProperties;
 
-    void InitBlockProperties();
+    void InitTileProperties();
 }

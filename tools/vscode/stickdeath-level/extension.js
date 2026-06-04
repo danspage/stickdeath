@@ -92,7 +92,7 @@ async function createBoilerplateLevel() {
 
     while (true) {
         const legendEntry = await vscode.window.showInputBox({
-            prompt: "Legend entry as '<symbol> <blockName>' (empty Enter or 'done' to finish)",
+            prompt: "Legend entry as '<symbol> <tileName>' (empty Enter or 'done' to finish)",
             placeHolder: "# floor",
             validateInput: (value) => {
                 const trimmed = value.trim();
@@ -103,7 +103,7 @@ async function createBoilerplateLevel() {
 
                 const match = /^(\S)\s+([A-Za-z_][A-Za-z0-9_./-]*)$/.exec(trimmed);
                 if (!match) {
-                    return "Use the format '<symbol> <blockName>', for example '# floor'.";
+                    return "Use the format '<symbol> <tileName>', for example '# floor'.";
                 }
 
                 const symbol = match[1];
@@ -383,7 +383,7 @@ function validateDocument(document) {
             }
 
             const symbol = match[1];
-            const blockName = match[2];
+            const tileName = match[2];
 
             if (symbol === ".") {
                 const symbolIndex = rawLine.indexOf(".");
@@ -404,7 +404,7 @@ function validateDocument(document) {
                     `Duplicate legend symbol '${symbol}'.`,
                 );
             } else {
-                legend.set(symbol, blockName);
+                legend.set(symbol, tileName);
             }
 
             continue;

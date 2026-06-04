@@ -1,30 +1,30 @@
-#include "Blocks.h"
+#include "Tiles.h"
 
 namespace StickDeath
 {
-    void InitBlockProperties()
+    void InitTileProperties()
     {
-        std::ifstream f("assets/data/blockproperties.json");
+        std::ifstream f("assets/data/tileproperties.json");
         if (!f.is_open())
         {
-            std::cerr << "Could not open assets/data/blockproperties.json" << std::endl;
+            std::cerr << "Could not open assets/data/tileproperties.json" << std::endl;
             return;
         }
 
         json data = json::parse(f);
 
-        for (auto &[blockName, blockContent] : data.items())
+        for (auto &[tileName, tileContent] : data.items())
         {
-            if (blockName == "parent_models")
+            if (tileName == "parent_models")
                 continue;
 
-            std::cout << "Loading default values for block: " << blockName << std::endl;
+            std::cout << "Loading default values for tile: " << tileName << std::endl;
 
-            BlockDefinition def;
+            TileDefinition def;
 
-            if (blockContent.contains("parent"))
+            if (tileContent.contains("parent"))
             {
-                const std::string parentName = blockContent.at("parent").get<std::string>();
+                const std::string parentName = tileContent.at("parent").get<std::string>();
 
                 if (!data.contains("parent_models") || !data.at("parent_models").contains(parentName))
                 {
@@ -48,11 +48,11 @@ namespace StickDeath
                     });
                 }
             }
-            else if (blockContent.contains("model"))
+            else if (tileContent.contains("model"))
             {
                 def.properties.bounds.clear();
 
-                const json &model = blockContent.at("model");
+                const json &model = tileContent.at("model");
                 for (const json &rect : model)
                 {
                     const float leftPx = rect.at(0).get<float>();
@@ -70,10 +70,10 @@ namespace StickDeath
             }
             else
             {
-                throw std::runtime_error(std::format("No model or parent model defined '{}'", blockName));
+                throw std::runtime_error(std::format("No model or parent model defined '{}'", tileName));
             }
 
-            for (auto &[propKey, propValue] : blockContent.items())
+            for (auto &[propKey, propValue] : tileContent.items())
             {
                 if (propKey == "parent" || propKey == "model")
                     continue;
@@ -87,7 +87,7 @@ namespace StickDeath
                     def.properties.isSolid = propValue.get<bool>();
                 }
 
-                _defaultBlockProperties[blockName] = def;
+                _defaultTileProperties[tileName] = def;
             }
         }
     }

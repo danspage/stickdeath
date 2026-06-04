@@ -12,51 +12,51 @@ namespace StickDeath::Map
         return (int)std::floor(worldY);
     }
 
-    void SetBlock(int x, int y, const std::string &blockName)
+    void SetTile(int x, int y, const std::string &tileName)
     {
         if (!IsInBounds(x, y))
-            throw BlockOutOfBoundsException(x, y);
+            throw TileOutOfBoundsException(x, y);
 
-        if (tileToBlockIndex[y * MAP_WIDTH + x] == NULL_BLOCK_INDEX)
+        if (tileToTileIndex[y * MAP_WIDTH + x] == NULL_TILE_INDEX)
         {
-            blocks.emplace_back(std::make_unique<Block>(x, y, blockName));
-            tileToBlockIndex[y * MAP_WIDTH + x] = blocks.size() - 1;
+            tiles.emplace_back(std::make_unique<Tile>(x, y, tileName));
+            tileToTileIndex[y * MAP_WIDTH + x] = tiles.size() - 1;
         }
         else
         {
-            blocks[tileToBlockIndex[y * MAP_WIDTH + x]] = std::make_unique<Block>(x, y, blockName);
+            tiles[tileToTileIndex[y * MAP_WIDTH + x]] = std::make_unique<Tile>(x, y, tileName);
         }
     }
 
-    void SetBlock(int x, int y, std::unique_ptr<Block> block)
+    void SetTile(int x, int y, std::unique_ptr<Tile> tile)
     {
         if (!IsInBounds(x, y))
-            throw BlockOutOfBoundsException(x, y);
+            throw TileOutOfBoundsException(x, y);
 
-        block->HardOverwriteCoordinates(x, y);
+        tile->HardOverwriteCoordinates(x, y);
 
-        if (tileToBlockIndex[y * MAP_WIDTH + x] == NULL_BLOCK_INDEX)
+        if (tileToTileIndex[y * MAP_WIDTH + x] == NULL_TILE_INDEX)
         {
-            blocks.emplace_back(std::move(block));
-            tileToBlockIndex[y * MAP_WIDTH + x] = blocks.size() - 1;
+            tiles.emplace_back(std::move(tile));
+            tileToTileIndex[y * MAP_WIDTH + x] = tiles.size() - 1;
         }
         else
         {
-            blocks[tileToBlockIndex[y * MAP_WIDTH + x]] = std::move(block);
+            tiles[tileToTileIndex[y * MAP_WIDTH + x]] = std::move(tile);
         }
     };
 
-    Block *TryGetBlock(int x, int y)
+    Tile *TryGetTile(int x, int y)
     {
-        if (!IsInBounds(x, y) || tileToBlockIndex[y * MAP_WIDTH + x] == NULL_BLOCK_INDEX)
+        if (!IsInBounds(x, y) || tileToTileIndex[y * MAP_WIDTH + x] == NULL_TILE_INDEX)
             return nullptr;
 
-        return blocks[tileToBlockIndex[y * MAP_WIDTH + x]].get();
+        return tiles[tileToTileIndex[y * MAP_WIDTH + x]].get();
     };
 
-    Block *TryGetBlockAtWorldPos(float worldX, float worldY)
+    Tile *TryGetTileAtWorldPos(float worldX, float worldY)
     {
-        return TryGetBlock(GetTileX(worldX), GetTileY(worldY));
+        return TryGetTile(GetTileX(worldX), GetTileY(worldY));
     }
 
     bool IsInBounds(int x, int y)
@@ -66,17 +66,17 @@ namespace StickDeath::Map
 
     void ClearMap()
     {
-        blocks.clear();
-        std::fill(tileToBlockIndex.begin(), tileToBlockIndex.end(), NULL_BLOCK_INDEX);
+        tiles.clear();
+        std::fill(tileToTileIndex.begin(), tileToTileIndex.end(), NULL_TILE_INDEX);
     }
 
-    std::vector<std::pair<int, int>> GetSolidBlocksInRow(int y, int startX, int endX)
+    std::vector<std::pair<int, int>> GetSolidTilesInRow(int y, int startX, int endX)
     {
         std::vector<std::pair<int, int>> matches;
 
         for (int x = startX; x <= endX; x++)
         {
-            Block *search = TryGetBlock(x, y);
+            Tile *search = TryGetTile(x, y);
             if (search != nullptr && search->GetProperties().isSolid)
             {
                 matches.push_back({x, y});
@@ -86,13 +86,13 @@ namespace StickDeath::Map
         return matches;
     };
 
-    std::vector<std::pair<int, int>> GetSolidBlocksInColumn(int x, int startY, int endY)
+    std::vector<std::pair<int, int>> GetSolidTilesInColumn(int x, int startY, int endY)
     {
         std::vector<std::pair<int, int>> matches;
 
         for (int y = startY; y <= endY; y++)
         {
-            Block *search = TryGetBlock(x, y);
+            Tile *search = TryGetTile(x, y);
             if (search != nullptr && search->GetProperties().isSolid)
             {
                 matches.push_back({x, y});
@@ -102,11 +102,11 @@ namespace StickDeath::Map
         return matches;
     };
 
-    bool CheckSolidBlocksExistInRow(int y, int startX, int endX)
+    bool CheckSolidTilesExistInRow(int y, int startX, int endX)
     {
         for (int x = startX; x <= endX; x++)
         {
-            Block *search = TryGetBlock(x, y);
+            Tile *search = TryGetTile(x, y);
             if (search != nullptr && search->GetProperties().isSolid)
             {
                 return true;
@@ -116,11 +116,11 @@ namespace StickDeath::Map
         return false;
     };
 
-    bool CheckSolidBlocksExistInColumn(int x, int startY, int endY)
+    bool CheckSolidTilesExistInColumn(int x, int startY, int endY)
     {
         for (int y = startY; y <= endY; y++)
         {
-            Block *search = TryGetBlock(x, y);
+            Tile *search = TryGetTile(x, y);
             if (search != nullptr && search->GetProperties().isSolid)
             {
                 return true;
@@ -131,7 +131,7 @@ namespace StickDeath::Map
 
     void UpdateMap(float dt)
     {
-        for (auto &b : blocks)
+        for (auto &b : tiles)
         {
             b->Update(dt);
         }
@@ -139,7 +139,7 @@ namespace StickDeath::Map
 
     void RenderMap()
     {
-        for (auto &b : blocks)
+        for (auto &b : tiles)
         {
             b->Render();
         }

@@ -8,9 +8,9 @@
 
 namespace StickDeath::Physics
 {
-    struct BlockEntityCollisionHit
+    struct TileEntityCollisionHit
     {
-        Block *block;
+        Tile *tile;
         bool isInside;
     };
 
@@ -63,6 +63,6 @@ namespace StickDeath::Physics
         void EnableGravity() { doGravity = true; }
         void DisableGravity() { doGravity = false; }
 
-        std::vector<BlockEntityCollisionHit> DoCollision(float dt);
+        std::vector<TileEntityCollisionHit> DoCollision(float dt);
     };
 }

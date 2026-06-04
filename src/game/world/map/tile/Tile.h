@@ -9,20 +9,20 @@ namespace StickDeath
 {
     class Entity;
 
-    struct BlockProperties
+    struct TileProperties
     {
         bool isSolid;
         std::vector<Physics::AABB> bounds;
     };
 
-    class Block
+    class Tile
     {
     public:
-        Block(int xPos, int yPos, std::string blockName);
+        Tile(int xPos, int yPos, std::string tileName);
 
         void HardOverwriteCoordinates(int xPos, int yPos);
 
-        BlockProperties GetProperties() const;
+        TileProperties GetProperties() const;
 
         void Render();
         virtual void Update(float dt) {}
@@ -31,6 +31,6 @@ namespace StickDeath
     protected:
         std::string texturePath;
         int x = 0, y = 0;
-        BlockProperties properties;
+        TileProperties properties;
     };
 }

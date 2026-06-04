@@ -1,6 +1,6 @@
 #include "Collider.h"
 
-#include "../map/block/Block.h"
+#include "../map/tile/Tile.h"
 
 namespace StickDeath::Physics
 {
@@ -37,7 +37,7 @@ namespace StickDeath::Physics
         };
     }
 
-    std::vector<BlockEntityCollisionHit> Collider::DoCollision(float dt)
+    std::vector<TileEntityCollisionHit> Collider::DoCollision(float dt)
     {
         // Resolve against tile faces using the collider's own local bounds offsets,
         // so this works for both center-anchored and left-anchored colliders.
@@ -75,7 +75,7 @@ namespace StickDeath::Physics
             Physics::AABB futureX = GetBoundsAt(xPos + dx, yPos);
             if (xVel > 0)
             {
-                bool collided = Map::CheckSolidBlocksExistInColumn(
+                bool collided = Map::CheckSolidTilesExistInColumn(
                     std::floor(futureX.rightBound - Map::EPSILON),
                     std::floor(futureX.bottomBound),
                     std::floor(futureX.topBound - Map::EPSILON));
@@ -92,7 +92,7 @@ namespace StickDeath::Physics
             }
             else if (xVel < 0)
             {
-                bool collided = Map::CheckSolidBlocksExistInColumn(
+                bool collided = Map::CheckSolidTilesExistInColumn(
                     std::floor(futureX.leftBound),
                     std::floor(futureX.bottomBound),
                     std::floor(futureX.topBound - Map::EPSILON));
@@ -112,7 +112,7 @@ namespace StickDeath::Physics
             Physics::AABB futureY = GetBoundsAt(xPos, yPos + dy);
             if (yVel > 0)
             {
-                bool collided = Map::CheckSolidBlocksExistInRow(
+                bool collided = Map::CheckSolidTilesExistInRow(
                     std::floor(futureY.topBound - Map::EPSILON),
                     std::floor(futureY.leftBound),
                     std::floor(futureY.rightBound - Map::EPSILON));
@@ -129,7 +129,7 @@ namespace StickDeath::Physics
             }
             else if (yVel < 0)
             {
-                bool collided = Map::CheckSolidBlocksExistInRow(
+                bool collided = Map::CheckSolidTilesExistInRow(
                     std::floor(futureY.bottomBound),
                     std::floor(futureY.leftBound),
                     std::floor(futureY.rightBound - Map::EPSILON));
@@ -148,7 +148,7 @@ namespace StickDeath::Physics
             }
         }
 
-        std::vector<BlockEntityCollisionHit> hits;
+        std::vector<TileEntityCollisionHit> hits;
 
         const AABB finalBounds = GetBounds();
 
@@ -161,13 +161,13 @@ namespace StickDeath::Physics
         {
             for (int x = minX; x <= maxX; x++)
             {
-                Block *block = Map::TryGetBlock(x, y);
-                if (block == nullptr)
+                Tile *tile = Map::TryGetTile(x, y);
+                if (tile == nullptr)
                     continue;
 
-                for (const AABB &localBound : block->GetProperties().bounds)
+                for (const AABB &localBound : tile->GetProperties().bounds)
                 {
-                    // Convert local block bound to world space
+                    // Convert local tile bound to world space
                     const AABB worldBound = {
                         .leftBound = localBound.leftBound + x,
                         .rightBound = localBound.rightBound + x,
@@ -185,7 +185,7 @@ namespace StickDeath::Physics
                                                     worldBound.topBound - finalBounds.bottomBound);
                     const bool isInside = overlapX > Map::EPSILON && overlapY > Map::EPSILON;
 
-                    hits.push_back({block, isInside});
+                    hits.push_back({tile, isInside});
                 }
             }
         }

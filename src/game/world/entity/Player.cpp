@@ -51,9 +51,9 @@ namespace StickDeath
 
         for (const auto &hit : hits)
         {
-            if (hit.block != nullptr)
+            if (hit.tile != nullptr)
             {
-                hit.block->OnCollision(this, hit.isInside);
+                hit.tile->OnCollision(this, hit.isInside);
             }
         }
     }

@@ -5,8 +5,8 @@
 #include "../../framework/graphics/Fonts.h"
 #include "../../framework/graphics/Images.h"
 #include "../world/entity/Player.h"
-#include "../world/map/block/Block.h"
-#include "../world/map/block/SpikeBlock.h"
+#include "../world/map/tile/Tile.h"
+#include "../world/map/tile/SpikeTile.h"
 #include "../world/map/Map.h"
 #include "../ui/components/player/HealthBar.h"
 

@@ -13,15 +13,15 @@ namespace StickDeath
     {
         for (int x = 0; x < 50; x++)
         {
-            StickDeath::Map::SetBlock(x, 0, "floor");
+            StickDeath::Map::SetTile(x, 0, "floor");
         }
 
         for (int x = 0; x < 10; x++)
         {
-            StickDeath::Map::SetBlock(x * 5, x + 4, "floor");
+            StickDeath::Map::SetTile(x * 5, x + 4, "floor");
         }
 
-        StickDeath::Map::SetBlock(1, 1, std::make_unique<SpikeBlock>(1, 1));
+        StickDeath::Map::SetTile(1, 1, std::make_unique<SpikeTile>(1, 1));
     }
 
     void TestState::Restart()

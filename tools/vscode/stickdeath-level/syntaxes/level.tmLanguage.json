@@ -10,10 +10,10 @@
             "include": "#headers"
         },
         {
-            "include": "#legendBlock"
+            "include": "#legendTile"
         },
         {
-            "include": "#rowsBlock"
+            "include": "#rowsTile"
         }
     ],
     "repository": {
@@ -71,7 +71,7 @@
                 }
             ]
         },
-        "legendBlock": {
+        "legendTile": {
             "begin": "^(legend)\\s*$",
             "beginCaptures": {
                 "1": {
@@ -91,13 +91,13 @@
                             "name": "constant.character.legend-symbol.stickdeath-level"
                         },
                         "3": {
-                            "name": "entity.name.type.block.stickdeath-level"
+                            "name": "entity.name.type.tile.stickdeath-level"
                         }
                     }
                 }
             ]
         },
-        "rowsBlock": {
+        "rowsTile": {
             "begin": "^(rows)\\s*$",
             "beginCaptures": {
                 "1": {

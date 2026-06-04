@@ -6,7 +6,7 @@
 #include <memory>
 #include <cmath>
 
-#include "block/Block.h"
+#include "tile/Tile.h"
 
 namespace StickDeath::Map
 {
@@ -14,13 +14,13 @@ namespace StickDeath::Map
 
     const inline float EPSILON = 0.0001;
 
-    class BlockOutOfBoundsException : public std::exception
+    class TileOutOfBoundsException : public std::exception
     {
     private:
         std::string message;
 
     public:
-        BlockOutOfBoundsException(int _x, int _y)
+        TileOutOfBoundsException(int _x, int _y)
         {
             message = std::format("The coordinate ({}, {}) is outside of the map", _x, _y);
         }
@@ -34,26 +34,26 @@ namespace StickDeath::Map
 
     inline const float GRAVITY = -25;
 
-    const inline int NULL_BLOCK_INDEX = -1;
-    inline std::vector<int> tileToBlockIndex((MAP_WIDTH * MAP_HEIGHT), NULL_BLOCK_INDEX);
-    inline std::deque<std::unique_ptr<Block>> blocks;
+    const inline int NULL_TILE_INDEX = -1;
+    inline std::vector<int> tileToTileIndex((MAP_WIDTH * MAP_HEIGHT), NULL_TILE_INDEX);
+    inline std::deque<std::unique_ptr<Tile>> tiles;
 
     int GetTileX(float worldX);
     int GetTileY(float worldY);
 
-    void SetBlock(int x, int y, const std::string &blockName);
-    void SetBlock(int x, int y, const std::unique_ptr<Block> block);
-    Block *TryGetBlock(int x, int y);
-    Block *TryGetBlockAtWorldPos(float worldX, float worldY);
+    void SetTile(int x, int y, const std::string &tileName);
+    void SetTile(int x, int y, const std::unique_ptr<Tile> tile);
+    Tile *TryGetTile(int x, int y);
+    Tile *TryGetTileAtWorldPos(float worldX, float worldY);
     bool IsInBounds(int x, int y);
 
     void ClearMap();
 
-    std::vector<std::pair<int, int>> GetSolidBlocksInRow(int y, int startX, int endX);
-    std::vector<std::pair<int, int>> GetSolidBlocksInColumn(int x, int startY, int endY);
+    std::vector<std::pair<int, int>> GetSolidTilesInRow(int y, int startX, int endX);
+    std::vector<std::pair<int, int>> GetSolidTilesInColumn(int x, int startY, int endY);
 
-    bool CheckSolidBlocksExistInRow(int y, int startX, int endX);
-    bool CheckSolidBlocksExistInColumn(int x, int startY, int endY);
+    bool CheckSolidTilesExistInRow(int y, int startX, int endX);
+    bool CheckSolidTilesExistInColumn(int x, int startY, int endY);
 
     void UpdateMap(float dt);
     void RenderMap();

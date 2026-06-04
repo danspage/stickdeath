@@ -1,6 +1,6 @@
 #pragma once
 
-#include "world/map/block/Blocks.h"
+#include "world/map/tile/Tiles.h"
 
 namespace StickDeath
 {

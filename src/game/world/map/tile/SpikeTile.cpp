@@ -1,4 +1,4 @@
-#include "SpikeBlock.h"
+#include "SpikeTile.h"
 
 #include <cmath>
 
@@ -8,11 +8,11 @@
 
 namespace StickDeath
 {
-    SpikeBlock::SpikeBlock(int x, int y) : Block(x, y, "spike")
+    SpikeTile::SpikeTile(int x, int y) : Tile(x, y, "spike")
     {
     }
 
-    void SpikeBlock::HurtPlayer()
+    void SpikeTile::HurtPlayer()
     {
         if (targetedEntityForCollision == nullptr)
             return;
@@ -26,7 +26,7 @@ namespace StickDeath
         player->RemoveHealth(1 + additionalDamage);
     }
 
-    void SpikeBlock::Update(float dt)
+    void SpikeTile::Update(float dt)
     {
         if (touchingPlayer)
         {
@@ -46,7 +46,7 @@ namespace StickDeath
         }
     }
 
-    void SpikeBlock::OnCollision(Entity *entity, bool isInside)
+    void SpikeTile::OnCollision(Entity *entity, bool isInside)
     {
         if (!isInside)
         {

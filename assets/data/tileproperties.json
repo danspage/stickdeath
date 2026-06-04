@@ -11,16 +11,16 @@
     },
     "null": {
         "parent": "solid_square",
-        "texture": "blocks/null",
+        "texture": "tiles/null",
         "isSolid": false
     },
     "floor": {
         "parent": "solid_square",
-        "texture": "blocks/floor",
+        "texture": "tiles/floor",
         "isSolid": true
     },
     "spike": {
-        "texture": "blocks/spike",
+        "texture": "tiles/spike",
         "isSolid": false,
         "model": [
             [

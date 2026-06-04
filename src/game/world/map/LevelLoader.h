@@ -8,9 +8,9 @@ namespace StickDeath
 {
     struct ParsedLevel
     {
-        int version = 0;
-        int width = 0, height = 0;
-        int spawnX = 0, spawnY = 0;
+        int version = -1;
+        int width = -1, height = -1;
+        int spawnX = -1, spawnY = -1;
         std::map<char, std::string> legend;
         std::vector<std::string> rows;
     };
