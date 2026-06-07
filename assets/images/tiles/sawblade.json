@@ -1,0 +1,10 @@
+{
+    "textures": [
+        "sawblade/0.png",
+        "sawblade/1.png",
+        "sawblade/2.png",
+        "sawblade/3.png",
+        "sawblade/4.png"
+    ],
+    "interval_seconds": 0.1
+}
