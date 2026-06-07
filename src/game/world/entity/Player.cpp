@@ -60,12 +60,12 @@ namespace StickDeath
 
     void Player::Render()
     {
-        float worldX = GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE;
-        float worldY = GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE;
+        float worldX = GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS;
+        float worldY = GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS;
 
         const PointF worldTopLeft = {
-            worldX - WIDTH_PX/2.0f,
-            worldY + HEIGHT_PX,
+            worldX - WIDTH_VOXELS/2.0f,
+            worldY + HEIGHT_VOXELS,
         };
 
         const PointI screen = StickDeath::Camera::WorldToScreen(worldTopLeft);

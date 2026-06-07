@@ -29,8 +29,8 @@ namespace StickDeath
 
     void Tile::Render()
     {
-        const float worldLeft = static_cast<float>(x * StickDeath::Map::TILE_SIZE);
-        const float worldTop = static_cast<float>((y + 1) * StickDeath::Map::TILE_SIZE);
+        const float worldLeft = static_cast<float>(x * StickDeath::Map::TILE_SIZE_VOXELS);
+        const float worldTop = static_cast<float>((y + 1) * StickDeath::Map::TILE_SIZE_VOXELS);
 
         const PointI screen = StickDeath::Camera::WorldToScreen({worldLeft, worldTop});
         GameEngine::DrawImage(texturePath, screen.x, screen.y);

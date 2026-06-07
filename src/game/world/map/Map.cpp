@@ -17,14 +17,14 @@ namespace StickDeath::Map
         if (!IsInBounds(x, y))
             throw TileOutOfBoundsException(x, y);
 
-        if (tileToTileIndex[y * MAP_WIDTH + x] == NULL_TILE_INDEX)
+        if (tileToTileIndex[y * mapWidth + x] == NULL_TILE_INDEX)
         {
             tiles.emplace_back(std::make_unique<Tile>(x, y, tileName));
-            tileToTileIndex[y * MAP_WIDTH + x] = tiles.size() - 1;
+            tileToTileIndex[y * mapWidth + x] = tiles.size() - 1;
         }
         else
         {
-            tiles[tileToTileIndex[y * MAP_WIDTH + x]] = std::make_unique<Tile>(x, y, tileName);
+            tiles[tileToTileIndex[y * mapWidth + x]] = std::make_unique<Tile>(x, y, tileName);
         }
     }
 
@@ -35,23 +35,23 @@ namespace StickDeath::Map
 
         tile->HardOverwriteCoordinates(x, y);
 
-        if (tileToTileIndex[y * MAP_WIDTH + x] == NULL_TILE_INDEX)
+        if (tileToTileIndex[y * mapWidth + x] == NULL_TILE_INDEX)
         {
             tiles.emplace_back(std::move(tile));
-            tileToTileIndex[y * MAP_WIDTH + x] = tiles.size() - 1;
+            tileToTileIndex[y * mapWidth + x] = tiles.size() - 1;
         }
         else
         {
-            tiles[tileToTileIndex[y * MAP_WIDTH + x]] = std::move(tile);
+            tiles[tileToTileIndex[y * mapWidth + x]] = std::move(tile);
         }
     };
 
     Tile *TryGetTile(int x, int y)
     {
-        if (!IsInBounds(x, y) || tileToTileIndex[y * MAP_WIDTH + x] == NULL_TILE_INDEX)
+        if (!IsInBounds(x, y) || tileToTileIndex[y * mapWidth + x] == NULL_TILE_INDEX)
             return nullptr;
 
-        return tiles[tileToTileIndex[y * MAP_WIDTH + x]].get();
+        return tiles[tileToTileIndex[y * mapWidth + x]].get();
     };
 
     Tile *TryGetTileAtWorldPos(float worldX, float worldY)
@@ -61,13 +61,13 @@ namespace StickDeath::Map
 
     bool IsInBounds(int x, int y)
     {
-        return (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT);
+        return (x >= 0 && x < mapWidth && y >= 0 && y < mapHeight);
     }
 
     void ClearMap()
     {
         tiles.clear();
-        std::fill(tileToTileIndex.begin(), tileToTileIndex.end(), NULL_TILE_INDEX);
+        tileToTileIndex.assign(static_cast<size_t>(mapWidth * mapHeight), NULL_TILE_INDEX);
     }
 
     std::vector<std::pair<int, int>> GetSolidTilesInRow(int y, int startX, int endX)

@@ -17,11 +17,11 @@ namespace StickDeath
     class Player : public Entity
     {
     public:
-        static constexpr float WIDTH_PX = 12.0f;
-        static constexpr float HEIGHT_PX = 32.0f;
+        static constexpr float WIDTH_VOXELS = 12.0f;
+        static constexpr float HEIGHT_VOXELS = 32.0f;
 
         Player(float x, float y)
-            : Entity(x, y, WIDTH_PX / Map::TILE_SIZE, HEIGHT_PX / Map::TILE_SIZE, true)
+            : Entity(x, y, WIDTH_VOXELS / Map::TILE_SIZE_VOXELS, HEIGHT_VOXELS / Map::TILE_SIZE_VOXELS, true)
         {
             GetCollider()->EnableGravity();
         };

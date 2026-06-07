@@ -6,27 +6,30 @@
 #include "../../framework/GameEngine.h"
 #include "../world/map/Map.h"
 #include "../../framework/graphics/camera/Camera.h"
+#include "../world/map/LevelLoader.h"
 
 namespace StickDeath
 {
     TestState::TestState() : GameState()
     {
-        for (int x = 0; x < 50; x++)
-        {
-            StickDeath::Map::SetTile(x, 0, "floor");
-        }
+        LevelLoader::ApplyLevel(LevelLoader::ParseLevel("0"));
 
-        for (int x = 0; x < 10; x++)
-        {
-            StickDeath::Map::SetTile(x * 5, x + 4, "floor");
-        }
+        // for (int x = 0; x < 50; x++)
+        // {
+        //     StickDeath::Map::SetTile(x, 0, "floor");
+        // }
 
-        StickDeath::Map::SetTile(1, 1, std::make_unique<SpikeTile>(1, 1));
+        // for (int x = 0; x < 10; x++)
+        // {
+        //     StickDeath::Map::SetTile(x * 5, x + 4, "floor");
+        // }
+
+        // StickDeath::Map::SetTile(1, 1, std::make_unique<SpikeTile>(1, 1));
     }
 
     void TestState::Restart()
     {
-        player.SetPos(3, 1);
+        player.SetPos(Map::spawnX, Map::spawnY);
         player.SetHealth(player.GetMaxHealth());
         healthBar.SetValue(player.GetMaxHealth());
         GameEngine::SetState("title");
@@ -35,15 +38,15 @@ namespace StickDeath
     void TestState::UpdateCameraPosition(float dt)
     {
         // Calculate target camera position (player near center)
-        const float playerWorldX = player.GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE;
-        const float playerWorldY = player.GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE;
+        const float playerWorldX = player.GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS;
+        const float playerWorldY = player.GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS;
 
         cameraTargetX = playerWorldX - GameEngine::WIDTH_VOXELS * 0.5f;
         cameraTargetY = playerWorldY - GameEngine::HEIGHT_VOXELS * 0.35f;
 
         // Clamp target to world bounds
-        const float maxCamX = StickDeath::Map::MAP_WIDTH * StickDeath::Map::TILE_SIZE - GameEngine::WIDTH_VOXELS;
-        const float maxCamY = StickDeath::Map::MAP_HEIGHT * StickDeath::Map::TILE_SIZE - GameEngine::HEIGHT_VOXELS;
+        const float maxCamX = StickDeath::Map::mapWidth * StickDeath::Map::TILE_SIZE_VOXELS - GameEngine::WIDTH_VOXELS;
+        const float maxCamY = StickDeath::Map::mapHeight * StickDeath::Map::TILE_SIZE_VOXELS - GameEngine::HEIGHT_VOXELS;
 
         cameraTargetX = std::clamp(cameraTargetX, 0.0f, maxCamX);
         cameraTargetY = std::clamp(cameraTargetY, 0.0f, maxCamY);

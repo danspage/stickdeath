@@ -1,10 +1,10 @@
 #include "LevelLoader.h"
 
+#include <fstream>
+
 #include "../../../framework/util/StringUtil.h"
 #include "Map.h"
 #include "tile/TileFactory.h"
-
-#include <fstream>
 
 namespace StickDeath
 {
@@ -199,6 +199,11 @@ namespace StickDeath
 
     void LevelLoader::ApplyLevel(const ParsedLevel &level)
     {
+        Map::mapWidth = level.width;
+        Map::mapHeight = level.height;
+        Map::spawnX = level.spawnX;
+        Map::spawnY = level.spawnY;
+
         Map::ClearMap();
 
         for (size_t row = 0; row < level.rows.size(); row++)

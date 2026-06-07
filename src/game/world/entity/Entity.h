@@ -11,8 +11,8 @@ namespace StickDeath
     class Entity
     {
     public:
-        Entity(float x, float y, float width, float height, bool anchoredBottomCenter)
-            : collider(x, y, width, height, anchoredBottomCenter)
+        Entity(float x, float y, float widthVoxels, float heightVoxels, bool anchoredBottomCenter)
+            : collider(x, y, widthVoxels, heightVoxels, anchoredBottomCenter)
         {
         }
 
