@@ -14,6 +14,8 @@ namespace StickDeath
     {
         LevelLoader::ApplyLevel(LevelLoader::ParseLevel("0"));
 
+        player.SetPos(Map::spawnX, Map::spawnY);
+
         // for (int x = 0; x < 50; x++)
         // {
         //     StickDeath::Map::SetTile(x, 0, "floor");
@@ -40,13 +42,29 @@ namespace StickDeath
         // Calculate target camera position (player near center)
         const float playerWorldX = player.GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS;
         const float playerWorldY = player.GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS;
+        const float worldHeightVoxels = static_cast<float>(StickDeath::Map::mapHeight * StickDeath::Map::TILE_SIZE_VOXELS);
 
         cameraTargetX = playerWorldX - GameEngine::WIDTH_VOXELS * 0.5f;
-        cameraTargetY = playerWorldY - GameEngine::HEIGHT_VOXELS * 0.35f;
+        cameraTargetY = StickDeath::Camera::y;
+
+        // Use a vertical dead-zone so jumps do not cause abrupt camera snaps.
+        const float topDeadZone = GameEngine::HEIGHT_VOXELS * 0.30f;
+        const float bottomDeadZone = GameEngine::HEIGHT_VOXELS * 0.55f;
+        const float playerScreenY = GameEngine::HEIGHT_VOXELS - (playerWorldY - StickDeath::Camera::y);
+
+        if (playerScreenY < topDeadZone)
+        {
+            cameraTargetY += (topDeadZone - playerScreenY);
+        }
+        else if (playerScreenY > bottomDeadZone)
+        {
+            cameraTargetY -= (playerScreenY - bottomDeadZone);
+        }
 
         // Clamp target to world bounds
-        const float maxCamX = StickDeath::Map::mapWidth * StickDeath::Map::TILE_SIZE_VOXELS - GameEngine::WIDTH_VOXELS;
-        const float maxCamY = StickDeath::Map::mapHeight * StickDeath::Map::TILE_SIZE_VOXELS - GameEngine::HEIGHT_VOXELS;
+        const float maxCamX = std::max(0.0f, static_cast<float>(StickDeath::Map::mapWidth * StickDeath::Map::TILE_SIZE_VOXELS - GameEngine::WIDTH_VOXELS));
+        const float strictMaxCamY = std::max(0.0f, worldHeightVoxels - GameEngine::HEIGHT_VOXELS);
+        const float maxCamY = std::max(strictMaxCamY, GameEngine::HEIGHT_VOXELS * 0.40f);
 
         cameraTargetX = std::clamp(cameraTargetX, 0.0f, maxCamX);
         cameraTargetY = std::clamp(cameraTargetY, 0.0f, maxCamY);

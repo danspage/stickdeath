@@ -32,7 +32,7 @@ namespace StickDeath
         float cameraTargetY = 0.0f;
         const float cameraSmoothSpeed = 5.0f; // tune this for feel
 
-        Player player = Player(3, 1);
+        Player player = Player(0, 0);
 
         UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::RED, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
     };

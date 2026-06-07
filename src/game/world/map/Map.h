@@ -31,7 +31,7 @@ namespace StickDeath::Map
     };
 
     inline int mapWidth = 0, mapHeight = 0;
-    inline int spawnX = 0, spawnY = 0;
+    inline float spawnX = 0, spawnY = 0;
 
     inline const float GRAVITY = -25;
 

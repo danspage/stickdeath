@@ -201,7 +201,7 @@ namespace StickDeath
     {
         Map::mapWidth = level.width;
         Map::mapHeight = level.height;
-        Map::spawnX = level.spawnX;
+        Map::spawnX = level.spawnX + 0.5;
         Map::spawnY = level.spawnY;
 
         Map::ClearMap();
