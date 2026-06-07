@@ -27,6 +27,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE  OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+/*
+ * Local modifications for stickdeath:
+ * - Updated user-defined literal declarations to C++20-preferred syntax
+ *   (`operator""_json` and `operator""_json_pointer`) to resolve
+ *   deprecated literal operator warnings on clang.
+ *
+ * Requested by: Dan Convey
+ * Changes made by: GitHub Copilot
+ */
+
 #ifndef INCLUDE_NLOHMANN_JSON_HPP_
 #define INCLUDE_NLOHMANN_JSON_HPP_
 
@@ -22695,7 +22705,7 @@ if no parse error occurred.
 @since version 1.0.0
 */
 JSON_HEDLEY_NON_NULL(1)
-inline nlohmann::json operator "" _json(const char* s, std::size_t n)
+inline nlohmann::json operator""_json(const char* s, std::size_t n)
 {
     return nlohmann::json::parse(s, s + n);
 }
@@ -22714,7 +22724,7 @@ object if no parse error occurred.
 @since version 2.0.0
 */
 JSON_HEDLEY_NON_NULL(1)
-inline nlohmann::json::json_pointer operator "" _json_pointer(const char* s, std::size_t n)
+inline nlohmann::json::json_pointer operator""_json_pointer(const char* s, std::size_t n)
 {
     return nlohmann::json::json_pointer(std::string(s, n));
 }
