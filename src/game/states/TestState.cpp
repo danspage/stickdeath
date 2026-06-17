@@ -7,6 +7,7 @@
 #include "../world/map/Map.h"
 #include "../../framework/graphics/camera/Camera.h"
 #include "../world/map/LevelLoader.h"
+#include "../world/map/tile/Tiles.h"
 
 namespace StickDeath
 {
@@ -27,6 +28,25 @@ namespace StickDeath
         // }
 
         // StickDeath::Map::SetTile(1, 1, std::make_unique<SpikeTile>(1, 1));
+    }
+
+    void TestState::OnEnter()
+    {
+        // Start all tile animation timers and reset their frames to 0
+        for (auto &[tileName, animState] : _animationStates)
+        {
+            animState.animTimer.Restart();
+            animState.currentFrame = 0;
+        }
+    }
+
+    void TestState::onExit()
+    {
+        // Stop all tile animation timers
+        for (auto &[tileName, animState] : _animationStates)
+        {
+            animState.animTimer.Stop();
+        }
     }
 
     void TestState::Restart()
@@ -94,6 +114,8 @@ namespace StickDeath
         healthBar.SetValue(player.GetHealth());
 
         UpdateCameraPosition(dt);
+
+        UpdateTileAnimations(dt);
     }
 
     void TestState::Render()

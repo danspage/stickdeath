@@ -16,13 +16,17 @@ using json = nlohmann::json;
 
 namespace StickDeath
 {
-    struct TileDefinition
+    struct TileAnimationState
     {
-        std::string texturePath;
-        TileProperties properties;
+        GameEngine::Util::Timer animTimer;
+        int currentFrame;
     };
 
-    inline std::map<std::string, TileDefinition> _defaultTileProperties;
+    inline std::map<std::string, TileProperties> _defaultTileProperties;
+
+    inline std::map<std::string, TileAnimationState> _animationStates;
 
     void InitTileProperties();
+
+    void UpdateTileAnimations(float dt);
 }

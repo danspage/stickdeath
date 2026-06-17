@@ -1,0 +1,10 @@
+{
+    "textures": [
+        "tiles/sawblade/0",
+        "tiles/sawblade/1",
+        "tiles/sawblade/2",
+        "tiles/sawblade/3",
+        "tiles/sawblade/4"
+    ],
+    "interval_seconds": 0.05
+}

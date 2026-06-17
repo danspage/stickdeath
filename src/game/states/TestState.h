@@ -17,8 +17,8 @@ namespace StickDeath
     public:
         TestState();
 
-        // void OnEnter() override;
-        // void onExit() override;
+        void OnEnter() override;
+        void onExit() override;
         void Restart();
         void UpdateCameraPosition(float dt);
         void Update(float dt) override;

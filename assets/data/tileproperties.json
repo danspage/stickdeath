@@ -42,5 +42,17 @@
                 16
             ]
         ]
+    },
+    "sawblade": {
+        "texture": "tiles/sawblade",
+        "isSolid": false,
+        "model": [
+            [
+                0,
+                0,
+                16,
+                8
+            ]
+        ]
     }
 }

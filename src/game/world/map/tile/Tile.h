@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../../physics/AABB.h"
+#include "../../../../framework/util/Timer.h"
 
 namespace StickDeath
 {
@@ -11,8 +12,15 @@ namespace StickDeath
 
     struct TileProperties
     {
+        std::string id;
+
+        std::vector<std::string> texturePaths;
+
         bool isSolid;
         std::vector<Physics::AABB> bounds;
+
+        // For animated tiles, these will be set to point to the actual animation data stored in the TileDefinition for this tile, so that when the animation updates it can update the current frame for all tiles that use that animation at once. For non-animated tiles, these will just be null pointers.
+        bool animated = false;
     };
 
     class Tile
@@ -24,12 +32,11 @@ namespace StickDeath
 
         TileProperties GetProperties() const;
 
-        void Render();
+        virtual void Render();
         virtual void Update(float dt) {}
         virtual void OnCollision(Entity *entity, bool isInside) {};
 
     protected:
-        std::string texturePath;
         int x = 0, y = 0;
         TileProperties properties;
     };

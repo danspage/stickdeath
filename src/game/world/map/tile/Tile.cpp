@@ -11,8 +11,7 @@ namespace StickDeath
 {
     Tile::Tile(int xPos, int yPos, std::string tileName)
         : x(xPos), y(yPos),
-          texturePath(_defaultTileProperties.at(tileName).texturePath),
-          properties(_defaultTileProperties.at(tileName).properties)
+          properties(_defaultTileProperties.at(tileName))
     {
     }
 
@@ -33,6 +32,14 @@ namespace StickDeath
         const float worldTop = static_cast<float>((y + 1) * StickDeath::Map::TILE_SIZE_VOXELS);
 
         const PointI screen = StickDeath::Camera::WorldToScreen({worldLeft, worldTop});
-        GameEngine::DrawImage(texturePath, screen.x, screen.y);
+
+        if (properties.animated)
+        {
+            GameEngine::DrawImage(properties.texturePaths[_animationStates.at(properties.id).currentFrame], screen.x, screen.y);
+        }
+        else
+        {
+            GameEngine::DrawImage(properties.texturePaths[0], screen.x, screen.y);
+        }
     }
 }
