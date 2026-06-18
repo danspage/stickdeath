@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <cmath>
+#include <string>
 
 #include "../map/Map.h"
 #include "../physics/Collider.h"
@@ -11,13 +12,14 @@ namespace StickDeath
     class Entity
     {
     public:
-        Entity(float x, float y, float widthVoxels, float heightVoxels, bool anchoredBottomCenter)
-            : collider(x, y, widthVoxels, heightVoxels, anchoredBottomCenter)
+        Entity(std::string id, float x, float y, float widthVoxels, float heightVoxels, bool anchoredBottomCenter)
+            : id(id), collider(x, y, widthVoxels, heightVoxels, anchoredBottomCenter)
         {
         }
 
         Physics::Collider *GetCollider() { return &collider; }
 
+        std::string GetID() const { return id; }
         void SetX(float x) { collider.SetXPos(x); }
         void SetY(float y) { collider.SetYPos(y); }
         void SetPos(float x, float y) { collider.SetPos(x, y); }
@@ -39,6 +41,7 @@ namespace StickDeath
         virtual void Update(float dt) { collider.DoCollision(dt); }
 
     private:
+        const std::string id;
         Physics::Collider collider;
     };
 }

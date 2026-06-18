@@ -6,17 +6,17 @@
 
 namespace StickDeath
 {
-    class SpikeTile : public Tile
+    class SawbladeTile : public Tile
     {
     private:
         bool touchedThisFrame = false;
         Player *playerInContact = nullptr;
-        GameEngine::Util::Timer playerTouchTimer = GameEngine::Util::Timer(0.5f, true);
+        GameEngine::Util::Timer playerTouchTimer = GameEngine::Util::Timer(0.1f, true);
 
-        void HurtPlayer(Player *player, bool isFirstContact);
+        void HurtPlayer(Player *player);
 
     public:
-        SpikeTile(int x, int y) : Tile(x, y, "spike") {}
+        SawbladeTile(int x, int y) : Tile(x, y, "sawblade") {}
 
         void Update(float dt) override;
         void OnCollision(Entity *entity, bool isInside) override;

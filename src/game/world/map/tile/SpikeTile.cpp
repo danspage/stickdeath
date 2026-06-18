@@ -1,62 +1,54 @@
 #include "SpikeTile.h"
 
+#include <algorithm>
 #include <cmath>
-
-#include "../../entity/Player.h"
-#include "../../../../framework/GameEngine.h"
-#include "../../../states/TestState.h"
 
 namespace StickDeath
 {
-    SpikeTile::SpikeTile(int x, int y) : Tile(x, y, "spike")
+    void SpikeTile::HurtPlayer(Player *player, bool isFirstContact)
     {
-    }
-
-    void SpikeTile::HurtPlayer()
-    {
-        if (targetedEntityForCollision == nullptr)
+        if (player == nullptr)
             return;
 
-        Player *player = dynamic_cast<Player *>(targetedEntityForCollision);
-        if (player == nullptr)
-            return; // Not a Player
-
-        int additionalDamage = std::max(0, static_cast<int>(std::round(player->GetYVel() / -5.0f)));
-
+        const int additionalDamage =
+            isFirstContact ? std::max(0, static_cast<int>(std::round(player->GetYVel() / -5.0f))) : 0;
         player->RemoveHealth(1 + additionalDamage);
     }
 
     void SpikeTile::Update(float dt)
     {
-        if (touchingPlayer)
+        if (playerInContact != nullptr)
         {
             const int ticks = playerTouchTimer.UpdateAndGetTicks(dt);
             for (int i = 0; i < ticks; i++)
             {
-                HurtPlayer();
+                HurtPlayer(playerInContact, false);
+            }
+
+            if (!touchedThisFrame)
+            {
+                playerInContact = nullptr;
+                playerTouchTimer.Stop();
             }
         }
 
-        touchingPlayer = touchedThisFrame;
         touchedThisFrame = false;
-
-        if (!touchingPlayer)
-        {
-            playerTouchTimer.Stop();
-        }
     }
 
     void SpikeTile::OnCollision(Entity *entity, bool isInside)
     {
         if (!isInside)
-        {
-            targetedEntityForCollision = entity;
             return;
-        }
 
-        if (!touchedThisFrame && !touchingPlayer)
+        Player *player = dynamic_cast<Player *>(entity);
+        if (player == nullptr)
+            return;
+
+        // First contact with this player: immediate hit + start repeat timer.
+        if (playerInContact != player)
         {
-            HurtPlayer();
+            playerInContact = player;
+            HurtPlayer(player, true);
             playerTouchTimer.Restart();
         }
 

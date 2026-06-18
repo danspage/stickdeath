@@ -21,7 +21,7 @@ namespace StickDeath
         static constexpr float HEIGHT_VOXELS = 32.0f;
 
         Player(float x, float y)
-            : Entity(x, y, WIDTH_VOXELS / Map::TILE_SIZE_VOXELS, HEIGHT_VOXELS / Map::TILE_SIZE_VOXELS, true)
+            : Entity("player", x, y, WIDTH_VOXELS / Map::TILE_SIZE_VOXELS, HEIGHT_VOXELS / Map::TILE_SIZE_VOXELS, true)
         {
             GetCollider()->EnableGravity();
         };

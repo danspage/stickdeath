@@ -5,6 +5,7 @@
 
 #include "Tile.h"
 #include "SpikeTile.h"
+#include "SawbladeTile.h"
 
 namespace StickDeath::TileFactory
 {
@@ -13,6 +14,10 @@ namespace StickDeath::TileFactory
         if (tileName == "spike")
         {
             return std::make_unique<SpikeTile>(x, y);
+        }
+        else if (tileName == "sawblade")
+        {
+            return std::make_unique<SawbladeTile>(x, y);
         }
         
         return std::make_unique<Tile>(x, y, tileName);
