@@ -63,12 +63,12 @@ namespace StickDeath
         float worldX = GetCollider()->GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS;
         float worldY = GetCollider()->GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS;
 
-        const PointF worldTopLeft = {
+        const GameEngine::PointF worldTopLeft = {
             worldX - WIDTH_VOXELS/2.0f,
             worldY + HEIGHT_VOXELS,
         };
 
-        const PointI screen = StickDeath::Camera::WorldToScreen(worldTopLeft);
+        const GameEngine::PointI screen = StickDeath::Camera::WorldToScreen(worldTopLeft);
 
         GameEngine::DrawImage(
             playerAnim.GetCurrentFrame(),

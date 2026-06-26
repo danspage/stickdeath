@@ -21,21 +21,21 @@ namespace StickDeath
         y += dy;
     }
 
-    PointI Camera::WorldToScreen(PointF worldPos)
+    GameEngine::PointI Camera::WorldToScreen(GameEngine::PointF worldPos)
     {
         const int screenX = static_cast<int>(std::lround(worldPos.x - x));
         const int screenY = static_cast<int>(std::lround(GameEngine::HEIGHT_VOXELS - (worldPos.y - y)));
         return {screenX, screenY};
     }
 
-    PointF Camera::ScreenToWorld(PointI screenPos)
+    GameEngine::PointF Camera::ScreenToWorld(GameEngine::PointI screenPos)
     {
         const float worldX = x + static_cast<float>(screenPos.x);
         const float worldY = y + (GameEngine::HEIGHT_VOXELS - static_cast<float>(screenPos.y));
         return {worldX, worldY};
     }
 
-    BoundsF Camera::GetWorldBounds()
+    GameEngine::BoundsF Camera::GetWorldBounds()
     {
         return {
             x,

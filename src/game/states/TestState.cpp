@@ -17,6 +17,14 @@ namespace StickDeath
 
         player.SetPos(Map::spawnX, Map::spawnY);
 
+        testParticles = Particles(
+            "blood_drop",
+            GameEngine::PointF(5.0f, 5.0f),
+            GameEngine::PointF(30.0f, 30.0f),
+            GameEngine::PointF(3.0f, 3.0f),
+            8.0f,
+            5000);
+
         // for (int x = 0; x < 50; x++)
         // {
         //     StickDeath::Map::SetTile(x, 0, "floor");
@@ -54,6 +62,14 @@ namespace StickDeath
         player.SetPos(Map::spawnX, Map::spawnY);
         player.SetHealth(player.GetMaxHealth());
         healthBar.SetValue(player.GetMaxHealth());
+        testParticles.Destroy();
+        testParticles = Particles(
+            "blood_drop",
+            GameEngine::PointF(5.0f, 5.0f),
+            GameEngine::PointF(30.0f, 30.0f),
+            GameEngine::PointF(3.0f, 3.0f),
+            8.0f,
+            5000);
         GameEngine::SetState("title");
     }
 
@@ -116,21 +132,25 @@ namespace StickDeath
         UpdateCameraPosition(dt);
 
         UpdateTileAnimations(dt);
+
+        testParticles.Update(dt);
     }
 
     void TestState::Render()
     {
-        GameEngine::FillBG(GameEngine::Colors::CRIMSON);
+        GameEngine::FillBG(GameEngine::Colors::WHITE);
+
+        testParticles.Render();
 
         StickDeath::Map::RenderMap();
 
         player.Render();
 
-        GameEngine::DrawString(std::format("FPS: {}", GameEngine::GetFPS()), 2, 2, "default", GameEngine::Colors::YELLOW);
+        GameEngine::DrawString(std::format("FPS: {}", GameEngine::GetFPS()), 2, 2, "default", GameEngine::Colors::RED);
 
-        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 32, "default", GameEngine::Colors::YELLOW);
-        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 40, "default", GameEngine::Colors::YELLOW);
-        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 48, "default", GameEngine::Colors::YELLOW);
+        GameEngine::DrawString(std::format("IsOnGround: {}", (player.GetCollider()->IsOnGround() ? "true" : "false")), 2, 10, "default", GameEngine::Colors::RED);
+        GameEngine::DrawString(std::format("X: {}", player.GetCollider()->GetXPos()), 2, 18, "default", GameEngine::Colors::RED);
+        GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 26, "default", GameEngine::Colors::RED);
 
         healthBar.Render();
     }

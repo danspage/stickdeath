@@ -12,8 +12,8 @@ namespace StickDeath
     class Entity
     {
     public:
-        Entity(std::string id, float x, float y, float widthVoxels, float heightVoxels, bool anchoredBottomCenter)
-            : id(id), collider(x, y, widthVoxels, heightVoxels, anchoredBottomCenter)
+        Entity(std::string id, float x, float y, float width, float height, bool anchoredBottomCenter)
+            : id(id), collider(x, y, width, height, anchoredBottomCenter)
         {
         }
 

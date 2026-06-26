@@ -9,6 +9,7 @@
 #include "../world/map/tile/SpikeTile.h"
 #include "../world/map/Map.h"
 #include "../ui/components/player/HealthBar.h"
+#include "../world/particles/Particles.h"
 
 namespace StickDeath
 {
@@ -34,6 +35,8 @@ namespace StickDeath
 
         Player player = Player(0, 0);
 
-        UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::RED, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
+        UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::BLACK, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
+
+        Particles testParticles = Particles("blood_drop", GameEngine::PointF(5, 5), GameEngine::PointF(5, 5), GameEngine::PointF(0.5, 0.5), 1.0, 100);
     };
 }

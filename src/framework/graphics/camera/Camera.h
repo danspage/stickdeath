@@ -15,9 +15,9 @@ namespace StickDeath
         static void SetPosition(float worldX, float worldY);
         static void MoveBy(float dx, float dy);
 
-        static PointI WorldToScreen(PointF worldPos);
-        static PointF ScreenToWorld(PointI screenPos);
+        static GameEngine::PointI WorldToScreen(GameEngine::PointF worldPos);
+        static GameEngine::PointF ScreenToWorld(GameEngine::PointI screenPos);
         
-        static BoundsF GetWorldBounds();
+        static GameEngine::BoundsF GetWorldBounds();
     };
 }

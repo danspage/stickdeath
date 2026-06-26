@@ -31,7 +31,7 @@ namespace StickDeath
         const float worldLeft = static_cast<float>(x * StickDeath::Map::TILE_SIZE_VOXELS);
         const float worldTop = static_cast<float>((y + 1) * StickDeath::Map::TILE_SIZE_VOXELS);
 
-        const PointI screen = StickDeath::Camera::WorldToScreen({worldLeft, worldTop});
+        const GameEngine::PointI screen = StickDeath::Camera::WorldToScreen({worldLeft, worldTop});
 
         if (properties.animated)
         {
