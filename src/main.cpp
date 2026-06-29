@@ -44,6 +44,8 @@ int main()
         return 1;
     }
 
+    GameEngine::LoadAllAssets();
+
     GameEngine::SetRenderer(renderer);
 
     StickDeath::InitGame();
@@ -54,8 +56,6 @@ int main()
             {"test", new StickDeath::TestState()},
             {"title", new StickDeath::TitleState()},
         });
-
-    GameEngine::LoadAllAssets();
 
     bool running = true;
     SDL_Event event;
