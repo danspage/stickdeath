@@ -38,7 +38,7 @@ namespace StickDeath
         void DisableGravity() { collider.DisableGravity(); }
 
         virtual void Render() {};
-        virtual void Update(float dt) { collider.DoCollision(dt); }
+        virtual void Update(float dt) { collider.MoveAndDoCollision(dt); }
 
     private:
         const std::string id;

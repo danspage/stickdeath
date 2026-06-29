@@ -47,7 +47,7 @@ namespace StickDeath
     {
         playerAnim.UpdateAnimation(dt);
 
-        const auto hits = GetCollider()->DoCollision(dt);
+        const auto hits = GetCollider()->MoveAndDoCollision(dt);
 
         for (const auto &hit : hits)
         {

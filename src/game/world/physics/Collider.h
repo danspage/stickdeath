@@ -63,6 +63,7 @@ namespace StickDeath::Physics
         void EnableGravity() { doGravity = true; }
         void DisableGravity() { doGravity = false; }
 
-        std::vector<TileEntityCollisionHit> DoCollision(float dt);
+        void MoveWithoutCollision(float dt);
+        std::vector<TileEntityCollisionHit> MoveAndDoCollision(float dt);
     };
 }

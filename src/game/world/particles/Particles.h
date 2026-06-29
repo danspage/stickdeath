@@ -4,18 +4,18 @@
 #include <vector>
 
 #include "../../../framework/basic_types/Positional.h"
+#include "../physics/Collider.h"
 
 namespace StickDeath
 {
     class Particle
     {
     public:
-        Particle(const std::string &texture, const GameEngine::PointF &position, const GameEngine::PointF &delta)
-            : texture(texture), position(position), delta(delta) {}
+        Particle(const std::string &texture, const GameEngine::PointF &position, const GameEngine::PointF &delta, bool doCollision, bool doGravity);
 
         /// @brief Updates the particle's position based on its delta and the time elapsed.
         /// @param deltaTime The time elapsed since the last update.
-        void Update(float speed, float deltaTime);
+        void Update(float deltaTime);
 
         /// @brief Renders the particle to the screen.
         void Render() const;
@@ -24,11 +24,11 @@ namespace StickDeath
         /// @brief The particle texture being used, relative to `images/sprites/particles`.
         std::string texture;
 
-        /// @brief The position of the particle in the world.
-        GameEngine::PointF position;
+        /// @brief Whether the particle will collide with other physics objects.
+        bool doCollision;
 
-        /// @brief The delta in each direction the particle will move over time, this will be determined upon creation given the particles speed and a random angle from the origin
-        GameEngine::PointF delta;
+        /// @brief The collider used to link the particle with the physics engine.
+        StickDeath::Physics::Collider collider;
     };
 
     class Particles
@@ -41,7 +41,17 @@ namespace StickDeath
         /// @param randomOffset Random spawn offset in tile units.
         /// @param speed Particle movement speed in world voxels per second.
         /// @param count Number of particles to spawn.
-        Particles(const std::string &texture, const GameEngine::PointF &origin, const GameEngine::PointF &delta, const GameEngine::PointF &randomOffset, float speed, int count);
+        /// @param doCollision Whether the particle will collide with tiles.
+        /// @param doGravity Whether the particle will have gravity applied to its velocity.
+        Particles(
+            const std::string &texture,
+            const GameEngine::PointF &origin,
+            const GameEngine::PointF &delta,
+            const GameEngine::PointF &randomOffset,
+            const float speed,
+            const int count,
+            const bool doCollision,
+            const bool doGravity);
 
         /// @brief Updates the particles' positions based on their deltas and the time elapsed.
         /// @param deltaTime The time elapsed since the last update.

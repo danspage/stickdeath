@@ -37,7 +37,21 @@ namespace StickDeath::Physics
         };
     }
 
-    std::vector<TileEntityCollisionHit> Collider::DoCollision(float dt)
+    void Collider::MoveWithoutCollision(float dt)
+    {
+        lastXPos = xPos;
+        lastYPos = yPos;
+
+        if (doGravity)
+        {
+            yVel += Map::GRAVITY * dt;
+        }
+
+        xPos += xVel * dt;
+        yPos += yVel * dt;
+    }
+
+    std::vector<TileEntityCollisionHit> Collider::MoveAndDoCollision(float dt)
     {
         // Resolve against tile faces using the collider's own local bounds offsets,
         // so this works for both center-anchored and left-anchored colliders.

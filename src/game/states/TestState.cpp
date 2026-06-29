@@ -19,11 +19,13 @@ namespace StickDeath
 
         testParticles = Particles(
             "blood_drop",
-            GameEngine::PointF(5.0f, 5.0f),
+            GameEngine::PointF(5.0f, 15.0f),
             GameEngine::PointF(30.0f, 30.0f),
             GameEngine::PointF(3.0f, 3.0f),
             8.0f,
-            5000);
+            5000,
+            true,
+            false);
 
         // for (int x = 0; x < 50; x++)
         // {
@@ -65,11 +67,13 @@ namespace StickDeath
         testParticles.Destroy();
         testParticles = Particles(
             "blood_drop",
-            GameEngine::PointF(5.0f, 5.0f),
+            GameEngine::PointF(5.0f, 15.0f),
             GameEngine::PointF(30.0f, 30.0f),
             GameEngine::PointF(3.0f, 3.0f),
             8.0f,
-            5000);
+            5000,
+            true,
+            true);
         GameEngine::SetState("title");
     }
 
