@@ -5,6 +5,7 @@
 
 #include "../../../framework/basic_types/Positional.h"
 #include "../physics/Collider.h"
+#include "../../../framework/graphics/GameImage.h"
 
 namespace StickDeath
 {
@@ -18,7 +19,7 @@ namespace StickDeath
         void Update(float deltaTime);
 
         /// @brief Renders the particle to the screen.
-        void Render() const;
+        void Render(GameEngine::GameImage *image);
 
     private:
         /// @brief The particle texture being used, relative to `images/sprites/particles`.
@@ -28,7 +29,7 @@ namespace StickDeath
         bool doCollision;
 
         /// @brief The collider used to link the particle with the physics engine.
-        StickDeath::Physics::Collider collider;
+        Physics::Collider collider;
     };
 
     class Particles
@@ -66,6 +67,9 @@ namespace StickDeath
     private:
         /// @brief The particle texture being used, relative to `images/sprites/particles`.
         std::string texture;
+
+        /// @brief The particle texture's image data.
+        GameEngine::GameImage *textureImage;
 
         /// @brief The emitter origin in tile coordinates.
         GameEngine::PointF origin;

@@ -34,19 +34,21 @@ namespace StickDeath
             collider.MoveWithoutCollision(dt);
     }
 
-    void Particle::Render() const
+    void Particle::Render(GameEngine::GameImage *image)
     {
         const GameEngine::PointF worldTopLeft = {
-            collider.GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS - (GameEngine::GetImage("sprites/particle/" + texture)->getWidth() / 2.0f),
-            collider.GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS + static_cast<float>(GameEngine::GetImage("sprites/particle/" + texture)->getHeight()),
+            collider.GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS - (image->getWidth() / 2.0f),
+            collider.GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS + static_cast<float>(image->getHeight()),
         };
         GameEngine::PointI screenPos = StickDeath::Camera::WorldToScreen(worldTopLeft);
-        GameEngine::DrawImage("sprites/particle/" + texture, screenPos.x, screenPos.y);
+        GameEngine::DrawImage(image, screenPos.x, screenPos.y);
     }
 
     Particles::Particles(const std::string &texture, const GameEngine::PointF &origin, const GameEngine::PointF &delta, const GameEngine::PointF &randomOffset, const float speed, const int count, const bool doCollision, const bool doGravity)
         : texture(texture), origin(origin), delta(delta), randomOffset(randomOffset), speed(speed), count(count), timeSinceBirth(0.0f)
     {
+        textureImage = GameEngine::GetImage("sprites/particle/" + texture);
+
         const GameEngine::PointF deltaWorld(
             delta.x * StickDeath::Map::TILE_SIZE_VOXELS,
             delta.y * StickDeath::Map::TILE_SIZE_VOXELS);
@@ -92,7 +94,7 @@ namespace StickDeath
     {
         for (Particle &p : particles)
         {
-            p.Render();
+            p.Render(textureImage);
         }
     }
 

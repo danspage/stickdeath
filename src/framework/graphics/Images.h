@@ -38,6 +38,15 @@ namespace GameEngine
 
     /**
      * @brief Draws an image from memory to the screen.
+     * @param image The GameImage to draw.
+     * @param x The x coordinate of the top left of the image.
+     * @param y The y coordinate of the top left of the image.
+     * @param options Additional options to influence the image's rendering.
+     */
+    void DrawImage(GameImage *image, int x, int y, GameImageRenderOptions options = {});
+
+    /**
+     * @brief Draws an image from memory to the screen.
      * @param imageName The path of the image. The format is as follows:
      * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat` for the parameter.
      * @param x The x coordinate of the top left of the image.
