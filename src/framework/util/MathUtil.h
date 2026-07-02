@@ -4,7 +4,7 @@
 
 namespace GameEngine::Util
 {
-    float RandomFloat(float min, float max)
+    inline float RandomFloat(float min, float max)
     {
         float random = ((float)rand()) / (float)RAND_MAX;
         float diff = max - min;

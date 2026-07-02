@@ -55,6 +55,7 @@ namespace GameEngine
         SDL_SCANCODE_RIGHT,
         SDL_SCANCODE_ESCAPE,
         SDL_SCANCODE_RETURN,
+        SDL_SCANCODE_SPACE,
     };
 
     /// @brief Sets the SDL_Renderer that the game engine will use to render to the screen. This should only be called once, in the app's main class, and should not be called anywhere else.

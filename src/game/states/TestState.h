@@ -10,6 +10,8 @@
 #include "../world/map/Map.h"
 #include "../ui/components/player/HealthBar.h"
 #include "../world/particles/Particles.h"
+#include "../../framework/basic_types/Positional.h"
+#include "../../framework/util/Timer.h"
 
 namespace StickDeath
 {
@@ -29,16 +31,6 @@ namespace StickDeath
         void OnKeyReleased(SDL_Scancode key) override;
 
     private:
-        const Particles demoParticles = Particles(
-            "blood_drop",
-            GameEngine::PointF(5.0f, 15.0f),
-            GameEngine::PointF(30.0f, 30.0f),
-            GameEngine::PointF(10.0f, 30.0f),
-            8.0f,
-            15000,
-            true,
-            true);
-
         float cameraTargetX = 0.0f;
         float cameraTargetY = 0.0f;
         const float cameraSmoothSpeed = 5.0f; // tune this for feel
@@ -47,6 +39,6 @@ namespace StickDeath
 
         UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::BLACK, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
 
-        Particles testParticles = demoParticles;
+        std::vector<CircleParticles*> particles;
     };
 }

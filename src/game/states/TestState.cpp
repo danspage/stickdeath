@@ -17,8 +17,6 @@ namespace StickDeath
 
         player.SetPos(Map::spawnX, Map::spawnY);
 
-        testParticles = demoParticles;
-
         // for (int x = 0; x < 50; x++)
         // {
         //     StickDeath::Map::SetTile(x, 0, "floor");
@@ -49,6 +47,11 @@ namespace StickDeath
         {
             animState.animTimer.Stop();
         }
+
+        for (Particles *p : particles)
+        {
+            p->Destroy();
+        }
     }
 
     void TestState::Restart()
@@ -56,8 +59,6 @@ namespace StickDeath
         player.SetPos(Map::spawnX, Map::spawnY);
         player.SetHealth(player.GetMaxHealth());
         healthBar.SetValue(player.GetMaxHealth());
-        testParticles.Destroy();
-        testParticles = demoParticles;
         GameEngine::SetState("title");
     }
 
@@ -121,14 +122,15 @@ namespace StickDeath
 
         UpdateTileAnimations(dt);
 
-        testParticles.Update(dt);
+        for (CircleParticles *p : particles)
+        {
+            p->Update(dt);
+        }
     }
 
     void TestState::Render()
     {
         GameEngine::FillBG(GameEngine::Colors::WHITE);
-
-        testParticles.Render();
 
         StickDeath::Map::RenderMap();
 
@@ -141,6 +143,11 @@ namespace StickDeath
         GameEngine::DrawString(std::format("Y: {}", player.GetCollider()->GetYPos()), 2, 26, "default", GameEngine::Colors::RED);
 
         healthBar.Render();
+
+        for (CircleParticles *p : particles)
+        {
+            p->Render();
+        }
     }
 
     void TestState::OnKeyPressed(SDL_Scancode key)
@@ -148,6 +155,19 @@ namespace StickDeath
         if (key == SDL_SCANCODE_ESCAPE)
         {
             GameEngine::SetState("title");
+        }
+        else if (key == SDL_SCANCODE_SPACE)
+        {
+            particles.emplace_back(new CircleParticles(
+                "blood_drop",
+                GameEngine::PointF(10, 13),
+                GameEngine::PointF(0, 0),
+                10,
+                1.5,
+                2.5,
+                1000,
+                true,
+                true));
         }
 
         player.OnKeyPressed(key);
