@@ -6,6 +6,7 @@
 
 #include "../map/Map.h"
 #include "../physics/Collider.h"
+#include "../../../framework/basic_types/Positional.h"
 
 namespace StickDeath
 {
@@ -25,6 +26,7 @@ namespace StickDeath
         void SetPos(float x, float y) { collider.SetPos(x, y); }
         float GetX() const { return collider.GetXPos(); }
         float GetY() const { return collider.GetYPos(); }
+        GameEngine::PointF GetPos() { return {collider.GetXPos(), collider.GetYPos()}; }
         float GetWidth() const { return collider.GetWidth(); }
         float GetHeight() const { return collider.GetHeight(); }
         float GetXVel() const { return collider.GetXVel(); }

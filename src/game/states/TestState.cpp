@@ -8,6 +8,8 @@
 #include "../../framework/graphics/camera/Camera.h"
 #include "../world/map/LevelLoader.h"
 #include "../world/map/tile/Tiles.h"
+#include "../world/particles/CircleParticles.h"
+#include "../world/particles/ArcParticles.h"
 
 namespace StickDeath
 {
@@ -48,7 +50,7 @@ namespace StickDeath
             animState.animTimer.Stop();
         }
 
-        for (Particles *p : particles)
+        for (std::unique_ptr<Particles> &p : particles)
         {
             p->Destroy();
         }
@@ -122,7 +124,7 @@ namespace StickDeath
 
         UpdateTileAnimations(dt);
 
-        for (CircleParticles *p : particles)
+        for (std::unique_ptr<Particles> &p : particles)
         {
             p->Update(dt);
         }
@@ -144,7 +146,7 @@ namespace StickDeath
 
         healthBar.Render();
 
-        for (CircleParticles *p : particles)
+        for (std::unique_ptr<Particles> &p : particles)
         {
             p->Render();
         }
@@ -168,6 +170,26 @@ namespace StickDeath
                 1000,
                 true,
                 true));
+        }
+        else if (key == SDL_SCANCODE_E)
+        {
+            float particlesX = player.IsFacingLeft()
+                                   ? player.GetX() - player.GetWidth()
+                                   : player.GetX() + player.GetWidth();
+
+            particles.emplace_back(new ArcParticles(
+                "blood_drop",
+                GameEngine::PointF(particlesX, player.GetY() + Map::VoxelsToWorldUnits(26)),
+                {0, 0},
+                10,
+                3,
+                GameEngine::Util::AngleUnit::Degrees,
+                0,
+                45,
+                3,
+                100,
+                true,
+                false));
         }
 
         player.OnKeyPressed(key);

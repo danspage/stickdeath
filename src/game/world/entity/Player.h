@@ -32,6 +32,8 @@ namespace StickDeath
         void AddHealth(int amount) { health = std::min(maxHealth, health + amount); }
         void RemoveHealth(int amount) { health = std::max(0, health - amount); }
 
+        bool IsFacingLeft() const { return facingLeft; }
+
         void OnKeyPressed(SDL_Scancode key);
         void OnKeyHeld(SDL_Scancode key);
         void OnKeyReleased(SDL_Scancode key);

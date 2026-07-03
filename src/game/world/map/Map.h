@@ -39,6 +39,11 @@ namespace StickDeath::Map
     inline std::vector<int> tileToTileIndex((mapWidth * mapHeight), NULL_TILE_INDEX);
     inline std::deque<std::unique_ptr<Tile>> tiles;
 
+    inline float VoxelsToWorldUnits(float voxels)
+    {
+        return voxels / TILE_SIZE_VOXELS;
+    };
+
     int GetTileX(float worldX);
     int GetTileY(float worldY);
 

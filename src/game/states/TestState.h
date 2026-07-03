@@ -1,5 +1,8 @@
 #pragma once
 
+#include <deque>
+#include <memory>
+
 #include "../../framework/state/GameState.h"
 #include "../../framework/graphics/Graphics.h"
 #include "../../framework/graphics/Fonts.h"
@@ -39,6 +42,6 @@ namespace StickDeath
 
         UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::BLACK, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
 
-        std::vector<CircleParticles*> particles;
+        std::deque<std::unique_ptr<Particles>> particles;
     };
 }
