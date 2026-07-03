@@ -174,7 +174,7 @@ namespace StickDeath
         else if (key == SDL_SCANCODE_E)
         {
             float particlesX = player.IsFacingLeft()
-                                   ? player.GetX() - player.GetWidth()
+                                   ? player.GetX()
                                    : player.GetX() + player.GetWidth();
 
             particles.emplace_back(new ArcParticles(
