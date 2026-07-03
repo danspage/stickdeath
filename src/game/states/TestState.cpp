@@ -173,23 +173,40 @@ namespace StickDeath
         }
         else if (key == SDL_SCANCODE_E)
         {
-            float particlesX = player.IsFacingLeft()
-                                   ? player.GetX()
-                                   : player.GetX() + player.GetWidth();
-
-            particles.emplace_back(new ArcParticles(
-                "blood_drop",
-                GameEngine::PointF(particlesX, player.GetY() + Map::VoxelsToWorldUnits(26)),
-                {0, 0},
-                10,
-                3,
-                GameEngine::Util::AngleUnit::Degrees,
-                0,
-                45,
-                3,
-                100,
-                true,
-                false));
+            if (player.IsFacingLeft())
+            {
+                // Left shoot particles
+                particles.emplace_back(new ArcParticles(
+                    "blood_drop",
+                    GameEngine::PointF(player.GetX() - player.GetWidth() * 0.75, player.GetY() + Map::VoxelsToWorldUnits(26)),
+                    {0, 0},
+                    10,
+                    3,
+                    GameEngine::Util::AngleUnit::Degrees,
+                    180,
+                    135,
+                    3,
+                    100,
+                    true,
+                    false));
+            }
+            else
+            {
+                // Right shoot particles
+                particles.emplace_back(new ArcParticles(
+                    "blood_drop",
+                    GameEngine::PointF(player.GetX() + player.GetWidth() * 0.75, player.GetY() + Map::VoxelsToWorldUnits(26)),
+                    {0, 0},
+                    10,
+                    3,
+                    GameEngine::Util::AngleUnit::Degrees,
+                    0,
+                    45,
+                    3,
+                    100,
+                    true,
+                    false));
+            }
         }
 
         player.OnKeyPressed(key);
