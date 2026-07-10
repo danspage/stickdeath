@@ -10,6 +10,7 @@
 #include "../world/map/tile/Tiles.h"
 #include "../world/particles/CircleParticles.h"
 #include "../world/particles/ArcParticles.h"
+#include "../world/particles/RectParticles.h"
 
 namespace StickDeath
 {
@@ -40,6 +41,8 @@ namespace StickDeath
             animState.animTimer.Restart();
             animState.currentFrame = 0;
         }
+
+        floorParticlesTimer.Restart();
     }
 
     void TestState::onExit()
@@ -127,6 +130,20 @@ namespace StickDeath
         for (std::unique_ptr<Particles> &p : particles)
         {
             p->Update(dt);
+        }
+
+        if (floorParticlesTimer.UpdateAndGetTicks(dt) > 0)
+        {
+            particles.emplace_back(new RectParticles(
+                "blood_drop",
+                GameEngine::PointF(6, 1),
+                GameEngine::PointF(41, 1.3),
+                GameEngine::PointF(0, 0.2),
+                GameEngine::PointF(0, 0.1),
+                2,
+                20,
+                true,
+                false));
         }
     }
 

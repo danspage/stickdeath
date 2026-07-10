@@ -43,5 +43,7 @@ namespace StickDeath
         UI::HealthBar healthBar = UI::HealthBar(GameEngine::Colors::BLACK, 10, 20, GameEngine::WIDTH_VOXELS - 23, 1, 22, 5);
 
         std::deque<std::unique_ptr<Particles>> particles;
+
+        GameEngine::Util::Timer floorParticlesTimer = GameEngine::Util::Timer(0.25, true);
     };
 }
