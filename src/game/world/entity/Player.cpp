@@ -27,11 +27,6 @@ namespace StickDeath
             facingLeft = false;
             GetCollider()->SetXVel(speed);
         }
-        else
-        {
-            playerAnim.SetAnimationActive(false);
-            GetCollider()->SetXVel(0);
-        }
     }
 
     void Player::OnKeyReleased(SDL_Scancode key)

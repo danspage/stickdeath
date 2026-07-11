@@ -1,6 +1,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include <filesystem>
+
 #include "framework/GameEngine.h"
 #include "framework/graphics/Graphics.h"
 #include "game/states/TestState.h"
@@ -9,8 +11,24 @@
 
 #include "game/Init.h"
 
-int main()
+int main(int argc, char **argv)
 {
+    if (argc > 0)
+    {
+        try
+        {
+            const std::filesystem::path executablePath = std::filesystem::absolute(argv[0]);
+            const std::filesystem::path projectRoot = executablePath.parent_path().parent_path();
+
+            // Keep relative asset paths stable no matter where the process is launched from.
+            std::filesystem::current_path(projectRoot);
+        }
+        catch (const std::filesystem::filesystem_error &e)
+        {
+            std::cerr << "Warning: could not set working directory: " << e.what() << std::endl;
+        }
+    }
+
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) == 0)
