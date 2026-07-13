@@ -3,10 +3,12 @@
 #include "../../../framework/graphics/Images.h"
 #include "../../../framework/graphics/camera/Camera.h"
 
+#include <cmath>
+
 namespace StickDeath
 {
-    Particle::Particle(GameEngine::PointF position, GameEngine::PointF velocity, GameEngine::PointF size, bool doCollision, bool doGravity) : doCollision(doCollision),
-                                                                                                                                              collider(position.x, position.y, size.x, size.y, true)
+    Particle::Particle(GameEngine::PointF position, GameEngine::PointF velocity, GameEngine::PointF size, bool doCollision, bool doGravity)
+        : doCollision(doCollision), collider(position.x, position.y, size.x, size.y, true)
     {
         collider.SetVel(velocity.x, velocity.y);
 
@@ -18,7 +20,32 @@ namespace StickDeath
     {
         if (doCollision)
         {
+            const float prevXVel = collider.GetXVel();
+            const float prevYVel = collider.GetYVel();
+
             collider.MoveAndDoCollision(dt);
+
+            constexpr float RESTITUTION_X = 0.6f;
+            constexpr float RESTITUTION_Y = 0.45f;
+            constexpr float MIN_BOUNCE_SPEED = 1.0f;
+
+            // Bounce if xVel meets min bounce speed and the particle just hit a horizontal wall
+            if (std::abs(prevXVel) > MIN_BOUNCE_SPEED && std::abs(collider.GetXVel()) <= Map::EPSILON)
+            {
+                collider.SetXVel(prevXVel * -RESTITUTION_X);
+
+                // Slight damping on other axis from friction
+                collider.SetYVel(collider.GetYVel() * 0.9);
+            }
+
+            // Bounce if yVel meets min bounce speed and the particle just hit a vertical wall
+            if (std::abs(prevYVel) > MIN_BOUNCE_SPEED && std::abs(collider.GetYVel()) <= Map::EPSILON)
+            {
+                collider.SetYVel(prevYVel * -RESTITUTION_Y);
+
+                // Slight damping on other axis from friction
+                collider.SetXVel(collider.GetXVel() * 0.9);
+            }
         }
         else
         {

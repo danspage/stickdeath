@@ -47,6 +47,9 @@ namespace StickDeath::Physics
             yVel += Map::GRAVITY * dt;
         }
 
+        if (std::abs(xVel) < Map::EPSILON) xVel = 0;
+        if (std::abs(yVel) < Map::EPSILON) yVel = 0;
+
         xPos += xVel * dt;
         yPos += yVel * dt;
     }
@@ -203,6 +206,9 @@ namespace StickDeath::Physics
                 }
             }
         }
+
+        if (std::abs(xVel) < Map::EPSILON) xVel = 0;
+        if (std::abs(yVel) < Map::EPSILON) yVel = 0;
 
         return hits;
     }
