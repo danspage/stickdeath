@@ -4,71 +4,83 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <utility>
 
 #include "Images.h"
 #include "../util/Timer.h"
 
 namespace GameEngine
 {
-    class Texture
+    class TextureAsset
     {
     public:
-        Texture(std::string name, GameImage &image);
+        TextureAsset(std::string name, std::string image);
 
-        virtual ~Texture() = default;
-
-        GameImage &GetCurrentImage() { return image; }
+        GameImage *GetTextureImage() { return GetImage(image); }
 
     protected:
         std::string name;
-        GameImage &image;
+        std::string image;
     };
 
-    class LoopingTexture : public Texture
+    // class LoopingTextureAsset : public TextureAsset
+    // {
+    // public:
+    //     LoopingTextureAsset(std::string name, std::vector<std::string> frames, float interval)
+    //         : TextureAsset(name, frames.front()), frames(frames), interval(interval) {} // Move the constructor to the .cpp
+
+    //     GameImage *GetCurrentImage() override;
+
+    // private:
+    //     Util::Timer animationTimer;
+    //     std::vector<std::string> frames;
+    //     float interval;
+    // };
+
+    class AnimationPlayer
     {
     public:
-        LoopingTexture(const std::string name, std::vector<GameImage *> frames, float interval)
-            : Texture(std::move(name), *frames.front()), frames(std::move(frames)), interval(interval) {} // Move the constructor to the .cpp
+        AnimationPlayer(std::vector<std::shared_ptr<TextureAsset>> frames, float duration, bool autoplay);
 
-        GameImage &GetCurrentImage(); // Add override keyword in the .cpp
-
-    private:
-        std::vector<GameImage *> frames;
-        float interval;
-    };
-
-    class AnimatedTexture : public Texture
-    {
-    public:
-        AnimatedTexture(std::string name, GameImage *defaultFrame, std::map<std::string, std::vector<GameImage *>> frames, float interval)
-            : Texture(name, *defaultFrame),
-              animationStates(std::move(animationStates)),
-              frameTimer(Util::Timer(interval, true))
-        {
-        } // Move the constructor to the .cpp file
-
-        void SetAnimationState(std::string state) { currentState = std::move(state); }
-        void PlayAnimation();
-        void PauseAnimation() { frameTimer.Stop(); }
-        void StopAnimation();
-
-        const GameImage &GetCurrentImage(); // Add override keyword in the .cpp
+        void SetFrames(std::vector<std::shared_ptr<TextureAsset>> frames);
+        void Update(float dt);
+        void Play();
+        void Pause();
+        void Stop();
+        GameImage *GetCurrentFrame();
 
     private:
-        std::map<std::string, std::vector<GameImage *>> animationStates;
-        Util::Timer frameTimer;
+        std::vector<std::shared_ptr<GameImage>> frames;
+        Util::Timer animationTimer;
+        size_t currentFrame = 0;
         float elapsed = 0.0f;
-        int currentFrame = 0; // Set to -1 when playing is false
+        float frameDuration = 0.1f;
         bool playing = false;
-        std::string currentState;
     };
 
-    namespace TextureManager
-    {
-        inline std::map<std::string, std::unique_ptr<Texture>> textures;
+    // class AnimatedTexture : public TextureAsset
+    // {
+    // public:
+    //     AnimatedTexture(std::string name, std::string defaultFrame, std::map<std::string, std::vector<std::string>> animationStates, float interval)
+    //         : TextureAsset(name, defaultFrame),
+    //           animationStates(animationStates),
+    //           frameTimer(Util::Timer(interval, true))
+    //     {
+    //     } // Move the constructor to the .cpp file
 
-        inline std::map<std::string, Util::Timer> loopingTextureTimers;
+    //     void SetAnimationState(std::string state) { currentState = std::move(state); }
+    //     void PlayAnimation();
+    //     void PauseAnimation() { frameTimer.Stop(); }
+    //     void StopAnimation();
 
-        void RegisterTexture(std::unique_ptr<Texture> texture);
-    }
+    //     GameImage *GetCurrentImage() override;
+
+    // private:
+    //     std::map<std::string, std::vector<std::string>> animationStates;
+    //     Util::Timer frameTimer;
+    //     float elapsed = 0.0f;
+    //     int currentFrame = 0; // Set to -1 when playing is false
+    //     bool playing = false;
+    //     std::string currentState;
+    // };
 }
