@@ -7,9 +7,14 @@
 #include "Textures.h"
 #include "../util/Timer.h"
 
-namespace GameEngine::TextureManager
+namespace GameEngine
 {
-    inline std::map<std::string, std::unique_ptr<TextureAsset>> textures;
+    // We want to have a public GetTexture function inside of 
 
-    void RegisterTexture(std::unique_ptr<TextureAsset> texture);
+    namespace TextureManager
+    {
+        // inline std::map<std::string, std::unique_ptr<TextureAsset>> textures;
+
+        // void RegisterTexture(std::unique_ptr<TextureAsset> texture);
+    }
 }
