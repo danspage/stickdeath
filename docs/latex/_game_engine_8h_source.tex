@@ -1,0 +1,79 @@
+\doxysection{Game\+Engine.\+h}
+\hypertarget{_game_engine_8h_source}{}\label{_game_engine_8h_source}\index{src/framework/GameEngine.h@{src/framework/GameEngine.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <SDL2/SDL.h>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}graphics/GameImage.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}graphics/Graphics.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }SDL\_Renderer;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }GameEngine}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_game_engine_1_1_game_state}{GameState}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TARGET\_UPDATE\_HZ\ =\ 60;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ VOXEL\_SIZE\ =\ 2;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WIDTH\_VOXELS\ =\ 320;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ HEIGHT\_VOXELS\ =\ 240;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WIDTH\_PIXELS\ =\ WIDTH\_VOXELS\ *\ VOXEL\_SIZE;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ HEIGHT\_PIXELS\ =\ HEIGHT\_VOXELS\ *\ VOXEL\_SIZE;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TOTAL\_NUM\_VOXELS\ =\ WIDTH\_VOXELS\ *\ HEIGHT\_VOXELS;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TOTAL\_NUM\_PIXELS\ =\ TOTAL\_NUM\_VOXELS\ *\ VOXEL\_SIZE\ *\ VOXEL\_SIZE;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *WINDOW\_TITLE\ =\ \textcolor{stringliteral}{"{}2D\ Game"{}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \_shuttingDown\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ SDL\_Scancode\ KEYS\_USED[]\ =\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_UP,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_DOWN,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_LEFT,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_RIGHT,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_ESCAPE,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_RETURN,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_SPACE,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ SDL\_SCANCODE\_E,}
+\DoxyCodeLine{00060\ \ \ \ \ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ SetRenderer(SDL\_Renderer\ *renderer);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ InitializeRoutes(std::string\ initialRoute,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::map<std::string,\ GameState\ *>\ routes);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ Shutdown();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ Cleanup();}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{inline}\ std::string\ \_currentState;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{inline}\ std::map<std::string,\ GameState\ *>\ \_states;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{int}\ GetFPS();}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessKeyEvents();}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateCurrentState(\textcolor{keywordtype}{float}\ dt);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderCurrentState();}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ SetState(std::string\ route);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{inline}\ uint32\_t\ *\_pixels;}
+\DoxyCodeLine{00110\ \}}
+
+\end{DoxyCode}

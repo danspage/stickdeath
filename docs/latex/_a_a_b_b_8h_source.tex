@@ -1,0 +1,28 @@
+\doxysection{AABB.\+h}
+\hypertarget{_a_a_b_b_8h_source}{}\label{_a_a_b_b_8h_source}\index{src/game/world/physics/AABB.h@{src/game/world/physics/AABB.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{keyword}{namespace\ }StickDeath::Physics}
+\DoxyCodeLine{00004\ \{}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_stick_death_1_1_physics_1_1_a_a_b_b}{AABB}}}
+\DoxyCodeLine{00006\ \ \ \ \ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ leftBound,\ rightBound,\ topBound,\ bottomBound;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ CheckCollision(\doxymbox{\hyperlink{struct_stick_death_1_1_physics_1_1_a_a_b_b}{AABB}}\ \&other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (leftBound\ <\ other.rightBound\ \&\&}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rightBound\ >\ other.leftBound\ \&\&}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bottomBound\ <\ other.topBound\ \&\&}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topBound\ >\ other.bottomBound);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \ \ \ \ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_stick_death_1_1_physics_1_1_tile_range}{TileRange}}}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ minX,\ maxX,\ minY,\ maxY;}
+\DoxyCodeLine{00021\ \ \ \ \ \};}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}

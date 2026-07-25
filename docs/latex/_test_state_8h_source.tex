@@ -1,0 +1,55 @@
+\doxysection{Test\+State.\+h}
+\hypertarget{_test_state_8h_source}{}\label{_test_state_8h_source}\index{src/game/states/TestState.h@{src/game/states/TestState.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../../framework/state/GameState.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../../framework/graphics/Graphics.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../../framework/graphics/Fonts.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../../framework/graphics/Images.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../world/entity/Player.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../world/map/tile/Tile.h"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../world/map/tile/SpikeTile.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}../world/map/Map.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}../ui/components/player/HealthBar.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}../world/particles/Particles.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}../../framework/basic\_types/Positional.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}../../framework/util/Timer.h"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }StickDeath}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{class\ }TestState\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state}{GameEngine::GameState}}}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ TestState();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a8f5a895d4e217c26d13e2999a9bc4b51}{OnEnter}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_ae50b25fe37947cddeb72e844615d57da}{onExit}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Restart();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateCameraPosition(\textcolor{keywordtype}{float}\ dt);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_acece91b1d889af70f162fe48680c28c4}{Update}}(\textcolor{keywordtype}{float}\ dt)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a6ec0df599f0d099f2974ecec30e9ee5e}{Render}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a67d12ebaa2a24c000aef290eab2397e8}{OnKeyPressed}}(SDL\_Scancode\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a69304e8c86a478fcf67615180610cff0}{OnKeyHeld}}(SDL\_Scancode\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a390836f72d0c180e70f296ff55d25806}{OnKeyReleased}}(SDL\_Scancode\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cameraTargetX\ =\ 0.0f;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ cameraTargetY\ =\ 0.0f;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ cameraSmoothSpeed\ =\ 5.0f;\ \textcolor{comment}{//\ tune\ this\ for\ feel}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_stick_death_1_1_player}{Player}}\ player\ =\ \doxymbox{\hyperlink{class_stick_death_1_1_player}{Player}}(0,\ 0);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_stick_death_1_1_u_i_1_1_health_bar}{UI::HealthBar}}\ healthBar\ =\ \doxymbox{\hyperlink{class_stick_death_1_1_u_i_1_1_health_bar}{UI::HealthBar}}(GameEngine::Colors::BLACK,\ 10,\ 20,\ GameEngine::WIDTH\_VOXELS\ -\/\ 23,\ 1,\ 22,\ 5);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::deque<std::unique\_ptr<Particles>>\ particles;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_engine_1_1_util_1_1_timer}{GameEngine::Util::Timer}}\ floorParticlesTimer\ =\ \doxymbox{\hyperlink{class_game_engine_1_1_util_1_1_timer}{GameEngine::Util::Timer}}(0.25,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00048\ \ \ \ \ \};}
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}

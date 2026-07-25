@@ -1,0 +1,46 @@
+\doxysection{Game\+Engine::\+Texture\+Asset Class Reference}
+\hypertarget{class_game_engine_1_1_texture_asset}{}\label{class_game_engine_1_1_texture_asset}\index{GameEngine::TextureAsset@{GameEngine::TextureAsset}}
+
+
+A single asset used to store a texture in the Texture\+Manager\textquotesingle{}s memory. It will not be directly accessed by the game outside of the Texture\+Manager\textquotesingle{}s internal code, rather it will be used to map texture names to image data within it. In the rest of the game\textquotesingle{}s code, a \href{src/framework/graphics/GameImage.h}{\texttt{Game\+Image}} will be returned when requesting a texture.  
+
+
+
+
+{\ttfamily \+\#include $<$Texture\+Asset.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_engine_1_1_texture_asset_ae3b516ff7e87eabef8e39e36d67d1b52}{Texture\+Asset}} (std::\+vector$<$ std::\+string $>$ image\+Paths)
+\item 
+\Hypertarget{class_game_engine_1_1_texture_asset_a36f891bc4e3adccdf53be43192a05be4}\label{class_game_engine_1_1_texture_asset_a36f891bc4e3adccdf53be43192a05be4} 
+const std::\+vector$<$ \doxymbox{\hyperlink{class_game_engine_1_1_game_image}{Game\+Image}} $>$ \& {\bfseries Get\+Texture\+Images} () const
+\begin{DoxyCompactList}\small\item\em Returns a reference to the {\ttfamily \doxylink{class_game_engine_1_1_game_image}{Game\+Image}} for an image asset. This is where the actual pixel data is stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A single asset used to store a texture in the Texture\+Manager\textquotesingle{}s memory. It will not be directly accessed by the game outside of the Texture\+Manager\textquotesingle{}s internal code, rather it will be used to map texture names to image data within it. In the rest of the game\textquotesingle{}s code, a \href{src/framework/graphics/GameImage.h}{\texttt{Game\+Image}} will be returned when requesting a texture. 
+
+See \href{src/framework/graphics/GameImage.h}{\texttt{Game\+Image}} for the underlying image wrapper. 
+
+\label{class_game_engine_1_1_texture_asset_doc-constructors}
+\Hypertarget{class_game_engine_1_1_texture_asset_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_engine_1_1_texture_asset_ae3b516ff7e87eabef8e39e36d67d1b52}\index{GameEngine::TextureAsset@{GameEngine::TextureAsset}!TextureAsset@{TextureAsset}}
+\index{TextureAsset@{TextureAsset}!GameEngine::TextureAsset@{GameEngine::TextureAsset}}
+\doxysubsubsection{\texorpdfstring{TextureAsset()}{TextureAsset()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_texture_asset_ae3b516ff7e87eabef8e39e36d67d1b52} 
+Game\+Engine::\+\+Texture\+Asset::\+\+Texture\+Asset (\begin{DoxyParamCaption}\item[{std::\+vector$<$ std::\+string $>$}]{image\+Paths}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+Paths} & A list of image paths for the texture, relative to the {\ttfamily assets/\+images} folder. In the event of a static texture, it will only contain one path, and in the event of an animated texture, it will contain every image used in the order of appearance. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+framework/\+graphics/\+textures/\+Texture\+Asset.\+h\item 
+src/\+framework/\+graphics/\+textures/\+Texture\+Asset.\+cpp\end{DoxyCompactItemize}

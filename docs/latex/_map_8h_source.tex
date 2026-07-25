@@ -1,0 +1,72 @@
+\doxysection{Map.\+h}
+\hypertarget{_map_8h_source}{}\label{_map_8h_source}\index{src/game/world/map/Map.h@{src/game/world/map/Map.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <format>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}tile/Tile.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }StickDeath::Map}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ TILE\_SIZE\_VOXELS\ =\ 16;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ EPSILON\ =\ 0.0001;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }TileOutOfBoundsException\ :\ \textcolor{keyword}{public}\ std::exception}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::string\ message;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ TileOutOfBoundsException(\textcolor{keywordtype}{int}\ \_x,\ \textcolor{keywordtype}{int}\ \_y)}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ message\ =\ std::format(\textcolor{stringliteral}{"{}The\ coordinate\ (\{\},\ \{\})\ is\ outside\ of\ the\ map"{}},\ \_x,\ \_y);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *what()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ message.c\_str();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ mapWidth\ =\ 0,\ mapHeight\ =\ 0;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ spawnX\ =\ 0,\ spawnY\ =\ 0;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ GRAVITY\ =\ -\/25;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ NULL\_TILE\_INDEX\ =\ -\/1;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{inline}\ std::vector<int>\ tileToTileIndex((mapWidth\ *\ mapHeight),\ NULL\_TILE\_INDEX);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{inline}\ std::deque<std::unique\_ptr<Tile>>\ tiles;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ VoxelsToWorldUnits(\textcolor{keywordtype}{float}\ voxels)}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ voxels\ /\ TILE\_SIZE\_VOXELS;}
+\DoxyCodeLine{00045\ \ \ \ \ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ GetTileX(\textcolor{keywordtype}{float}\ worldX);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ GetTileY(\textcolor{keywordtype}{float}\ worldY);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ SetTile(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keyword}{const}\ std::string\ \&tileName);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ SetTile(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keyword}{const}\ std::unique\_ptr<Tile>\ tile);}
+\DoxyCodeLine{00052\ \ \ \ \ \doxymbox{\hyperlink{class_stick_death_1_1_tile}{Tile}}\ *TryGetTile(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00053\ \ \ \ \ \doxymbox{\hyperlink{class_stick_death_1_1_tile}{Tile}}\ *TryGetTileAtWorldPos(\textcolor{keywordtype}{float}\ worldX,\ \textcolor{keywordtype}{float}\ worldY);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsInBounds(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ ClearMap();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ std::vector<std::pair<int,\ int>>\ GetSolidTilesInRow(\textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ startX,\ \textcolor{keywordtype}{int}\ endX);}
+\DoxyCodeLine{00059\ \ \ \ \ std::vector<std::pair<int,\ int>>\ GetSolidTilesInColumn(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ startY,\ \textcolor{keywordtype}{int}\ endY);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ CheckSolidTilesExistInRow(\textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ startX,\ \textcolor{keywordtype}{int}\ endX);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ CheckSolidTilesExistInColumn(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ startY,\ \textcolor{keywordtype}{int}\ endY);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateMap(\textcolor{keywordtype}{float}\ dt);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ RenderMap();}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}

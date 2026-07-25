@@ -1,0 +1,91 @@
+\doxysection{Stick\+Death::\+Title\+State Class Reference}
+\hypertarget{class_stick_death_1_1_title_state}{}\label{class_stick_death_1_1_title_state}\index{StickDeath::TitleState@{StickDeath::TitleState}}
+Inheritance diagram for Stick\+Death::\+Title\+State:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_stick_death_1_1_title_state}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_stick_death_1_1_title_state_a84c8fc8dfcd334db970ee68718c26ec1}{Update}} (float dt) override
+\begin{DoxyCompactList}\small\item\em Handles all game logic for the state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_stick_death_1_1_title_state_ac87744113905275f94b5badd749ad605}{Render}} () override
+\begin{DoxyCompactList}\small\item\em Handles all rendering to the screen for the state. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_stick_death_1_1_title_state_a89bf0099fc81dcc63c0cceb02b163a67}{On\+Key\+Pressed}} (SDL\+\_\+\+Scancode key) override
+\begin{DoxyCompactList}\small\item\em Handles the logic for when a key is pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_game_engine_1_1_game_state}{Game\+Engine::\+\+Game\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a22bb495b0ca7e842cf9133e5fdf4d05d}{On\+Enter}} ()
+\begin{DoxyCompactList}\small\item\em Runs when the state is loaded by the game. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_ae3a205e0d5b8b7594b36c5c94f1d18f6}{on\+Exit}} ()
+\begin{DoxyCompactList}\small\item\em Runs before the game switches from this state to a new one. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a63c4be6bf1f3d54ed7e6e6c329750371}{On\+Key\+Held}} (SDL\+\_\+\+Scancode key)
+\begin{DoxyCompactList}\small\item\em Handles the logic for when a key is held. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a45caf1bac407beac4b1c31979a5f9f44}{On\+Key\+Released}} (SDL\+\_\+\+Scancode key)
+\begin{DoxyCompactList}\small\item\em Handles the logic for when a key is released. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{class_stick_death_1_1_title_state_doc-func-members}
+\Hypertarget{class_stick_death_1_1_title_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_stick_death_1_1_title_state_a89bf0099fc81dcc63c0cceb02b163a67}\index{StickDeath::TitleState@{StickDeath::TitleState}!OnKeyPressed@{OnKeyPressed}}
+\index{OnKeyPressed@{OnKeyPressed}!StickDeath::TitleState@{StickDeath::TitleState}}
+\doxysubsubsection{\texorpdfstring{OnKeyPressed()}{OnKeyPressed()}}
+{\footnotesize\ttfamily \label{class_stick_death_1_1_title_state_a89bf0099fc81dcc63c0cceb02b163a67} 
+void Stick\+Death::\+\+Title\+State::\+\+On\+Key\+Pressed (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Scancode}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handles the logic for when a key is pressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Which key was pressed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_game_engine_1_1_game_state_af2cdc740ad6c3f67ea3384d1202417d2}{Game\+Engine::\+\+Game\+State}}.
+
+\Hypertarget{class_stick_death_1_1_title_state_ac87744113905275f94b5badd749ad605}\index{StickDeath::TitleState@{StickDeath::TitleState}!Render@{Render}}
+\index{Render@{Render}!StickDeath::TitleState@{StickDeath::TitleState}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_stick_death_1_1_title_state_ac87744113905275f94b5badd749ad605} 
+void Stick\+Death::\+\+Title\+State::\+\+Render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handles all rendering to the screen for the state. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_game_engine_1_1_game_state_ab2850ce145fb142c6e659f24c7a784e9}{Game\+Engine::\+\+Game\+State}}.
+
+\Hypertarget{class_stick_death_1_1_title_state_a84c8fc8dfcd334db970ee68718c26ec1}\index{StickDeath::TitleState@{StickDeath::TitleState}!Update@{Update}}
+\index{Update@{Update}!StickDeath::TitleState@{StickDeath::TitleState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_stick_death_1_1_title_state_a84c8fc8dfcd334db970ee68718c26ec1} 
+void Stick\+Death::\+\+Title\+State::\+\+Update (\begin{DoxyParamCaption}\item[{float}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handles all game logic for the state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & Time since the last update, in seconds. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a0f580c523f5b35b3d802bb8caa53dae9}{Game\+Engine::\+\+Game\+State}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+game/\+states/\+Title\+State.\+h\item 
+src/\+game/\+states/\+Title\+State.\+cpp\end{DoxyCompactItemize}

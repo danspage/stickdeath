@@ -1,0 +1,30 @@
+\doxysection{Sawblade\+Tile.\+h}
+\hypertarget{_sawblade_tile_8h_source}{}\label{_sawblade_tile_8h_source}\index{src/game/world/map/tile/SawbladeTile.h@{src/game/world/map/tile/SawbladeTile.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Tile.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../../../../framework/util/Timer.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../../entity/Player.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }StickDeath}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{class\ }SawbladeTile\ :\ \textcolor{keyword}{public}\ Tile}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ touchedThisFrame\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_stick_death_1_1_player}{Player}}\ *playerInContact\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_engine_1_1_util_1_1_timer}{GameEngine::Util::Timer}}\ playerTouchTimer\ =\ \doxymbox{\hyperlink{class_game_engine_1_1_util_1_1_timer}{GameEngine::Util::Timer}}(0.1f,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ HurtPlayer(\doxymbox{\hyperlink{class_stick_death_1_1_player}{Player}}\ *player);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ SawbladeTile(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ :\ Tile(x,\ y,\ \textcolor{stringliteral}{"{}sawblade"{}})\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ dt)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ OnCollision(\doxymbox{\hyperlink{class_stick_death_1_1_entity}{Entity}}\ *entity,\ \textcolor{keywordtype}{bool}\ isInside)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00023\ \ \ \ \ \};}
+\DoxyCodeLine{00024\ \}}
+
+\end{DoxyCode}

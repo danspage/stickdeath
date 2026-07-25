@@ -1,0 +1,30 @@
+\doxysection{Level\+Loader.\+h}
+\hypertarget{_level_loader_8h_source}{}\label{_level_loader_8h_source}\index{src/game/world/map/LevelLoader.h@{src/game/world/map/LevelLoader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }StickDeath}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_stick_death_1_1_parsed_level}{ParsedLevel}}}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ version\ =\ -\/1;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ width\ =\ -\/1,\ height\ =\ -\/1;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ spawnX\ =\ -\/1,\ spawnY\ =\ -\/1;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ std::map<char,\ std::string>\ legend;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ std::vector<std::string>\ rows;}
+\DoxyCodeLine{00016\ \ \ \ \ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_stick_death_1_1_level_loader}{LevelLoader}}}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{struct_stick_death_1_1_parsed_level}{ParsedLevel}}\ ParseLevel(\textcolor{keyword}{const}\ std::string\ \&levelName);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ApplyLevel(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_stick_death_1_1_parsed_level}{ParsedLevel}}\ \&level);}
+\DoxyCodeLine{00023\ \ \ \ \ \};}
+\DoxyCodeLine{00024\ \}}
+
+\end{DoxyCode}

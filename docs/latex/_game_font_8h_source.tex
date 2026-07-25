@@ -1,0 +1,51 @@
+\doxysection{Game\+Font.\+h}
+\hypertarget{_game_font_8h_source}{}\label{_game_font_8h_source}\index{src/framework/graphics/GameFont.h@{src/framework/graphics/GameFont.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }GameEngine}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *CHAR\_MAP\ =\ \textcolor{stringliteral}{"{}\ !\(\backslash\)"{}\#\$\%\&'()*+,-\/./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\(\backslash\)\(\backslash\)]\string^\_`abcdefghijklmnopqrstuvwxyz\{|\}\string~"{}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_game_engine_1_1_pixel_offset}{PixelOffset}}}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ uint16\_t\ x;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ uint16\_t\ y;}
+\DoxyCodeLine{00016\ \ \ \ \ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{class\ }GameFontChar}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::vector<PixelOffset>\ pixels;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ uint8\_t\ charWidth;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ GameFontChar(std::vector<PixelOffset>\ \_pixels,\ uint8\_t\ \_charWidth)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ pixels\ =\ \_pixels;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ charWidth\ =\ \_charWidth;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<PixelOffset>\ \&getPixels()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ pixels;\ \};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ getCharWidth()\ \{\ \textcolor{keywordflow}{return}\ charWidth;\ \};}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{class\ }GameFont}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::vector<GameFontChar\ *>\ fontChars;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ charHeight;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ GameFont(\textcolor{keywordtype}{int}\ \_charHeight,\ std::vector<GameFontChar\ *>\ \_fontChars);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_engine_1_1_game_font_char}{GameFontChar}}\ *GetCharData(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ GetCharHeight()\ \{\ \textcolor{keywordflow}{return}\ charHeight;\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \};}
+\DoxyCodeLine{00045\ \}}
+
+\end{DoxyCode}

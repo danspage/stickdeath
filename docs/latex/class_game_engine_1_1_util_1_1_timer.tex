@@ -1,0 +1,32 @@
+\doxysection{Game\+Engine::\+Util::\+Timer Class Reference}
+\hypertarget{class_game_engine_1_1_util_1_1_timer}{}\label{class_game_engine_1_1_util_1_1_timer}\index{GameEngine::Util::Timer@{GameEngine::Util::Timer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_ac312fbe09c43cb2f7229d085a8145acc}\label{class_game_engine_1_1_util_1_1_timer_ac312fbe09c43cb2f7229d085a8145acc} 
+{\bfseries Timer} (float \+\_\+interval\+Seconds, bool \+\_\+looping)
+\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_a9a284be33f5408caaa34b5174b8a76ba}\label{class_game_engine_1_1_util_1_1_timer_a9a284be33f5408caaa34b5174b8a76ba} 
+void {\bfseries Start} ()
+\begin{DoxyCompactList}\small\item\em Starts the timer. If the timer is already running, this does nothing. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_ae5beb5b67f1ac0d5d139c89594917625}\label{class_game_engine_1_1_util_1_1_timer_ae5beb5b67f1ac0d5d139c89594917625} 
+void {\bfseries Stop} ()
+\begin{DoxyCompactList}\small\item\em Stops the timer, but does not reset the elapsed time. Calling \doxylink{class_game_engine_1_1_util_1_1_timer_a9a284be33f5408caaa34b5174b8a76ba}{Start()} again will resume from where it left off. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_a9c45e7886ecb7f63d356213d06713a5a}\label{class_game_engine_1_1_util_1_1_timer_a9c45e7886ecb7f63d356213d06713a5a} 
+void {\bfseries Restart} ()
+\begin{DoxyCompactList}\small\item\em Resets the timer to 0 and starts it. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_a89f654e63be682328f86ec4d768ee1af}\label{class_game_engine_1_1_util_1_1_timer_a89f654e63be682328f86ec4d768ee1af} 
+void {\bfseries Set\+Interval} (float seconds)
+\begin{DoxyCompactList}\small\item\em Sets the interval for the timer. If the timer is running, the new interval will take effect immediately. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_a07a37c71cc394ba283569e3ae6bbd32c}\label{class_game_engine_1_1_util_1_1_timer_a07a37c71cc394ba283569e3ae6bbd32c} 
+int {\bfseries Update\+And\+Get\+Ticks} (float dt)
+\begin{DoxyCompactList}\small\item\em Updates the timer with the given delta time and returns the number of ticks that have occurred since the last update. If the timer is not running, this returns 0. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_engine_1_1_util_1_1_timer_a6c8def5be7ab26a1dcad10667808a080}\label{class_game_engine_1_1_util_1_1_timer_a6c8def5be7ab26a1dcad10667808a080} 
+bool {\bfseries Is\+Running} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+framework/\+util/\+Timer.\+h\item 
+src/\+framework/\+util/\+Timer.\+cpp\end{DoxyCompactItemize}

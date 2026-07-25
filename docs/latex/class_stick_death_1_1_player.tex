@@ -1,0 +1,128 @@
+\doxysection{Stick\+Death::\+Player Class Reference}
+\hypertarget{class_stick_death_1_1_player}{}\label{class_stick_death_1_1_player}\index{StickDeath::Player@{StickDeath::Player}}
+Inheritance diagram for Stick\+Death::\+Player:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_stick_death_1_1_player}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_stick_death_1_1_player_aa5a67f483695cce727181d5e9d51be51}\label{class_stick_death_1_1_player_aa5a67f483695cce727181d5e9d51be51} 
+{\bfseries Player} (float x, float y)
+\item 
+\Hypertarget{class_stick_death_1_1_player_a35a76cf428fe760b06d635a9ffece8b5}\label{class_stick_death_1_1_player_a35a76cf428fe760b06d635a9ffece8b5} 
+int {\bfseries Get\+Health} () const
+\item 
+\Hypertarget{class_stick_death_1_1_player_ac2ac81cbc719e3917f5a6cd03b58dc7f}\label{class_stick_death_1_1_player_ac2ac81cbc719e3917f5a6cd03b58dc7f} 
+int {\bfseries Get\+Max\+Health} () const
+\item 
+\Hypertarget{class_stick_death_1_1_player_aa2e67c9c0ef9d557ec39762827affe3b}\label{class_stick_death_1_1_player_aa2e67c9c0ef9d557ec39762827affe3b} 
+void {\bfseries Set\+Health} (int \+\_\+health)
+\item 
+\Hypertarget{class_stick_death_1_1_player_aba75bd273d50e4ae0e03661faa1164a8}\label{class_stick_death_1_1_player_aba75bd273d50e4ae0e03661faa1164a8} 
+void {\bfseries Add\+Health} (int amount)
+\item 
+\Hypertarget{class_stick_death_1_1_player_a7063eeb9230f9ac8201f45f5f2d6eba9}\label{class_stick_death_1_1_player_a7063eeb9230f9ac8201f45f5f2d6eba9} 
+void {\bfseries Remove\+Health} (int amount)
+\item 
+\Hypertarget{class_stick_death_1_1_player_a3eb1a2026c3ef51a367fd029620e903c}\label{class_stick_death_1_1_player_a3eb1a2026c3ef51a367fd029620e903c} 
+bool {\bfseries Is\+Facing\+Left} () const
+\item 
+\Hypertarget{class_stick_death_1_1_player_aafedd2c5a1c90b6e14fe9c8774a58a5e}\label{class_stick_death_1_1_player_aafedd2c5a1c90b6e14fe9c8774a58a5e} 
+void {\bfseries On\+Key\+Pressed} (SDL\+\_\+\+Scancode key)
+\item 
+\Hypertarget{class_stick_death_1_1_player_aafbd181c388b4c516b0d0460a929cd75}\label{class_stick_death_1_1_player_aafbd181c388b4c516b0d0460a929cd75} 
+void {\bfseries On\+Key\+Held} (SDL\+\_\+\+Scancode key)
+\item 
+\Hypertarget{class_stick_death_1_1_player_ae3e0f0cd63dcff8453718a4752a10db6}\label{class_stick_death_1_1_player_ae3e0f0cd63dcff8453718a4752a10db6} 
+void {\bfseries On\+Key\+Released} (SDL\+\_\+\+Scancode key)
+\item 
+void \doxymbox{\hyperlink{class_stick_death_1_1_player_a4e9ac0739fea4305b7cee6ff1d213469}{Update}} (float dt) override
+\item 
+void \doxymbox{\hyperlink{class_stick_death_1_1_player_aae0e76396020ad24fdf91fa39ff63f22}{Render}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_stick_death_1_1_entity}{Stick\+Death::\+\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Entity} (std::\+string id, float x, float y, float width, float height, bool anchored\+Bottom\+Center)
+\item 
+\doxymbox{\hyperlink{class_stick_death_1_1_physics_1_1_collider}{Physics::\+\+Collider}} \texorpdfstring{$\ast$}{*} {\bfseries Get\+Collider} ()
+\item 
+std::\+string {\bfseries Get\+ID} () const
+\item 
+void {\bfseries SetX} (float x)
+\item 
+void {\bfseries SetY} (float y)
+\item 
+void {\bfseries Set\+Pos} (float x, float y)
+\item 
+float {\bfseries GetX} () const
+\item 
+float {\bfseries GetY} () const
+\item 
+\doxymbox{\hyperlink{struct_game_engine_1_1_point_f}{Game\+Engine::\+\+PointF}} {\bfseries Get\+Pos} ()
+\item 
+float {\bfseries Get\+Width} () const
+\item 
+float {\bfseries Get\+Height} () const
+\item 
+float {\bfseries Get\+XVel} () const
+\item 
+float {\bfseries Get\+YVel} () const
+\item 
+void {\bfseries Set\+XVel} (float x\+Vel)
+\item 
+void {\bfseries Set\+YVel} (float y\+Vel)
+\item 
+void {\bfseries Set\+Vel} (float x\+Vel, float y\+Vel)
+\item 
+bool {\bfseries Is\+On\+Ground} () const
+\item 
+bool {\bfseries Is\+Affected\+By\+Gravity} () const
+\item 
+void {\bfseries Enable\+Gravity} ()
+\item 
+void {\bfseries Disable\+Gravity} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_stick_death_1_1_player_ad81f8ca10a1876a7efc96c49626a2fef}\label{class_stick_death_1_1_player_ad81f8ca10a1876a7efc96c49626a2fef} 
+static constexpr float {\bfseries WIDTH\+\_\+\+VOXELS} = 12.\+0f
+\item 
+\Hypertarget{class_stick_death_1_1_player_afbc12a0423ab2dceceb17e09a964899b}\label{class_stick_death_1_1_player_afbc12a0423ab2dceceb17e09a964899b} 
+static constexpr float {\bfseries HEIGHT\+\_\+\+VOXELS} = 32.\+0f
+\end{DoxyCompactItemize}
+
+
+\label{class_stick_death_1_1_player_doc-func-members}
+\Hypertarget{class_stick_death_1_1_player_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_stick_death_1_1_player_aae0e76396020ad24fdf91fa39ff63f22}\index{StickDeath::Player@{StickDeath::Player}!Render@{Render}}
+\index{Render@{Render}!StickDeath::Player@{StickDeath::Player}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_stick_death_1_1_player_aae0e76396020ad24fdf91fa39ff63f22} 
+void Stick\+Death::\+\+Player::\+\+Render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_stick_death_1_1_entity}{Stick\+Death::\+\+Entity}}.
+
+\Hypertarget{class_stick_death_1_1_player_a4e9ac0739fea4305b7cee6ff1d213469}\index{StickDeath::Player@{StickDeath::Player}!Update@{Update}}
+\index{Update@{Update}!StickDeath::Player@{StickDeath::Player}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_stick_death_1_1_player_a4e9ac0739fea4305b7cee6ff1d213469} 
+void Stick\+Death::\+\+Player::\+\+Update (\begin{DoxyParamCaption}\item[{float}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_stick_death_1_1_entity}{Stick\+Death::\+\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+game/\+world/\+entity/\+Player.\+h\item 
+src/\+game/\+world/\+entity/\+Player.\+cpp\end{DoxyCompactItemize}

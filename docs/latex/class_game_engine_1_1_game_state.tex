@@ -1,0 +1,153 @@
+\doxysection{Game\+Engine::\+Game\+State Class Reference}
+\hypertarget{class_game_engine_1_1_game_state}{}\label{class_game_engine_1_1_game_state}\index{GameEngine::GameState@{GameEngine::GameState}}
+Inheritance diagram for Game\+Engine::\+Game\+State:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_engine_1_1_game_state}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a22bb495b0ca7e842cf9133e5fdf4d05d}{On\+Enter}} ()
+\begin{DoxyCompactList}\small\item\em Runs when the state is loaded by the game. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_ae3a205e0d5b8b7594b36c5c94f1d18f6}{on\+Exit}} ()
+\begin{DoxyCompactList}\small\item\em Runs before the game switches from this state to a new one. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a0f580c523f5b35b3d802bb8caa53dae9}{Update}} (float dt)
+\begin{DoxyCompactList}\small\item\em Handles all game logic for the state. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_ab2850ce145fb142c6e659f24c7a784e9}{Render}} ()
+\begin{DoxyCompactList}\small\item\em Handles all rendering to the screen for the state. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_af2cdc740ad6c3f67ea3384d1202417d2}{On\+Key\+Pressed}} (SDL\+\_\+\+Scancode key)
+\begin{DoxyCompactList}\small\item\em Handles the logic for when a key is pressed. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a63c4be6bf1f3d54ed7e6e6c329750371}{On\+Key\+Held}} (SDL\+\_\+\+Scancode key)
+\begin{DoxyCompactList}\small\item\em Handles the logic for when a key is held. \end{DoxyCompactList}\item 
+virtual void \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a45caf1bac407beac4b1c31979a5f9f44}{On\+Key\+Released}} (SDL\+\_\+\+Scancode key)
+\begin{DoxyCompactList}\small\item\em Handles the logic for when a key is released. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{class_game_engine_1_1_game_state_doc-func-members}
+\Hypertarget{class_game_engine_1_1_game_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_engine_1_1_game_state_a22bb495b0ca7e842cf9133e5fdf4d05d}\index{GameEngine::GameState@{GameEngine::GameState}!OnEnter@{OnEnter}}
+\index{OnEnter@{OnEnter}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{OnEnter()}{OnEnter()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_a22bb495b0ca7e842cf9133e5fdf4d05d} 
+virtual void Game\+Engine::\+\+Game\+State::\+\+On\+Enter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Runs when the state is loaded by the game. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a8f5a895d4e217c26d13e2999a9bc4b51}{Stick\+Death::\+\+Test\+State}}.
+
+\Hypertarget{class_game_engine_1_1_game_state_ae3a205e0d5b8b7594b36c5c94f1d18f6}\index{GameEngine::GameState@{GameEngine::GameState}!onExit@{onExit}}
+\index{onExit@{onExit}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{onExit()}{onExit()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_ae3a205e0d5b8b7594b36c5c94f1d18f6} 
+virtual void Game\+Engine::\+\+Game\+State::\+on\+Exit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Runs before the game switches from this state to a new one. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_ae50b25fe37947cddeb72e844615d57da}{Stick\+Death::\+\+Test\+State}}.
+
+\Hypertarget{class_game_engine_1_1_game_state_a63c4be6bf1f3d54ed7e6e6c329750371}\index{GameEngine::GameState@{GameEngine::GameState}!OnKeyHeld@{OnKeyHeld}}
+\index{OnKeyHeld@{OnKeyHeld}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{OnKeyHeld()}{OnKeyHeld()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_a63c4be6bf1f3d54ed7e6e6c329750371} 
+virtual void Game\+Engine::\+\+Game\+State::\+\+On\+Key\+Held (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Scancode}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handles the logic for when a key is held. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Which key is being held. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a69304e8c86a478fcf67615180610cff0}{Stick\+Death::\+\+Test\+State}}.
+
+\Hypertarget{class_game_engine_1_1_game_state_af2cdc740ad6c3f67ea3384d1202417d2}\index{GameEngine::GameState@{GameEngine::GameState}!OnKeyPressed@{OnKeyPressed}}
+\index{OnKeyPressed@{OnKeyPressed}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{OnKeyPressed()}{OnKeyPressed()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_af2cdc740ad6c3f67ea3384d1202417d2} 
+virtual void Game\+Engine::\+\+Game\+State::\+\+On\+Key\+Pressed (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Scancode}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handles the logic for when a key is pressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Which key was pressed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a67d12ebaa2a24c000aef290eab2397e8}{Stick\+Death::\+\+Test\+State}}, and \doxymbox{\hyperlink{class_stick_death_1_1_title_state_a89bf0099fc81dcc63c0cceb02b163a67}{Stick\+Death::\+\+Title\+State}}.
+
+\Hypertarget{class_game_engine_1_1_game_state_a45caf1bac407beac4b1c31979a5f9f44}\index{GameEngine::GameState@{GameEngine::GameState}!OnKeyReleased@{OnKeyReleased}}
+\index{OnKeyReleased@{OnKeyReleased}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{OnKeyReleased()}{OnKeyReleased()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_a45caf1bac407beac4b1c31979a5f9f44} 
+virtual void Game\+Engine::\+\+Game\+State::\+\+On\+Key\+Released (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Scancode}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handles the logic for when a key is released. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Which key was released. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a390836f72d0c180e70f296ff55d25806}{Stick\+Death::\+\+Test\+State}}.
+
+\Hypertarget{class_game_engine_1_1_game_state_ab2850ce145fb142c6e659f24c7a784e9}\index{GameEngine::GameState@{GameEngine::GameState}!Render@{Render}}
+\index{Render@{Render}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_ab2850ce145fb142c6e659f24c7a784e9} 
+virtual void Game\+Engine::\+\+Game\+State::\+\+Render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handles all rendering to the screen for the state. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_a6ec0df599f0d099f2974ecec30e9ee5e}{Stick\+Death::\+\+Test\+State}}, and \doxymbox{\hyperlink{class_stick_death_1_1_title_state_ac87744113905275f94b5badd749ad605}{Stick\+Death::\+\+Title\+State}}.
+
+\Hypertarget{class_game_engine_1_1_game_state_a0f580c523f5b35b3d802bb8caa53dae9}\index{GameEngine::GameState@{GameEngine::GameState}!Update@{Update}}
+\index{Update@{Update}!GameEngine::GameState@{GameEngine::GameState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_game_engine_1_1_game_state_a0f580c523f5b35b3d802bb8caa53dae9} 
+virtual void Game\+Engine::\+\+Game\+State::\+\+Update (\begin{DoxyParamCaption}\item[{float}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handles all game logic for the state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & Time since the last update, in seconds. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \doxymbox{\hyperlink{class_stick_death_1_1_test_state_acece91b1d889af70f162fe48680c28c4}{Stick\+Death::\+\+Test\+State}}, and \doxymbox{\hyperlink{class_stick_death_1_1_title_state_a84c8fc8dfcd334db970ee68718c26ec1}{Stick\+Death::\+\+Title\+State}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+src/\+framework/\+state/\+Game\+State.\+h\end{DoxyCompactItemize}

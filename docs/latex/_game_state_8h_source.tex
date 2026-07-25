@@ -1,0 +1,32 @@
+\doxysection{Game\+State.\+h}
+\hypertarget{_game_state_8h_source}{}\label{_game_state_8h_source}\index{src/framework/state/GameState.h@{src/framework/state/GameState.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <SDL2/SDL.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }GameEngine}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_game_engine_1_1_game_state}{GameState}}}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state}{\string~GameState}}()\ \{\};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a22bb495b0ca7e842cf9133e5fdf4d05d}{OnEnter}}()\ \{\};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_ae3a205e0d5b8b7594b36c5c94f1d18f6}{onExit}}()\ \{\};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a0f580c523f5b35b3d802bb8caa53dae9}{Update}}(\textcolor{keywordtype}{float}\ dt)\ \{\};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_ab2850ce145fb142c6e659f24c7a784e9}{Render}}()\ \{\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_af2cdc740ad6c3f67ea3384d1202417d2}{OnKeyPressed}}(SDL\_Scancode\ key)\ \{\};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a63c4be6bf1f3d54ed7e6e6c329750371}{OnKeyHeld}}(SDL\_Scancode\ key)\ \{\};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_engine_1_1_game_state_a45caf1bac407beac4b1c31979a5f9f44}{OnKeyReleased}}(SDL\_Scancode\ key)\ \{\};}
+\DoxyCodeLine{00036\ \ \ \ \ \};}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}

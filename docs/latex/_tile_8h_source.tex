@@ -1,0 +1,49 @@
+\doxysection{Tile.\+h}
+\hypertarget{_tile_8h_source}{}\label{_tile_8h_source}\index{src/game/world/map/tile/Tile.h@{src/game/world/map/tile/Tile.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../../physics/AABB.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../../../../framework/util/Timer.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }StickDeath}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_stick_death_1_1_entity}{Entity}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_stick_death_1_1_tile_properties}{TileProperties}}}
+\DoxyCodeLine{00014\ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ std::string\ id;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ std::vector<std::string>\ texturePaths;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isSolid;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ std::vector<Physics::AABB>\ bounds;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ animated\ tiles,\ these\ will\ be\ set\ to\ point\ to\ the\ actual\ animation\ data\ stored\ in\ the\ TileDefinition\ for\ this\ tile,\ so\ that\ when\ the\ animation\ updates\ it\ can\ update\ the\ current\ frame\ for\ all\ tiles\ that\ use\ that\ animation\ at\ once.\ For\ non-\/animated\ tiles,\ these\ will\ just\ be\ null\ pointers.}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ animated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00024\ \ \ \ \ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{class\ }Tile}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ Tile(\textcolor{keywordtype}{int}\ xPos,\ \textcolor{keywordtype}{int}\ yPos,\ std::string\ tileName);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ HardOverwriteCoordinates(\textcolor{keywordtype}{int}\ xPos,\ \textcolor{keywordtype}{int}\ yPos);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_stick_death_1_1_tile_properties}{TileProperties}}\ GetProperties()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Render();}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ dt)\ \{\}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnCollision(\doxymbox{\hyperlink{class_stick_death_1_1_entity}{Entity}}\ *entity,\ \textcolor{keywordtype}{bool}\ isInside)\ \{\};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ 0,\ y\ =\ 0;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_stick_death_1_1_tile_properties}{TileProperties}}\ properties;}
+\DoxyCodeLine{00042\ \ \ \ \ \};}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}
