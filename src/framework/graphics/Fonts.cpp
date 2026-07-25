@@ -1,6 +1,7 @@
 #include "Fonts.h"
 
 #include <cstring>
+#include <string>
 
 namespace GameEngine
 {
@@ -47,7 +48,7 @@ namespace GameEngine
                         }
                         else if (second[i] != '0')
                         {
-                            std::cerr << "Invalid characters were present in line " << line << " while loading the font file '" << _fileName << "'!";
+                            throw std::runtime_error("Invalid characters were present in line " + line + std::string(" while loading the font file '") + _fileName + "'!");
                         }
                     }
 
@@ -55,7 +56,7 @@ namespace GameEngine
                 }
                 else
                 {
-                    std::cerr << "The font " << _fileName << " is malformed at line " << line << "!" << std::endl;
+                    throw std::runtime_error("The font " + _fileName + " is malformed at line " + std::to_string(line) + "!");
                     return;
                 }
             }
@@ -65,7 +66,7 @@ namespace GameEngine
         const size_t expectedChars = std::strlen(CHAR_MAP);
         if (tempCharData.size() != expectedChars)
         {
-            std::cerr << "Warning: Font '" << referenceName << "' loaded " << tempCharData.size() << " glyphs, expected " << expectedChars << ". Missing characters will render as spaces." << std::endl;
+            throw std::runtime_error("Warning: Font '" + referenceName + "' loaded " + std::to_string(tempCharData.size()) + " glyphs, expected " + std::to_string(expectedChars) + ". Missing characters will render as spaces.");
         }
 
         _fonts[referenceName] = new GameFont(_charHeight, tempCharData);

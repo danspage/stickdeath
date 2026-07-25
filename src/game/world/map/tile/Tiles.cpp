@@ -7,7 +7,7 @@ namespace StickDeath
         std::ifstream propsFile("assets/data/tileproperties.json");
         if (!propsFile.is_open())
         {
-            std::cerr << "Could not open assets/data/tileproperties.json" << std::endl;
+            throw std::runtime_error("Could not open assets/data/tileproperties.json");
             return;
         }
 

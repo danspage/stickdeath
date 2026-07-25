@@ -14,7 +14,7 @@ namespace GameEngine
         SDL_Surface *loaded = IMG_Load(filename.c_str());
         if (loaded == nullptr)
         {
-            std::cerr << "IMG_Load failed for '" << filename << "': " << IMG_GetError() << std::endl;
+            throw std::runtime_error("IMG_Load failed for '" + filename + "': " + IMG_GetError());
             width = 1;
             height = 1;
             pixels = new unsigned char[4]{0, 0, 0, 0};
@@ -26,7 +26,7 @@ namespace GameEngine
 
         if (rgba == nullptr)
         {
-            std::cerr << "SDL_ConvertSurfaceFormat failed for '" << filename << "': " << SDL_GetError() << std::endl;
+            throw std::runtime_error("SDL_ConvertSurfaceFormat failed for '" + filename + "': " + SDL_GetError());
             width = 1;
             height = 1;
             pixels = new unsigned char[4]{0, 0, 0, 0};

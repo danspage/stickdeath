@@ -57,12 +57,12 @@ namespace GameEngine
             }
             else
             {
-                std::cerr << "Path does not exist or is not a directory." << std::endl;
+                throw std::runtime_error("Path does not exist or is not a directory.");
             }
         }
         catch (const fs::filesystem_error &e)
         {
-            std::cerr << "Error: " << e.what() << std::endl;
+            throw std::runtime_error("Error: " + std::string(e.what()));
         }
 
         // Print the results to verify

@@ -16,7 +16,7 @@ namespace GameEngine
     {
         // TODO: Implement image scaling (nearest neighbor)
 
-        unsigned char *imgPx = image->getPixels();
+        const unsigned char *imgPx = image->getPixels();
 
         int xOffset = 0, yOffset = 0, xMult = 1, yMult = 1;
         if (options.flipHorizontal)
@@ -53,7 +53,7 @@ namespace GameEngine
         // TODO: Implement image scaling (nearest neighbor)
 
         GameImage *img = GetImage(imageName);
-        unsigned char *imgPx = img->getPixels();
+        const unsigned char *imgPx = img->getPixels();
 
         int xOffset = 0, yOffset = 0, xMult = 1, yMult = 1;
         if (options.flipHorizontal)

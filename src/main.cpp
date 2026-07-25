@@ -25,7 +25,7 @@ int main(int argc, char **argv)
         }
         catch (const std::filesystem::filesystem_error &e)
         {
-            std::cerr << "Warning: could not set working directory: " << e.what() << std::endl;
+            throw std::runtime_error("Warning: could not set working directory: " + std::string(e.what()));
         }
     }
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
     if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) == 0)
     {
-        std::cerr << "IMG_Init failed: " << IMG_GetError() << std::endl;
+        throw std::runtime_error("IMG_Init failed: " + std::string(IMG_GetError()));
         SDL_Quit();
         return 1;
     }
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
         SDL_WINDOW_ALLOW_HIGHDPI);
     if (window == nullptr)
     {
-        std::cerr << "SDL_CreateWindow failed: " << SDL_GetError() << std::endl;
+        throw std::runtime_error("SDL_CreateWindow failed: " + std::string(SDL_GetError()));
         return 1;
     }
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == nullptr)
     {
-        std::cerr << "SDL_CreateRenderer failed: " << SDL_GetError() << std::endl;
+        throw std::runtime_error("SDL_CreateRenderer failed: " + std::string(SDL_GetError()));
         SDL_DestroyWindow(window);
         return 1;
     }
