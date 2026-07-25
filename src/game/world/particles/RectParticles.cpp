@@ -1,7 +1,7 @@
 #include "RectParticles.h"
 #include "Particles.h"
 
-#include "../../../framework/graphics/Images.h"
+#include "../../../engine/graphics/Images.h"
 
 namespace StickDeath
 {

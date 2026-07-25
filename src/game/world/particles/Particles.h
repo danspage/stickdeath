@@ -3,9 +3,9 @@
 #include <vector>
 #include <string>
 
-#include "../../../framework/graphics/Images.h"
-#include "../../../framework/graphics/GameImage.h"
-#include "../../../framework/basic_types/Positional.h"
+#include "../../../engine/graphics/Images.h"
+#include "../../../engine/graphics/GameImage.h"
+#include "../../../engine/basic_types/Positional.h"
 #include "../physics/Collider.h"
 
 namespace StickDeath

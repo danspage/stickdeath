@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-#include "../../../framework/util/StringUtil.h"
+#include "../../../engine/util/StringUtil.h"
 #include "Map.h"
 #include "tile/TileFactory.h"
 

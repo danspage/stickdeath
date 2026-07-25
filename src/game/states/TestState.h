@@ -3,18 +3,18 @@
 #include <deque>
 #include <memory>
 
-#include "../../framework/state/GameState.h"
-#include "../../framework/graphics/Graphics.h"
-#include "../../framework/graphics/Fonts.h"
-#include "../../framework/graphics/Images.h"
+#include "../../engine/state/GameState.h"
+#include "../../engine/graphics/Graphics.h"
+#include "../../engine/graphics/Fonts.h"
+#include "../../engine/graphics/Images.h"
 #include "../world/entity/Player.h"
 #include "../world/map/tile/Tile.h"
 #include "../world/map/tile/SpikeTile.h"
 #include "../world/map/Map.h"
 #include "../ui/components/player/HealthBar.h"
 #include "../world/particles/Particles.h"
-#include "../../framework/basic_types/Positional.h"
-#include "../../framework/util/Timer.h"
+#include "../../engine/basic_types/Positional.h"
+#include "../../engine/util/Timer.h"
 
 namespace StickDeath
 {

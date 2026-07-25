@@ -2,11 +2,11 @@
 
 #include <vector>
 
-#include "../../framework/state/GameState.h"
+#include "../../engine/state/GameState.h"
 
-#include "../../framework/graphics/Graphics.h"
-#include "../../framework/GameEngine.h"
-#include "../../framework/graphics/Fonts.h"
+#include "../../engine/graphics/Graphics.h"
+#include "../../engine/GameEngine.h"
+#include "../../engine/graphics/Fonts.h"
 
 namespace StickDeath
 {

@@ -5,8 +5,8 @@
 #include <vector>
 #include <cmath>
 
-#include "../../../framework/graphics/Graphics.h"
-#include "../../../framework/graphics/Images.h"
+#include "../../../engine/graphics/Graphics.h"
+#include "../../../engine/graphics/Images.h"
 #include "../map/Map.h"
 
 #include <SDL2/SDL.h>

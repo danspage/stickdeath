@@ -3,11 +3,11 @@
 
 #include <filesystem>
 
-#include "framework/GameEngine.h"
-#include "framework/graphics/Graphics.h"
+#include "engine/GameEngine.h"
+#include "engine/graphics/Graphics.h"
 #include "game/states/TestState.h"
 #include "game/states/TitleState.h"
-#include "framework/file_io/AssetLoader.h"
+#include "engine/file_io/AssetLoader.h"
 
 #include "game/Init.h"
 

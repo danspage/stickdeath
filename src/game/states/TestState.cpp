@@ -3,9 +3,9 @@
 #include <format>
 #include <algorithm>
 
-#include "../../framework/GameEngine.h"
+#include "../../engine/GameEngine.h"
 #include "../world/map/Map.h"
-#include "../../framework/graphics/camera/Camera.h"
+#include "../../engine/graphics/camera/Camera.h"
 #include "../world/map/LevelLoader.h"
 #include "../world/map/tile/Tiles.h"
 #include "../world/particles/CircleParticles.h"

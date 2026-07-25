@@ -5,9 +5,9 @@
 #include <string>
 #include <filesystem>
 
-#include "framework/util/StringUtil.h"
-#include "framework/graphics/Images.h"
-#include "framework/graphics/Fonts.h"
+#include "engine/util/StringUtil.h"
+#include "engine/graphics/Images.h"
+#include "engine/graphics/Fonts.h"
 
 namespace fs = std::filesystem;
 

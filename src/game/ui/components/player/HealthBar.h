@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../../framework/graphics/Graphics.h"
+#include "../../../../engine/graphics/Graphics.h"
 
 namespace StickDeath::UI
 {

@@ -12,13 +12,13 @@
 namespace GameEngine
 {
     /**
-     * See [GameImage](src/framework/graphics/GameImage.h) for the underlying image wrapper.
+     * See [GameImage](src/engine/graphics/GameImage.h) for the underlying image wrapper.
      *
      * @brief A single asset used to store a texture in the TextureManager's memory.
      * It will not be directly accessed by the game outside of the TextureManager's
      * internal code, rather it will be used to map texture names to image data
      * within it. In the rest of the game's code, a
-     * [GameImage](src/framework/graphics/GameImage.h) will be returned when
+     * [GameImage](src/engine/graphics/GameImage.h) will be returned when
      * requesting a texture.
      */
     class TextureAsset

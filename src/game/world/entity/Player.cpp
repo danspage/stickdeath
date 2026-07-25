@@ -1,6 +1,6 @@
 #include "Player.h"
-#include "../../../framework/GameEngine.h"
-#include "../../../framework/graphics/camera/Camera.h"
+#include "../../../engine/GameEngine.h"
+#include "../../../engine/graphics/camera/Camera.h"
 
 namespace StickDeath
 {

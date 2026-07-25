@@ -1,7 +1,7 @@
 #include "Particles.h"
 
-#include "../../../framework/graphics/Images.h"
-#include "../../../framework/graphics/camera/Camera.h"
+#include "../../../engine/graphics/Images.h"
+#include "../../../engine/graphics/camera/Camera.h"
 
 #include <cmath>
 

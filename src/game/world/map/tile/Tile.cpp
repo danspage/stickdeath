@@ -2,10 +2,10 @@
 
 #include "Tiles.h"
 #include "../Map.h"
-#include "../../../../framework/graphics/Images.h"
+#include "../../../../engine/graphics/Images.h"
 #include "../../entity/Entity.h"
-#include "../../../../framework/GameEngine.h"
-#include "../../../../framework/graphics/camera/Camera.h"
+#include "../../../../engine/GameEngine.h"
+#include "../../../../engine/graphics/camera/Camera.h"
 
 namespace StickDeath
 {
