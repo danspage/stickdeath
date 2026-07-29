@@ -4,14 +4,42 @@
 
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 #include <SDL2/SDL_image.h>
 #include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
+
 namespace GameEngine::TextureManager
 {
+    namespace
+    {
+        /// @brief A class to manage the state of a globally looping animation.
+        class GlobalAnimation
+        {
+        public:
+            GlobalAnimation(const TextureAsset *asset, float interval)
+                : asset(asset), timer(interval, true) {}
+
+            const GameImage &GetCurrentFrame() const { return asset->GetFrame(currentFrame); }
+
+            void Update(float dt)
+            {
+                int ticks = timer.UpdateAndGetTicks(dt);
+                if (ticks > 0)
+                    currentFrame = (currentFrame + ticks) % asset->GetNumFrames();
+            }
+
+        private:
+            const TextureAsset *asset;
+            Util::Timer timer;
+            int currentFrame = 0;
+        };
+    }
+
     static std::map<std::string, TextureAsset> textureStorage;
-    static std::map<std::string, std::unique_ptr<Util::Timer>> globalTextureAnimationTimers;
+    static std::map<std::string, GlobalAnimation> globalAnimations;
 
     void RegisterStaticTexture(const std::string &refPath, const std::string &imagePath)
     {
@@ -20,16 +48,88 @@ namespace GameEngine::TextureManager
 
     void RegisterAnimatedTexture(const std::string &refPath, const std::string &jsonPath)
     {
-        // implementation here
+        std::ifstream propsFile("assets/images/" + jsonPath);
+        if (!propsFile.is_open())
+        {
+            throw std::runtime_error("Could not open assets/images/" + jsonPath);
+            return;
+        }
+
+        json animJson = json::parse(propsFile);
+
+        if (!animJson.contains("textures"))
+            throw std::runtime_error("The animation config file at assets/images/" + jsonPath + " does not contain a textures list.");
+
+        if (!animJson.contains("interval_seconds"))
+            throw std::runtime_error("The animation config file at assets/images/" + jsonPath + " does not contain an interval time.");
+
+        if (!animJson.contains("global_loop"))
+            throw std::runtime_error("The animation config file at assets/images/" + jsonPath + " does not contain a bool for globally looping.");
+
+        // Load textures
+        const json &texturesList = animJson.at("textures");
+        if (!texturesList.is_array())
+            throw std::runtime_error("The textures entry inside of assets/images/" + jsonPath + " must be an array.");
+
+        std::vector<std::string> images;
+        images.reserve(texturesList.size());
+
+        for (const auto &entry : texturesList)
+        {
+            if (!entry.is_string())
+                throw std::runtime_error("The animation textures inside assets/images/" + jsonPath + " must be strings.");
+            images.emplace_back(entry.get<std::string>());
+        }
+
+        // Read timing/mode
+        float interval = animJson.at("interval_seconds").get<float>();
+        float globalLoop = animJson.at("global_loop").get<bool>();
+
+        // Register image asset to texture storage using the paths in the json.
+        auto [it, inserted] = textureStorage.try_emplace(refPath, TextureAsset(images));
+        const TextureAsset *assetPtr = &it->second;
+
+        // If the animation is set to globally loop, register it to the global animation map.
+        if (globalLoop)
+        {
+            globalAnimations.try_emplace(refPath, GlobalAnimation(assetPtr, interval));
+        }
     }
 
+    /**
+     * @brief Get the Texture object
+     *
+     * @param texture
+     * @return const GameImage&
+     *
+     *
+     * TODO: This will need to detect if an animation is in the global loop, since
+     * since it will exist in the texture storage anyway for use with AnimationPlayers.
+     * If it is in the global loop, it will return the current frame of the animation
+     * synced to the game's clock. If it is not in the global loop, it will simply return
+     * the first frame of the texture asset, since it is not meant to be used as a global
+     * animation.
+     */
     const GameImage &GetTexture(const std::string &texture)
     {
-        // implementation here
+        auto it = globalAnimations.find(texture);
+        if (it != globalAnimations.end())
+            return it->second.GetCurrentFrame();
+
+        return textureStorage.at(texture).GetFrame(0);
     }
 
-    const std::vector<GameImage> &GetTextureAnimationFrames(const std::string &texture)
+    const TextureAsset &GetTextureAsset(const std::string &texture)
     {
-        // implementation here
+        return textureStorage.at(texture);
+        
+    }
+
+    void UpdateGlobalAnimations(float dt)
+    {
+        for (auto &entry : globalAnimations)
+        {
+            entry.second.Update(dt);
+        }
     }
 }

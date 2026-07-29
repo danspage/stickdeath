@@ -6,8 +6,8 @@
 #include <memory>
 #include <utility>
 
-#include "../Images.h"
 #include "../../util/Timer.h"
+#include "../GameImage.h"
 
 namespace GameEngine
 {
@@ -20,6 +20,8 @@ namespace GameEngine
      * within it. In the rest of the game's code, a
      * [GameImage](src/engine/graphics/GameImage.h) will be returned when
      * requesting a texture.
+     * 
+     * @throws std::runtime_error If the TextureAsset is initialized with an empty list of image paths.
      */
     class TextureAsset
     {
@@ -31,11 +33,13 @@ namespace GameEngine
          */
         TextureAsset(std::vector<std::string> imagePaths);
 
-        /// @brief Returns a reference to the `GameImage` for an image asset. This is where the actual pixel data is stored.
-        const std::vector<GameImage> &GetTextureImages() const { return images; }
+        const GameImage &GetFrame(size_t index) const { return *images.at(index); }
+        const std::vector<std::unique_ptr<GameImage>> &GetAllFrames() const { return images; }
+        size_t GetNumFrames() const { return images.size(); }
+        bool IsAnimated() const { return isAnimated; }
 
     private:
-        std::vector<GameImage> images;
+        std::vector<std::unique_ptr<GameImage>> images;
         bool isAnimated;
     };
 }

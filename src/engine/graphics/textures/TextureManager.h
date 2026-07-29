@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../GameImage.h"
+#include "AnimationPlayer.h"
 
 namespace GameEngine::TextureManager
 {
@@ -32,11 +33,14 @@ namespace GameEngine::TextureManager
     const GameEngine::GameImage &GetTexture(const std::string &texture);
 
     // TODO: MUST THROW EXCEPTIONS FOR NON-EXISTENT TEXTURES AND TEXTURES THAT ARE STATIC
+    // FUTURE WORK
+    /// @brief Creates an animation player for the specified texture.
+    const AnimationPlayer &CreateAnimationPlayer(const std::string &texture);
+
     /**
-     * @brief Returns a vector containing a list of animation frames of an
-     * animated texture in the form of a GameImage.
-     *
-     * @param texture The reference name of the texture.
+     * @brief Updates the globally looping animations.
+     * 
+     * @param dt The amount of time passed since the previous update.
      */
-    const std::vector<GameEngine::GameImage> &CreateAnimationPlayer(const std::string &texture);
+    void UpdateGlobalAnimations(float dt);
 }
