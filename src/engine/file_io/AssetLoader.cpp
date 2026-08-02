@@ -8,10 +8,13 @@
 #include "engine/util/StringUtil.h"
 #include "engine/graphics/Images.h"
 #include "engine/graphics/Fonts.h"
+#include "engine/graphics/textures/TextureManager.h"
+
+#include "TextureLoader.h"
 
 namespace fs = std::filesystem;
 
-void _LoadAssetFile(std::string path, std::string cleanedPath, std::string fileExtension)
+void _LoadAssetFile(const std::string &path, std::string cleanedPath, const std::string &fileExtension)
 {
     if (fileExtension == ".png")
     {
@@ -33,25 +36,25 @@ void _LoadAssetFile(std::string path, std::string cleanedPath, std::string fileE
     }
 }
 
-namespace GameEngine
+namespace GameEngine::FileIO
 {
-    void LoadAllAssets()
+    std::vector<AssetFilePath> GetAssetsInFolder(const std::string &folderPath)
     {
-        std::string path = "assets";
-        std::vector<std::string> filePaths;
+        std::vector<std::string> initialFilePaths;
+        std::vector<AssetFilePath> finalFilePaths;
 
         try
         {
-            if (fs::exists(path) && fs::is_directory(path))
+            if (fs::exists(folderPath) && fs::is_directory(folderPath))
             {
                 // The recursive iterator does all the heavy lifting
-                for (const auto &entry : fs::recursive_directory_iterator(path))
+                for (const auto &entry : fs::recursive_directory_iterator(folderPath))
                 {
 
                     // We only want files, not the folder names themselves
                     if (fs::is_regular_file(entry))
                     {
-                        filePaths.push_back(entry.path().string());
+                        initialFilePaths.push_back(entry.path().string());
                     }
                 }
             }
@@ -65,22 +68,22 @@ namespace GameEngine
             throw std::runtime_error("Error: " + std::string(e.what()));
         }
 
-        // Print the results to verify
-        for (const auto &file : filePaths)
+        for (const auto &file : initialFilePaths)
         {
             fs::path p(file);
-            std::string cleanedPath = fs::relative(p, "assets").replace_extension("").string();
+            const std::string &cleanedPath = fs::relative(p, "assets").replace_extension("").string();
+            const std::string &fileExtension = p.extension().string();
 
             // std::cout << "Found: " << cleanedPath << std::endl;
 
-            _LoadAssetFile(file, cleanedPath, p.extension().string());
-
-            //     if (GameUtil::ends_with(file, ".png"))
-            // {
-
-            //     GameEngine::LoadImage(cleanedPath, new GameImage(file.c_str()));
-
-            // }
+            finalFilePaths.push_back({cleanedPath, file, fileExtension});
         }
+
+        return finalFilePaths;
+    }
+
+    void LoadAllAssets()
+    {
+        LoadTextures(GetAssetsInFolder("assets/images"));
     }
 }

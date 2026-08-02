@@ -17,13 +17,13 @@ namespace StickDeath
     {
         if (key == SDL_SCANCODE_LEFT)
         {
-            playerAnim.SetAnimationActive(true);
+            // playerAnim.SetAnimationActive(true);
             facingLeft = true;
             GetCollider()->SetXVel(-speed);
         }
         else if (key == SDL_SCANCODE_RIGHT)
         {
-            playerAnim.SetAnimationActive(true);
+            // playerAnim.SetAnimationActive(true);
             facingLeft = false;
             GetCollider()->SetXVel(speed);
         }
@@ -33,14 +33,14 @@ namespace StickDeath
     {
         if (key == SDL_SCANCODE_LEFT || key == SDL_SCANCODE_RIGHT)
         {
-            playerAnim.SetAnimationActive(false);
+            // playerAnim.SetAnimationActive(false);
             GetCollider()->SetXVel(0);
         }
     }
 
     void Player::Update(float dt)
     {
-        playerAnim.UpdateAnimation(dt);
+        // playerAnim.UpdateAnimation(dt);
 
         const auto hits = GetCollider()->MoveAndDoCollision(dt);
 
@@ -66,7 +66,8 @@ namespace StickDeath
         const GameEngine::PointI screen = StickDeath::Camera::WorldToScreen(worldTopLeft);
 
         GameEngine::DrawImage(
-            playerAnim.GetCurrentFrame(),
+            // playerAnim.GetCurrentFrame(),
+            "sprites/entity/player/walking_1",
             screen.x,
             screen.y,
             {.flipHorizontal = facingLeft});

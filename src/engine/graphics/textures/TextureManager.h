@@ -38,6 +38,13 @@ namespace GameEngine::TextureManager
     const AnimationPlayer &CreateAnimationPlayer(const std::string &texture);
 
     /**
+     * @brief Returns the TextureAsset object for the specified texture.
+     *
+     * @param texture The reference name of the texture.
+     */
+    const TextureAsset &GetTextureAsset(const std::string &texture);
+
+    /**
      * @brief Updates the globally looping animations.
      * 
      * @param dt The amount of time passed since the previous update.

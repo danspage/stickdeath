@@ -69,7 +69,7 @@ namespace GameEngine
     /// @param routes A map that defines all game states, and the names that will be
     /// used to navigate to them within the code.
     void InitializeRoutes(std::string initialRoute,
-                          std::map<std::string, GameState *> routes);
+                          const std::map<std::string, GameState *> &routes);
 
     /// @brief Shuts down the game and closes the window.
     void Shutdown();

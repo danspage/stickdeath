@@ -62,7 +62,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    GameEngine::LoadAllAssets();
+    GameEngine::FileIO::LoadAllAssets();
 
     GameEngine::SetRenderer(renderer);
 

@@ -37,8 +37,10 @@ namespace GameEngine
         const std::vector<std::unique_ptr<GameImage>> &GetAllFrames() const { return images; }
         size_t GetNumFrames() const { return images.size(); }
         bool IsAnimated() const { return isAnimated; }
+        const std::vector<std::string> &GetImagePaths() const { return imagePaths; }
 
     private:
+        std::vector<std::string> imagePaths;
         std::vector<std::unique_ptr<GameImage>> images;
         bool isAnimated;
     };

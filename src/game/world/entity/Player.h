@@ -47,11 +47,11 @@ namespace StickDeath
         const int maxHealth = 20;
         int health = maxHealth;
 
-        GameEngine::TextureAnimation playerAnim = GameEngine::TextureAnimation(0.1, {
-                                                                                        "sprites/entity/player/walking_1",
-                                                                                        "sprites/entity/player/walking_2",
-                                                                                        "sprites/entity/player/walking_3",
-                                                                                        "sprites/entity/player/walking_4",
-                                                                                    });
+        // GameEngine::TextureAnimation playerAnim = GameEngine::TextureAnimation(0.1, {
+        //                                                                                 "sprites/entity/player/walking_1",
+        //                                                                                 "sprites/entity/player/walking_2",
+        //                                                                                 "sprites/entity/player/walking_3",
+        //                                                                                 "sprites/entity/player/walking_4",
+        //                                                                             });
     };
 }

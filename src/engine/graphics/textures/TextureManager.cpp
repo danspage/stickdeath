@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include <map>
 
 #include <SDL2/SDL_image.h>
 #include <nlohmann/json.hpp>
@@ -43,33 +44,36 @@ namespace GameEngine::TextureManager
 
     void RegisterStaticTexture(const std::string &refPath, const std::string &imagePath)
     {
+        std::cout << "LOADING A STATIC TEXTURE! " << refPath << std::endl;
         textureStorage.try_emplace(refPath, TextureAsset({imagePath}));
     }
 
     void RegisterAnimatedTexture(const std::string &refPath, const std::string &jsonPath)
     {
-        std::ifstream propsFile("assets/images/" + jsonPath);
+        std::cout << "LOADING AN ANIMATED TEXTURE! " << refPath << std::endl;
+
+        std::ifstream propsFile(jsonPath);
         if (!propsFile.is_open())
         {
-            throw std::runtime_error("Could not open assets/images/" + jsonPath);
+            throw std::runtime_error("Could not open " + jsonPath);
             return;
         }
 
         json animJson = json::parse(propsFile);
 
         if (!animJson.contains("textures"))
-            throw std::runtime_error("The animation config file at assets/images/" + jsonPath + " does not contain a textures list.");
+            throw std::runtime_error("The animation config file at " + jsonPath + " does not contain a textures list.");
 
         if (!animJson.contains("interval_seconds"))
-            throw std::runtime_error("The animation config file at assets/images/" + jsonPath + " does not contain an interval time.");
+            throw std::runtime_error("The animation config file at " + jsonPath + " does not contain an interval time.");
 
         if (!animJson.contains("global_loop"))
-            throw std::runtime_error("The animation config file at assets/images/" + jsonPath + " does not contain a bool for globally looping.");
+            throw std::runtime_error("The animation config file at " + jsonPath + " does not contain a bool for globally looping.");
 
         // Load textures
         const json &texturesList = animJson.at("textures");
         if (!texturesList.is_array())
-            throw std::runtime_error("The textures entry inside of assets/images/" + jsonPath + " must be an array.");
+            throw std::runtime_error("The textures entry inside of " + jsonPath + " must be an array.");
 
         std::vector<std::string> images;
         images.reserve(texturesList.size());
@@ -77,8 +81,8 @@ namespace GameEngine::TextureManager
         for (const auto &entry : texturesList)
         {
             if (!entry.is_string())
-                throw std::runtime_error("The animation textures inside assets/images/" + jsonPath + " must be strings.");
-            images.emplace_back(entry.get<std::string>());
+                throw std::runtime_error("The animation textures inside " + jsonPath + " must be strings.");
+            images.emplace_back("assets/images/" + entry.get<std::string>() + ".png");
         }
 
         // Read timing/mode
@@ -86,13 +90,12 @@ namespace GameEngine::TextureManager
         float globalLoop = animJson.at("global_loop").get<bool>();
 
         // Register image asset to texture storage using the paths in the json.
-        auto [it, inserted] = textureStorage.try_emplace(refPath, TextureAsset(images));
-        const TextureAsset *assetPtr = &it->second;
+        textureStorage.try_emplace(refPath, TextureAsset(images));
 
         // If the animation is set to globally loop, register it to the global animation map.
         if (globalLoop)
         {
-            globalAnimations.try_emplace(refPath, GlobalAnimation(assetPtr, interval));
+            globalAnimations.try_emplace(refPath, GlobalAnimation(&textureStorage.at(refPath), interval));
         }
     }
 
@@ -122,7 +125,6 @@ namespace GameEngine::TextureManager
     const TextureAsset &GetTextureAsset(const std::string &texture)
     {
         return textureStorage.at(texture);
-        
     }
 
     void UpdateGlobalAnimations(float dt)

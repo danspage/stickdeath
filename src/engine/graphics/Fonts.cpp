@@ -48,7 +48,7 @@ namespace GameEngine
                         }
                         else if (second[i] != '0')
                         {
-                            throw std::runtime_error("Invalid characters were present in line " + line + std::string(" while loading the font file '") + _fileName + "'!");
+                            throw std::runtime_error("Invalid characters were present in line " + std::to_string(line) + std::string(" while loading the font file '") + _fileName + "'!");
                         }
                     }
 

@@ -20,7 +20,7 @@ namespace GameEngine
   }
 
   void InitializeRoutes(std::string initialRoute,
-                        std::map<std::string, GameState *> routes)
+                        const std::map<std::string, GameState *> &routes)
   {
     GameEngine::InitializeGraphics();
 
@@ -66,7 +66,7 @@ namespace GameEngine
         _states[_currentState]->OnKeyPressed(key);
       else if (!down && prevDown[key])
         _states[_currentState]->OnKeyReleased(key);
-      
+
       if (down)
         _states[_currentState]->OnKeyHeld(key);
 
