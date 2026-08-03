@@ -15,26 +15,26 @@ namespace GameEngine
         bool flipVertical = false;
     };
 
-    inline std::map<std::string, GameImage *>
-        _images;
+    // inline std::map<std::string, GameImage *>
+    //     _images;
 
-    /**
-     * @brief Used internally within the `GameEngine::LoadAllAssets` function, to load an
-     * image into memory.
-     * @param referencePath The path that the image will be referenced by for the
-     * `GameEngine::GetImage` function. The format is as follows:
-     * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat`.
-     * @param filePath The path of the file, starting with `assets/...`
-     */
-    void _LoadImage(std::string referencePath, std::string filePath);
+    // /**
+    //  * @brief Used internally within the `GameEngine::LoadAllAssets` function, to load an
+    //  * image into memory.
+    //  * @param referencePath The path that the image will be referenced by for the
+    //  * `GameEngine::GetImage` function. The format is as follows:
+    //  * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat`.
+    //  * @param filePath The path of the file, starting with `assets/...`
+    //  */
+    // void _LoadImage(std::string referencePath, std::string filePath);
 
-    /**
-     * @brief Returns a game image from memory.
-     * @param imageName The path of the image. The format is as follows:
-     * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat` for the parameter.
-     * @return The GameImage retrieved from memory.
-     */
-    GameImage *GetImage(std::string imageName);
+    // /**
+    //  * @brief Returns a game image from memory.
+    //  * @param imageName The path of the image. The format is as follows:
+    //  * `assets/animals/mammals/cat.png` becomes `animals/mammals/cat` for the parameter.
+    //  * @return The GameImage retrieved from memory.
+    //  */
+    // GameImage *GetImage(std::string imageName);
 
     /**
      * @brief Draws an image from memory to the screen.
@@ -43,7 +43,7 @@ namespace GameEngine
      * @param y The y coordinate of the top left of the image.
      * @param options Additional options to influence the image's rendering.
      */
-    void DrawImage(GameImage *image, int x, int y, GameImageRenderOptions options = {});
+    void DrawImage(const GameImage &image, const int x, const int y, GameImageRenderOptions options = {});
 
     /**
      * @brief Draws an image from memory to the screen.

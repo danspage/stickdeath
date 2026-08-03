@@ -72,12 +72,14 @@ namespace StickDeath
     {
         for (Particle &p : particles)
         {
+            const GameEngine::PointF size = GetSize();
+
             const GameEngine::PointF worldTopLeft = {
-                p.collider.GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS - (textureImage->getWidth() / 2.0f),
-                p.collider.GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS + static_cast<float>(textureImage->getHeight()),
+                p.collider.GetXPos() * StickDeath::Map::TILE_SIZE_VOXELS - (size.x / 2.0f),
+                p.collider.GetYPos() * StickDeath::Map::TILE_SIZE_VOXELS + static_cast<float>(size.y),
             };
             GameEngine::PointI screenPos = StickDeath::Camera::WorldToScreen(worldTopLeft);
-            GameEngine::DrawImage(textureImage, screenPos.x, screenPos.y);
+            GameEngine::DrawImage(texture, screenPos.x, screenPos.y);
         }
     }
 

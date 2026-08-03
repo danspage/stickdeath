@@ -14,7 +14,7 @@ namespace StickDeath
     {
         std::string id;
 
-        std::vector<std::string> texturePaths;
+        std::string texture;
 
         bool isSolid;
         std::vector<Physics::AABB> bounds;

@@ -1,58 +1,18 @@
 {
-    "parent_models": {
-        "solid_square": [
-            [
-                0,
-                0,
-                16,
-                16
-            ]
-        ]
-    },
     "null": {
-        "parent": "solid_square",
         "texture": "tiles/null",
         "isSolid": false
     },
     "floor": {
-        "parent": "solid_square",
         "texture": "tiles/floor",
         "isSolid": true
     },
     "spike": {
         "texture": "tiles/spike",
-        "isSolid": false,
-        "model": [
-            [
-                0,
-                0,
-                16,
-                6
-            ],
-            [
-                3,
-                6,
-                13,
-                12
-            ],
-            [
-                6,
-                12,
-                10,
-                16
-            ]
-        ]
+        "isSolid": false
     },
     "sawblade": {
         "texture": "tiles/sawblade",
-        "isSolid": false,
-        "model": [
-            [
-                0,
-                0,
-                16,
-                8
-            ]
-        ]
+        "isSolid": false
     }
 }

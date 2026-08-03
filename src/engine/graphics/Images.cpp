@@ -1,40 +1,41 @@
 #include "Images.h"
+#include "textures/TextureManager.h"
 
 namespace GameEngine
 {
-    void _LoadImage(std::string referencePath, std::string filePath)
-    {
-        _images[referencePath] = new GameImage(filePath);
-    };
+    // void _LoadImage(std::string referencePath, std::string filePath)
+    // {
+    //     _images[referencePath] = new GameImage(filePath);
+    // };
 
-    GameImage *GetImage(std::string imageName)
-    {
-        return _images[imageName];
-    }
+    // GameImage *GetImage(std::string imageName)
+    // {
+    //     return _images[imageName];
+    // }
 
-    void DrawImage(GameImage *image, int x, int y, GameImageRenderOptions options)
+    void DrawImage(const GameImage &image, const int x, const int y, GameImageRenderOptions options)
     {
         // TODO: Implement image scaling (nearest neighbor)
 
-        const unsigned char *imgPx = image->getPixels();
+        const unsigned char *imgPx = image.getPixels();
 
         int xOffset = 0, yOffset = 0, xMult = 1, yMult = 1;
         if (options.flipHorizontal)
         {
-            xOffset += image->getWidth() - 1;
+            xOffset += image.getWidth() - 1;
             xMult = -1;
         }
         if (options.flipVertical)
         {
-            yOffset += image->getHeight() - 1;
+            yOffset += image.getHeight() - 1;
             yMult = -1;
         }
 
-        for (int imgX = 0; imgX < image->getWidth(); imgX++)
+        for (int imgX = 0; imgX < image.getWidth(); imgX++)
         {
-            for (int imgY = 0; imgY < image->getHeight(); imgY++)
+            for (int imgY = 0; imgY < image.getHeight(); imgY++)
             {
-                int imgIndex = (imgY * image->getWidth() + imgX) * 4;
+                int imgIndex = (imgY * image.getWidth() + imgX) * 4;
                 if (imgPx[imgIndex + 3] != 0)
                 {
                     int drawX = x + imgX * xMult + xOffset;
@@ -48,30 +49,30 @@ namespace GameEngine
         }
     }
 
-    void DrawImage(std::string imageName, int x, int y, GameImageRenderOptions options)
+    void DrawImage(const std::string &imageName, int x, int y, GameImageRenderOptions options)
     {
         // TODO: Implement image scaling (nearest neighbor)
 
-        GameImage *img = GetImage(imageName);
-        const unsigned char *imgPx = img->getPixels();
+        const GameImage &img = TextureManager::GetTexture(imageName);
+        const unsigned char *imgPx = img.getPixels();
 
         int xOffset = 0, yOffset = 0, xMult = 1, yMult = 1;
         if (options.flipHorizontal)
         {
-            xOffset += img->getWidth() - 1;
+            xOffset += img.getWidth() - 1;
             xMult = -1;
         }
         if (options.flipVertical)
         {
-            yOffset += img->getHeight() - 1;
+            yOffset += img.getHeight() - 1;
             yMult = -1;
         }
 
-        for (int imgX = 0; imgX < img->getWidth(); imgX++)
+        for (int imgX = 0; imgX < img.getWidth(); imgX++)
         {
-            for (int imgY = 0; imgY < img->getHeight(); imgY++)
+            for (int imgY = 0; imgY < img.getHeight(); imgY++)
             {
-                int imgIndex = (imgY * img->getWidth() + imgX) * 4;
+                int imgIndex = (imgY * img.getWidth() + imgX) * 4;
                 if (imgPx[imgIndex + 3] != 0)
                 {
                     int drawX = x + imgX * xMult + xOffset;

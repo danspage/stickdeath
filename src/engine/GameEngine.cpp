@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 
 #include "state/GameState.h"
+#include "engine/graphics/textures/TextureManager.h";
 
 #include <SDL2/SDL.h>
 
@@ -74,7 +75,12 @@ namespace GameEngine
     }
   }
 
-  void UpdateCurrentState(float dt) { _states[_currentState]->Update(dt); }
+  void Update(float dt)
+  {
+    TextureManager::UpdateGlobalAnimations(dt);
+
+    _states[_currentState]->Update(dt);
+  }
 
   void RenderCurrentState()
   {

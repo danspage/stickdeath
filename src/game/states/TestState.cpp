@@ -4,6 +4,8 @@
 #include <algorithm>
 
 #include "../../engine/GameEngine.h"
+#include "../../engine/graphics/textures/TextureManager.h";
+
 #include "../world/map/Map.h"
 #include "../../engine/graphics/camera/Camera.h"
 #include "../world/map/LevelLoader.h"
@@ -112,6 +114,8 @@ namespace StickDeath
 
     void TestState::Update(float dt)
     {
+        
+
         Map::UpdateMap(dt);
 
         player.Update(dt);

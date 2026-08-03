@@ -2,10 +2,11 @@
 
 #include "Tiles.h"
 #include "../Map.h"
-#include "../../../../engine/graphics/Images.h"
 #include "../../entity/Entity.h"
 #include "../../../../engine/GameEngine.h"
 #include "../../../../engine/graphics/camera/Camera.h"
+#include "../../../../engine/graphics/textures/TextureManager.h";
+#include <Images.h>
 
 namespace StickDeath
 {
@@ -33,13 +34,16 @@ namespace StickDeath
 
         const GameEngine::PointI screen = StickDeath::Camera::WorldToScreen({worldLeft, worldTop});
 
-        if (properties.animated)
-        {
-            GameEngine::DrawImage(properties.texturePaths[_animationStates.at(properties.id).currentFrame], screen.x, screen.y);
-        }
-        else
-        {
-            GameEngine::DrawImage(properties.texturePaths[0], screen.x, screen.y);
-        }
+        // if (properties.animated)
+        // {
+        //     // GameEngine::DrawImage(properties.texturePaths[_animationStates.at(properties.id).currentFrame], screen.x, screen.y);
+        //     GameEngine::DrawImage(GameEngine::TextureManager::GetTexture(properties.texture), screen.x, screen.y);
+        // }
+        // else
+        // {
+        //     // GameEngine::DrawImage(properties.texturePaths[0], screen.x, screen.y);
+        // }
+
+        GameEngine::DrawImage(GameEngine::TextureManager::GetTexture(properties.texture), screen.x, screen.y);
     }
 }

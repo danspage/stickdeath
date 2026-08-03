@@ -111,7 +111,8 @@ int main(int argc, char **argv)
         while (accumulator >= fixedDt && steps < maxStepsPerFrame)
         {
             GameEngine::ProcessKeyEvents();
-            GameEngine::UpdateCurrentState(static_cast<float>(fixedDt));
+            
+            GameEngine::Update(static_cast<float>(fixedDt));
             accumulator -= fixedDt;
             steps++;
         }

@@ -91,10 +91,7 @@ namespace GameEngine
     /// functions.
     void ProcessKeyEvents();
 
-    /// @brief Handles all game logic for the current state, and is run in tandem
-    /// with and before the `Render` function.
-    /// @param dt Time since the last update, in seconds.
-    void UpdateCurrentState(float dt);
+    void Update(float dt);
 
     /// @brief Handles all rendering to the screen for the current state. Attemps to
     /// run at a constant interval defined by the `TARGET_FPS` variable in the

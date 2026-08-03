@@ -7,6 +7,7 @@
 #include "../../../engine/graphics/GameImage.h"
 #include "../../../engine/basic_types/Positional.h"
 #include "../physics/Collider.h"
+#include "../../../engine/graphics/textures/TextureManager.h";
 
 namespace StickDeath
 {
@@ -35,13 +36,14 @@ namespace StickDeath
             const GameEngine::PointF &randomizeOrigin,
             const float destroyTime,
             const int count)
-            : texture(texture),
-              textureImage(GameEngine::GetImage("sprites/particle/" + texture)),
+            : texture("sprites/particle/" + texture),
               origin(origin),
               randomizeOrigin(randomizeOrigin),
               destroyTime(destroyTime),
               count(count),
-              timeSinceBirth(0.0f) {}
+              timeSinceBirth(0.0f)
+        {
+        }
 
         void Update(float dt);
         void Render();
@@ -49,9 +51,11 @@ namespace StickDeath
 
         inline GameEngine::PointF GetSize()
         {
+            const auto &currentFrame = GameEngine::TextureManager::GetTexture(texture);
+
             return {
-                static_cast<float>(textureImage->getWidth()) / static_cast<float>(Map::TILE_SIZE_VOXELS),
-                static_cast<float>(textureImage->getHeight()) / static_cast<float>(Map::TILE_SIZE_VOXELS),
+                static_cast<float>(currentFrame.getWidth()) / static_cast<float>(Map::TILE_SIZE_VOXELS),
+                static_cast<float>(currentFrame.getHeight()) / static_cast<float>(Map::TILE_SIZE_VOXELS),
             };
         }
 
@@ -59,7 +63,6 @@ namespace StickDeath
 
     private:
         const std::string texture;
-        GameEngine::GameImage *textureImage;
 
         const GameEngine::PointF origin;
         const GameEngine::PointF randomizeOrigin;
