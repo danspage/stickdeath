@@ -1,18 +1,14 @@
 {
     "null": {
-        "texture": "tiles/null",
         "isSolid": false
     },
     "floor": {
-        "texture": "tiles/floor",
         "isSolid": true
     },
     "spike": {
-        "texture": "tiles/spike",
         "isSolid": false
     },
     "sawblade": {
-        "texture": "tiles/sawblade",
         "isSolid": false
     }
 }

@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include "../../engine/GameEngine.h"
-#include "../../engine/graphics/textures/TextureManager.h";
+#include "../../engine/graphics/textures/TextureManager.h"
 
 #include "../world/map/Map.h"
 #include "../../engine/graphics/camera/Camera.h"

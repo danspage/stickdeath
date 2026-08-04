@@ -21,7 +21,7 @@ namespace GameEngine::FileIO
                 continue;
 
             std::string refPath = entry.cleanedPath;
-            size_t pos = refPath.find("images/");
+            size_t pos = refPath.find("textures/");
 
             if (entry.fileExtension == ".json")
             {

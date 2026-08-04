@@ -1,7 +1,7 @@
 #include "GameEngine.h"
 
 #include "state/GameState.h"
-#include "engine/graphics/textures/TextureManager.h";
+#include "engine/graphics/textures/TextureManager.h"
 
 #include <SDL2/SDL.h>
 

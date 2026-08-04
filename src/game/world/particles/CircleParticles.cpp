@@ -1,7 +1,6 @@
 #include "CircleParticles.h"
 
 #include "../../../engine/util/MathUtil.h"
-#include "../../../engine/graphics/Images.h"
 
 namespace StickDeath
 {

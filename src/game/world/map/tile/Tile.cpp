@@ -5,8 +5,8 @@
 #include "../../entity/Entity.h"
 #include "../../../../engine/GameEngine.h"
 #include "../../../../engine/graphics/camera/Camera.h"
-#include "../../../../engine/graphics/textures/TextureManager.h";
-#include <Images.h>
+#include "../../../../engine/graphics/textures/TextureManager.h"
+#include "../../../../engine/graphics/Images.h"
 
 namespace StickDeath
 {

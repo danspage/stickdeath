@@ -2,7 +2,7 @@
 
 ### Common
 
-* Texture - the particle texture being used, relative to images/sprites/particles
+* Texture - the particle texture being used, relative to textures/sprites/particles
 * Origin - the origin of the particles
 * Random shift x/y - a randomization factor on each axis for where the particle's origin is
 * Time since birth (float) - how many seconds the particles have existed for, used to destroy itself once the allotted time has elapsed

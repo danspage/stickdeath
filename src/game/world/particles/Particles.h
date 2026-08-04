@@ -7,7 +7,7 @@
 #include "../../../engine/graphics/GameImage.h"
 #include "../../../engine/basic_types/Positional.h"
 #include "../physics/Collider.h"
-#include "../../../engine/graphics/textures/TextureManager.h";
+#include "../../../engine/graphics/textures/TextureManager.h"
 
 namespace StickDeath
 {

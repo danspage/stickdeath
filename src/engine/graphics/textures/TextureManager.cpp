@@ -82,7 +82,7 @@ namespace GameEngine::TextureManager
         {
             if (!entry.is_string())
                 throw std::runtime_error("The animation textures inside " + jsonPath + " must be strings.");
-            images.emplace_back("assets/images/" + entry.get<std::string>() + ".png");
+            images.emplace_back("assets/textures/" + entry.get<std::string>() + ".png");
         }
 
         // Read timing/mode

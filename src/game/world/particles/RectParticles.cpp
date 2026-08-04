@@ -1,8 +1,6 @@
 #include "RectParticles.h"
 #include "Particles.h"
 
-#include "../../../engine/graphics/Images.h"
-
 namespace StickDeath
 {
     RectParticles::RectParticles(

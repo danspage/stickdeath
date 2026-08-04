@@ -1,0 +1,16 @@
+{
+    "model": [
+        [
+            0,
+            0,
+            16,
+            8
+        ]
+    ],
+    "textures": [
+        {
+            "path": "tiles/sawblade",
+            "origin": [0, 0]
+        }
+    ]
+}

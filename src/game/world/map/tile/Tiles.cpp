@@ -87,7 +87,7 @@ namespace StickDeath
 
                 if (propKey == "texture")
                 {
-                    std::ifstream animFile("assets/images/" + propValue.get<std::string>() + ".json");
+                    std::ifstream animFile("assets/textures/" + propValue.get<std::string>() + ".json");
                     if (animFile.is_open())
                     {
                         json data = json::parse(animFile);

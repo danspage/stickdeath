@@ -1,8 +1,6 @@
 #include "ArcParticles.h"
 #include "Particles.h"
 
-#include "../../../engine/graphics/Images.h"
-
 namespace StickDeath
 {
     ArcParticles::ArcParticles(

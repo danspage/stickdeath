@@ -6,7 +6,7 @@
 #include <filesystem>
 
 #include "engine/util/StringUtil.h"
-#include "engine/graphics/Images.h"
+#include "engine/graphics/textures.h"
 #include "engine/graphics/Fonts.h"
 #include "engine/graphics/textures/TextureManager.h"
 
@@ -18,10 +18,10 @@ void _LoadAssetFile(const std::string &path, std::string cleanedPath, const std:
 {
     if (fileExtension == ".png")
     {
-        size_t pos = cleanedPath.find("images/");
+        size_t pos = cleanedPath.find("textures/");
         if (pos != std::string::npos)
         {
-            cleanedPath.erase(pos, std::string("images/").length());
+            cleanedPath.erase(pos, std::string("textures/").length());
         }
 
         std::cout << "LOADING IMAGE: " << cleanedPath << std::endl;

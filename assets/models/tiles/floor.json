@@ -1,0 +1,9 @@
+{
+    "parent": "solid_square",
+    "textures": [
+        {
+            "path": "tiles/floor",
+            "origin": [0, 0]
+        }
+    ]
+}
