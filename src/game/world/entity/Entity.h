@@ -5,7 +5,8 @@
 #include <string>
 
 #include "../map/Map.h"
-#include "../physics/Collider.h"
+#include "../map/tile/Tiles.h"
+#include "../../../engine/physics/Collider.h"
 #include "../../../engine/basic_types/Positional.h"
 
 namespace StickDeath
@@ -18,7 +19,7 @@ namespace StickDeath
         {
         }
 
-        Physics::Collider *GetCollider() { return &collider; }
+        GameEngine::Physics::Collider *GetCollider() { return &collider; }
 
         std::string GetID() const { return id; }
         void SetX(float x) { collider.SetXPos(x); }
@@ -40,10 +41,11 @@ namespace StickDeath
         void DisableGravity() { collider.DisableGravity(); }
 
         virtual void Render() {};
-        virtual void Update(float dt) { collider.MoveAndDoCollision(dt); }
+
+        void Update(float dt);
 
     private:
         const std::string id;
-        Physics::Collider collider;
+        GameEngine::Physics::Collider collider;
     };
 }

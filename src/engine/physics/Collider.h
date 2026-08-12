@@ -2,16 +2,16 @@
 
 #include <cmath>
 #include <algorithm>
+#include <vector>
 
 #include "AABB.h"
-#include "../map/Map.h"
 
-namespace StickDeath::Physics
+namespace GameEngine::Physics
 {
-    struct TileEntityCollisionHit
+    struct CollisionHit
     {
-        Tile *tile;
-        bool isInside;
+        const AABB *other = nullptr;
+        bool isInside = false;
     };
 
     class Collider
@@ -37,7 +37,6 @@ namespace StickDeath::Physics
 
         AABB GetBoundsAt(float x, float y) const;
         AABB GetBounds() const { return GetBoundsAt(xPos, yPos); }
-        TileRange GetTileRange();
 
         float GetXPos() const { return xPos; }
         float GetYPos() const { return yPos; }
@@ -64,6 +63,6 @@ namespace StickDeath::Physics
         void DisableGravity() { doGravity = false; }
 
         void MoveWithoutCollision(float dt);
-        std::vector<TileEntityCollisionHit> MoveAndDoCollision(float dt);
+        std::vector<CollisionHit> MoveAndDoCollision(float dt, const std::vector<const AABB *> &otherBounds);
     };
 }

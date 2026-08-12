@@ -12,7 +12,8 @@ namespace StickDeath
 {
     Tile::Tile(int xPos, int yPos, std::string tileName)
         : x(xPos), y(yPos),
-          properties(_defaultTileProperties.at(tileName))
+          properties(_defaultTileProperties.at(tileName)),
+          tileCollider({xPos, yPos, 1, 1, false, this})
     {
     }
 

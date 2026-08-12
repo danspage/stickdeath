@@ -1,7 +1,46 @@
 #include "Tiles.h"
 
+#include "../../../../engine/physics/AABB.h"
+#include "../../../../engine/Constants.h"
+
+#include "../Map.h"
+
 namespace StickDeath
 {
+    // const TileRange GetTileRange(GameEngine::Physics::AABB bounds)
+    // {
+    //     return {
+    //         static_cast<int>(std::floor(bounds.leftBound)),
+    //         static_cast<int>(std::floor(bounds.rightBound - GameEngine::EPSILON)),
+    //         static_cast<int>(std::floor(bounds.bottomBound)),
+    //         static_cast<int>(std::floor(bounds.topBound - GameEngine::EPSILON)),
+    //     };
+    // }
+
+    const std::vector<Tile *> GetTilesInArea(const GameEngine::Physics::AABB &area)
+    {
+        std::vector<Tile *> tiles;
+
+        const int minX = static_cast<int>(std::floor(area.leftBound));
+        const int maxX = static_cast<int>(std::floor(area.rightBound - GameEngine::EPSILON));
+        const int minY = static_cast<int>(std::floor(area.bottomBound));
+        const int maxY = static_cast<int>(std::floor(area.topBound - GameEngine::EPSILON));
+
+        for (int y = minY; y <= maxY; ++y)
+        {
+            for (int x = minX; x <= maxX; ++x)
+            {
+                Tile *tile = Map::TryGetTile(x, y);
+                if (tile != nullptr)
+                {
+                    tiles.push_back(tile);
+                }
+            }
+        }
+
+        return tiles;
+    }
+
     void InitTileProperties()
     {
         std::ifstream propsFile("assets/data/tileproperties.json");
@@ -22,7 +61,7 @@ namespace StickDeath
             std::cout << "Loading default values for tile: " << tileName << std::endl;
 
             TileProperties props;
-            
+
             props.id = tileName;
 
             // If the tile has a parent, use the parent's model as the default bounds for this tile. This allows multiple tiles to share the same model without having to duplicate it in the JSON file.
@@ -95,7 +134,7 @@ namespace StickDeath
                         // Get the list of textures for this animation
                         const json &textures = data.at("textures");
                         for (const json &texture : textures)
-                        {
+                        { 
                             props.texturePaths.push_back(texture.get<std::string>());
                         }
 
@@ -121,7 +160,7 @@ namespace StickDeath
                     props.isSolid = propValue.get<bool>();
                 }
             }
-            
+
             _defaultTileProperties[tileName] = props;
         }
     }

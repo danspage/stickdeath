@@ -12,8 +12,6 @@ namespace StickDeath::Map
 {
     const inline int TILE_SIZE_VOXELS = 16;
 
-    const inline float EPSILON = 0.0001;
-
     class TileOutOfBoundsException : public std::exception
     {
     private:
@@ -32,8 +30,6 @@ namespace StickDeath::Map
 
     inline int mapWidth = 0, mapHeight = 0;
     inline float spawnX = 0, spawnY = 0;
-
-    inline const float GRAVITY = -25;
 
     const inline int NULL_TILE_INDEX = -1;
     inline std::vector<int> tileToTileIndex((mapWidth * mapHeight), NULL_TILE_INDEX);
